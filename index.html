@@ -1,0 +1,878 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="OREHA Energy Gel — smooth, Japanese performance fuel for endurance sport." />
+    <title>OREHA — Energy Gel</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500&display=swap" rel="stylesheet" />
+    <style>
+      :root { --ink:#111719; --paper:#eef2f3; --quiet:#98a2a5; --line:rgba(238,242,243,.28); --text-body:16px; --text-ui:14px; --text-note:14px; }
+      * { box-sizing:border-box; }
+      .sr-only { position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0; }
+      html { scroll-behavior:smooth; }
+      body { margin:0; background:var(--paper); color:var(--ink); font-family:Manrope,Arial,sans-serif; font-weight:300; }
+      a { color:inherit; }
+      .mono { font:400 var(--text-ui)/1.25 Manrope,Arial,sans-serif; letter-spacing:.06em; text-transform:uppercase; }
+      /* Clean over the hero; a compact glass rail once the page moves underneath it. */
+      .nav { position:absolute; z-index:5; top:16px; left:50%; width:min(920px,calc(100vw - 32px)); translate:-50% 0; display:flex; align-items:center; justify-content:space-between; padding:15px 22px; border:1px solid transparent; border-radius:10px; color:var(--paper); background:transparent; transition:background-color .42s cubic-bezier(.16,1,.3,1),border-color .42s cubic-bezier(.16,1,.3,1),backdrop-filter .42s cubic-bezier(.16,1,.3,1); animation:site-fade-up .7s both cubic-bezier(.16,1,.3,1); }
+      .nav.is-sticky { position:fixed; border-color:rgba(238,242,243,.12); background:rgba(14,16,20,.76); backdrop-filter:blur(16px) saturate(120%); -webkit-backdrop-filter:blur(16px) saturate(120%); }
+      .wordmark { font-weight:500; font-size:20px; letter-spacing:.25em; text-decoration:none; }
+      .nav-links { display:flex; gap:26px; font-family:Manrope,Arial,sans-serif; font-size:var(--text-ui); font-weight:400; letter-spacing:0; text-transform:none; }
+      .nav-links a { position:relative; color:var(--paper); opacity:.8; text-decoration:none; transition:opacity .2s ease; }
+      .nav-links a::after { position:absolute; right:0; bottom:-7px; left:0; height:1px; background:currentColor; content:""; transform:scaleX(0); transform-origin:right; transition:transform .28s cubic-bezier(.16,1,.3,1); }
+      .nav-links a:hover,.nav-links a:focus-visible { opacity:1; }
+      .nav-links a:hover::after,.nav-links a:focus-visible::after { transform:scaleX(1); transform-origin:left; }
+      section { position:relative; overflow:hidden; }
+      .hero { min-height:100svh; color:var(--paper); background:var(--surface-navy,#16171b); isolation:isolate; display:flex; align-items:flex-end; padding:0 5.5vw 8vh; }
+      .hero .hero-media { position:absolute; inset:0; z-index:-2; width:100%; height:100%; object-fit:cover; opacity:.7; filter:grayscale(.72) contrast(1.04); animation:hero-video-settle 2.2s both cubic-bezier(.16,1,.3,1); }
+      .hero::after { content:""; position:absolute; inset:0; z-index:-1; background:linear-gradient(180deg,rgba(3,4,5,0) 0%,rgba(3,4,5,.18) 58%,rgba(8,9,10,.72) 82%,var(--surface-navy,#16171b) 100%),linear-gradient(90deg,rgba(8,9,9,.86),rgba(8,9,9,.48) 56%,rgba(8,9,9,.1)); }
+      .hero-content { max-width:850px; }
+      .hero h1 { max-width:720px; margin:0 0 26px; font-size:clamp(3.45rem,7vw,7.25rem); font-weight:400; line-height:.92; letter-spacing:-.055em; }
+      .hero h1 span { display:block; }
+      .hero-character,.hero h1 .hero-character { display:inline-block; }
+      .js-motion .hero .hero-character { opacity:0; transform:translateY(9px); transition:opacity .24s ease,transform .42s cubic-bezier(.16,1,.3,1); transition-delay:var(--character-delay,0ms); will-change:opacity,transform; }
+      .js-motion .hero .hero-character.is-visible { opacity:1; transform:none; }
+      .hero p { width:min(390px,100%); margin:0 0 33px; font-size:var(--text-body); font-weight:300; line-height:1.62; color:rgba(238,236,229,.86); animation:site-fade-up .55s .82s both cubic-bezier(.16,1,.3,1); }
+      .button { display:inline-flex; align-items:center; justify-content:center; gap:10px; min-height:52px; padding:0 22px; background:var(--paper); color:var(--ink); border:1px solid var(--paper); font:500 var(--text-ui)/1 Manrope,sans-serif; letter-spacing:.02em; text-decoration:none; text-transform:none; transition:background .22s ease,color .22s ease; }
+      .button:hover,.button:focus-visible { background:transparent; color:var(--paper); }
+      .hero .button { animation:site-fade-up .55s 1.25s both cubic-bezier(.16,1,.3,1); }
+      /* Shared, low-key entrance language for ordinary content sections. Attributes are added only by JS, so content remains visible without it. */
+      .js-motion [data-reveal] { opacity:0; transform:translateY(22px); transition:opacity .5s ease,transform .72s cubic-bezier(.16,1,.3,1); transition-delay:var(--reveal-delay,0ms); will-change:opacity,transform; }
+      .js-motion [data-reveal="soft"] { transform:translateY(14px); }
+      .js-motion [data-reveal="scale"] { transform:translateY(16px) scale(.985); }
+      .js-motion [data-reveal="wordmark"] { transform:translateY(20px) scaleX(1.02); }
+      .js-motion [data-reveal].is-revealed { opacity:1; transform:none; }
+      .js-motion [data-reveal="wordmark"].is-revealed { transform:scaleX(1.06); }
+      .intro { padding:130px 5.5vw; background:var(--paper); }
+      .heritage { min-height:70svh; display:grid; place-items:center; padding:64px 5.5vw; background:#f1f4f4; text-align:center; }
+      .heritage-copy { width:min(1050px,100%); }
+      .heritage-art { width:min(250px,52vw); height:auto; display:block; margin:0 auto 22px; overflow:visible; }
+      .heritage-landscape { fill:none; stroke:#272923; stroke-width:2.5; stroke-linecap:round; stroke-linejoin:round; }
+      .heritage-moon { fill:#C83232; stroke:#171717; stroke-width:2.5; }
+      .heritage h2 { max-width:850px; margin:auto; font-size:clamp(2.5rem,5.15vw,6.9rem); font-weight:400; line-height:1.04; letter-spacing:-.06em; }
+      .heritage p { max-width:660px; margin:25px auto 0; font-size:var(--text-body); line-height:1.6; }
+      .heritage-mark { display:block; width:44px; height:1px; margin:42px auto 0; background:var(--ink); }
+      .heritage .mask-line { display:block; overflow:hidden; padding:.04em .06em .12em; margin:-.04em -.06em -.12em; }
+      .heritage .mask-reveal { display:block; }
+      .heritage-character { display:inline-block; }
+      .js-motion .heritage .heritage-character { opacity:0; transform:translateY(9px); transition:opacity .28s ease,transform .52s cubic-bezier(.16,1,.3,1); transition-delay:var(--character-delay,0ms); will-change:opacity,transform; }
+      .js-motion .heritage .mask-body { opacity:0; transform:translateY(10px); transition:opacity .32s ease .72s,transform .42s cubic-bezier(.16,1,.3,1) .72s; }
+      .js-motion .heritage.is-revealed .heritage-character { opacity:1; transform:none; }
+      .js-motion .heritage.is-revealed .mask-body { opacity:1; transform:none; }
+      .js-motion .heritage.is-instant .heritage-character,.js-motion .heritage.is-instant .mask-body { transition:none; }
+      .js-motion .heritage-mark { transform:scaleX(0); transform-origin:left; transition:transform .46s 1.18s cubic-bezier(.16,1,.3,1); }
+      .js-motion .heritage.is-revealed .heritage-mark { transform:scaleX(1); }
+      .intro-grid { display:grid; grid-template-columns:minmax(0,1.1fr) minmax(330px,.9fr); gap:9vw; max-width:1280px; margin:auto; align-items:start; }
+      .section-kicker { margin:0 0 22px; }
+      .intro h2, .ingredients h2, .range h2 { margin:0; font-size:clamp(3rem,6.4vw,6.7rem); font-weight:400; line-height:.9; letter-spacing:-.06em; }
+      .intro-body { padding-top:6px; }
+      .intro-body > p { max-width:460px; margin:0 0 38px; font-size:var(--text-body); line-height:1.68; }
+      .proof-list { border-top:1px solid rgba(17,23,25,.28); }
+      .proof { display:grid; grid-template-columns:44px 1fr; gap:16px; padding:19px 0; border-bottom:1px solid rgba(17,23,25,.2); }
+      .proof h3 { margin:0 0 6px; font-size:var(--text-ui); font-weight:400; }
+      .proof p { margin:0; max-width:410px; color:#46545a; font-size:var(--text-body); line-height:1.6; }
+      .proof .mono { padding-top:3px; }
+      .texture-story { height:260svh; color:var(--paper); background:#10191c; overflow:visible; }
+      .texture-stage { position:sticky; top:0; height:100svh; isolation:isolate; overflow:hidden; }
+      .texture-stage::before { content:""; position:absolute; inset:0; z-index:-3; background:radial-gradient(circle at 50% 52%,#315360 0,transparent 43%),#10191c; }
+      .texture-copy { position:absolute; z-index:2; inset:0; max-width:none; pointer-events:none; }.texture-copy p { position:absolute; top:7vh; left:5.5vw; margin:0; color:#8fc9d6; font-size:var(--text-body); }.texture-title-reveal { position:absolute; inset:0; }.js-motion .texture-title-reveal { opacity:var(--formula-reveal,0); transform:scale(var(--formula-title-scale,.9)); will-change:opacity,transform; }.texture-copy h2 { position:absolute; top:53%; left:50%; width:min(1120px,94vw); margin:0; color:#bfd4da; font-size:clamp(4.4rem,10.8vw,12rem); font-weight:400; line-height:.78; letter-spacing:-.06em; text-align:center; transform:translate(-50%,calc(-50% - var(--formula-shift,0px))) scale(var(--formula-scale,1)); transform-origin:center center; will-change:transform; }
+      .texture-droplet { position:absolute; z-index:3; left:50%; top:55%; height:min(62vh,560px); width:auto; max-width:48vw; object-fit:contain; opacity:var(--droplet-opacity,0); transform:translate(-50%,calc(-50% + var(--droplet-offset,88vh))) scale(var(--droplet-scale,.9)); filter:drop-shadow(0 28px 26px rgba(0,0,0,.36)); will-change:transform,opacity; }
+      .texture-callout { position:absolute; z-index:5; width:min(310px,26vw); padding:11px 13px; opacity:0; background:rgba(16,25,28,.12); border:0; border-left:1px solid rgba(143,201,214,.42); box-shadow:none; backdrop-filter:blur(5px); -webkit-backdrop-filter:blur(5px); transform:translateY(14px); transition:opacity .38s ease,transform .48s ease; }.texture-callout.active { opacity:1; transform:translateY(0); }.texture-callout .mono { display:block; margin:0 0 8px; color:#8fc9d6; }.texture-callout h3 { margin:0 0 7px; color:#f0f6f7; font-size:var(--text-ui); font-weight:400; letter-spacing:.03em; }.texture-callout p { margin:0; color:rgba(225,237,240,.8); font-size:var(--text-body); font-weight:300; line-height:1.5; }.texture-callout.one { top:39%; left:8vw; }.texture-callout.two { top:51%; right:2vw; }.texture-callout.three { top:72%; left:5vw; }
+      .texture-connectors { position:absolute; z-index:4; inset:0; width:100%; height:100%; overflow:visible; pointer-events:none; }.texture-connectors path { fill:none; stroke:#8fc9d6; stroke-width:1.4; stroke-linecap:round; stroke-dasharray:var(--path-length,150); stroke-dashoffset:var(--path-length,150); filter:drop-shadow(0 0 1.5px #091013); opacity:0; transition:stroke-dashoffset .76s cubic-bezier(.2,.7,.2,1),opacity .28s ease; }.texture-connectors circle { fill:#122327; stroke:#c3e1e7; stroke-width:1.8; filter:drop-shadow(0 0 1px #091013); opacity:0; transform-box:fill-box; transform-origin:center; transform:scale(.45); transition:opacity .2s ease,transform .3s ease .45s; }.texture-connectors .active path { stroke-dashoffset:0; opacity:1; }.texture-connectors .active circle { opacity:1; transform:scale(1); }
+      .ingredients { padding:122px 5.5vw; color:var(--paper); background:#151d1f; }
+      .ingredients-grid { display:grid; grid-template-columns:minmax(0,.8fr) minmax(410px,1.2fr); gap:9vw; max-width:1280px; margin:auto; align-items:end; }
+      .ingredients .section-kicker { color:#8fc9d6; }
+      .ingredients h2 { max-width:580px; }
+      .ingredients-intro { max-width:500px; margin:26px 0 0; color:rgba(238,242,243,.74); font-size:var(--text-body); line-height:1.65; }
+      .ingredient-rows { border-top:1px solid var(--line); }
+      .ingredient-row { display:grid; grid-template-columns:50px 150px 1fr; gap:18px; align-items:baseline; padding:20px 0; border-bottom:1px solid var(--line); }
+      .ingredient-row p { margin:0; color:rgba(238,242,243,.72); font-size:var(--text-body); line-height:1.6; }
+      .formulation-bridge { height:clamp(140px,18vw,260px); background:linear-gradient(180deg,#10191c 0%,#0d1412 52%,#080b09 100%); }
+      .range { padding:126px 3.5vw 88px; background:#e9eef0; }
+      .range-top { max-width:920px; margin:0 auto 52px; text-align:center; }
+      .range-copy { max-width:760px; margin:auto; }
+      .range-top .section-kicker { margin-bottom:18px; }
+      .range-top p { max-width:620px; margin:20px auto 0; font-size:var(--text-body); line-height:1.6; }
+      .flavors { display:grid; grid-template-columns:repeat(3,1fr); gap:16px; max-width:1280px; margin:auto; }
+      .flavor { min-height:0; position:relative; overflow:hidden; background:#fff; color:var(--ink); box-shadow:0 12px 28px rgba(21,21,19,.06); }
+      .flavor-visual { position:relative; height:363px; display:grid; place-items:center; overflow:hidden; padding:24px; }
+      .flavor-product { position:relative; z-index:2; height:315px; max-width:100%; width:auto; object-fit:contain; filter:drop-shadow(0 17px 11px rgba(0,0,0,.17)) drop-shadow(0 4px 3px rgba(0,0,0,.1)); transition:transform .35s ease; }
+      .flavor-fruit { position:absolute; z-index:1; width:260px; opacity:0; filter:saturate(.9) contrast(1.02); transform:scale(.88) rotate(-7deg); transition:opacity .4s ease,transform .5s cubic-bezier(.2,.75,.25,1); }
+      .peach .flavor-fruit { left:-126px; bottom:-128px; }
+      .grape .flavor-fruit { right:-112px; top:-96px; }
+      .lemon .flavor-fruit { right:-126px; bottom:-122px; width:280px; }
+      .flavor-copy { position:static; padding:24px; }
+      .flavor-copy h3 { margin:0; font-size:28px; font-weight:400; line-height:1; letter-spacing:-.03em; }
+      .flavor-copy p { display:none; }
+      .flavor-stats { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:14px 18px; margin-top:16px; }
+      .flavor-stats strong { display:block; color:rgba(242,240,234,.72); font:300 var(--text-ui)/1.2 Manrope,Arial,sans-serif; letter-spacing:-.02em; }
+      .flavor-stats span { display:block; margin-top:5px; color:rgba(203,213,222,.58); font:300 var(--text-ui)/1.3 Manrope,Arial,sans-serif; letter-spacing:.04em; text-transform:uppercase; }
+      .flavor:hover .flavor-fruit,.flavor:focus-visible .flavor-fruit { opacity:.5; transform:scale(1) rotate(0); }
+      .flavor:hover .flavor-product,.flavor:focus-visible .flavor-product { transform:translateY(-4px); }
+      .view-cursor { position:fixed; z-index:20; top:0; left:0; display:flex; width:64px; height:64px; align-items:center; justify-content:center; flex-direction:column; gap:4px; padding:10px; border:1px solid transparent; border-radius:50%; background:#fff; box-shadow:none; color:var(--ink); font-family:Manrope,Arial,sans-serif; mix-blend-mode:difference; opacity:0; pointer-events:none; text-transform:uppercase; transform:translate(-50%,-50%) scale(.17); transition:opacity .12s ease,transform .22s cubic-bezier(.16,1,.3,1),background .18s ease,border-color .18s ease,box-shadow .18s ease; will-change:transform,opacity; }.view-cursor::before { position:absolute; inset:-1px; border:1px solid #fff; border-radius:inherit; content:""; opacity:0; }.cursor-label,.cursor-arrow { display:block; opacity:0; text-align:center; transform:translateY(2px); transition:opacity .1s ease .1s,transform .16s cubic-bezier(.16,1,.3,1) .1s; }.cursor-label { font-size:var(--text-note); font-weight:400; letter-spacing:.055em; line-height:1; white-space:nowrap; }.cursor-arrow { margin-top:1px; font-size:var(--text-ui); font-weight:400; line-height:.8; }.view-cursor.is-active { opacity:1; transform:translate(-50%,-50%) scale(.17); }.view-cursor.is-card { border-color:rgba(21,21,19,.78); background:#fff; box-shadow:0 5px 18px rgba(0,0,0,.14); mix-blend-mode:normal; transform:translate(-50%,-50%) scale(1); }.view-cursor.is-card .cursor-label,.view-cursor.is-card .cursor-arrow { opacity:1; transform:none; }.view-cursor.is-entering::before { animation:cursor-ring .34s cubic-bezier(.16,1,.3,1); } @keyframes cursor-ring { 0% { opacity:.78; transform:scale(.45); } 100% { opacity:0; transform:scale(1.55); } }
+      .cursor-trail { position:fixed; z-index:19; top:0; left:0; width:28px; height:28px; border:1px solid rgba(255,255,255,.76); border-radius:50%; mix-blend-mode:difference; opacity:0; pointer-events:none; transform:translate3d(-100px,-100px,0) translate(-50%,-50%); transition:opacity .16s ease,width .22s cubic-bezier(.16,1,.3,1),height .22s cubic-bezier(.16,1,.3,1); will-change:transform; }.cursor-trail.is-active { opacity:.6; }.cursor-trail.is-card { width:78px; height:78px; opacity:.42; }
+      .view-cursor { position:fixed; z-index:20; top:0; left:0; display:flex; width:64px; height:64px; align-items:center; justify-content:center; flex-direction:column; gap:4px; padding:10px; border:1px solid transparent; border-radius:50%; background:#fff; box-shadow:none; color:var(--ink); font-family:Manrope,Arial,sans-serif; mix-blend-mode:difference; opacity:0; pointer-events:none; text-transform:uppercase; transform:translate(-50%,-50%) scale(.14); transition:opacity .12s ease,transform .22s cubic-bezier(.16,1,.3,1),background .18s ease,border-color .18s ease,box-shadow .18s ease; will-change:transform,opacity; }.view-cursor::before { position:absolute; inset:-1px; border:1px solid #fff; border-radius:inherit; content:""; opacity:0; }.cursor-label,.cursor-arrow { display:block; opacity:0; text-align:center; transform:translateY(2px); transition:opacity .1s ease .1s,transform .16s cubic-bezier(.16,1,.3,1) .1s; }.cursor-label { font-size:var(--text-note); font-weight:400; letter-spacing:.055em; line-height:1; white-space:nowrap; }.cursor-arrow { margin-top:1px; font-size:var(--text-ui); font-weight:400; line-height:.8; }.view-cursor.is-active { opacity:1; transform:translate(-50%,-50%) scale(.14); }.view-cursor.is-card { border-color:rgba(21,21,19,.78); background:#fff; box-shadow:0 5px 18px rgba(0,0,0,.14); mix-blend-mode:normal; transform:translate(-50%,-50%) scale(1); }.view-cursor.is-card .cursor-label,.view-cursor.is-card .cursor-arrow { opacity:1; transform:none; }.view-cursor.is-entering::before { animation:cursor-ring .34s cubic-bezier(.16,1,.3,1); } @keyframes cursor-ring { 0% { opacity:.78; transform:scale(.45); } 100% { opacity:0; transform:scale(1.55); } }
+      /* Approved V10 product range: charcoal surface, fruit revealed on hover */
+      .range { background:#10110f; color:#f2efe8; }.range-top p { color:rgba(242,239,232,.68); }.range .section-kicker { color:#b5c4d1; }.flavors { gap:16px; }.flavor { background:#222320; color:#f2efe8; border:1px solid rgba(242,239,232,.10); box-shadow:none; transition:background .42s ease,color .32s ease,border-color .32s ease,box-shadow .35s ease; }.flavor-visual { height:363px; padding:24px; overflow:hidden; isolation:isolate; border-bottom:1px solid rgba(242,239,232,.08); background:#222320; transition:background .42s ease,border-color .32s ease; }.flavor-visual::before { content:""; position:absolute; z-index:0; width:78%; height:76%; left:11%; top:8%; background:radial-gradient(ellipse at 50% 48%,rgba(255,255,255,.07),rgba(255,255,255,.018) 42%,transparent 72%); pointer-events:none; }.flavor-visual::after { content:""; position:absolute; z-index:0; width:60%; height:42px; left:20%; bottom:20px; background:radial-gradient(ellipse at center,rgba(0,0,0,.43),rgba(0,0,0,.15) 42%,transparent 72%); filter:blur(9px); pointer-events:none; }.flavor-product { height:330px; z-index:2; transform:translateY(-2px); filter:drop-shadow(0 18px 12px rgba(0,0,0,.27)) drop-shadow(0 4px 3px rgba(0,0,0,.14)); transition:transform .38s ease,filter .35s ease; }.flavor-fruit { z-index:1; filter:saturate(.82) contrast(.98) blur(.1px); }.peach .flavor-fruit { width:570px; left:-45px; bottom:-34px; }.grape .flavor-fruit { width:340px; right:-78px; top:-72px; }.lemon .flavor-fruit { width:360px; right:-50px; bottom:-15px; }.flavor-copy { padding:24px; background:#222320; transition:background .42s ease; }.flavor-copy h3 { color:#f2efe8; }.flavor-stats { gap:12px; }.flavor-stats strong { color:rgba(242,240,234,.72); font:300 13px/1.1 Manrope,Arial,sans-serif; letter-spacing:-.02em; }.flavor-stats span { color:rgba(203,213,222,.58); font:300 11px/1.3 Manrope,Arial,sans-serif; letter-spacing:.04em; }.flavor:hover,.flavor:focus-visible { background:#181916; border-color:rgba(242,239,232,.14); box-shadow:0 18px 34px rgba(0,0,0,.22); }.flavor:hover .flavor-visual,.flavor:focus-visible .flavor-visual,.flavor:hover .flavor-copy,.flavor:focus-visible .flavor-copy { background:#181916; }.flavor:hover .flavor-fruit,.flavor:focus-visible .flavor-fruit { opacity:.46; }.flavor:hover .flavor-product,.flavor:focus-visible .flavor-product { transform:translateY(-7px); filter:drop-shadow(0 24px 16px rgba(0,0,0,.42)) drop-shadow(0 5px 3px rgba(0,0,0,.2)); }.view-cursor { backdrop-filter:blur(4px); }.js-motion .range .flavor { opacity:0; transform:translateY(44px) scale(.975); transition:opacity .9s ease,transform 1.05s cubic-bezier(.16,.8,.2,1),background .42s ease,color .32s ease,border-color .32s ease,box-shadow .35s ease; }.js-motion .range.is-revealed .flavor { opacity:1; transform:none; }.js-motion .range.is-revealed .flavor:nth-child(2) { transition-delay:.14s; }.js-motion .range.is-revealed .flavor:nth-child(3) { transition-delay:.28s; }
+      /* Typography audit: supporting stats share the readable UI scale. */
+      .flavor-stats strong { font:300 var(--text-ui)/1.2 Manrope,Arial,sans-serif; }
+      .flavor-stats span { font:300 var(--text-ui)/1.3 Manrope,Arial,sans-serif; }
+
+      /* Neutral black product surface: no green or olive cast. */
+      .range { background:#000; }.flavor,.flavor-visual,.flavor-copy { background:#101010; }.flavor:hover,.flavor:focus-visible,.flavor:hover .flavor-visual,.flavor:focus-visible .flavor-visual,.flavor:hover .flavor-copy,.flavor:focus-visible .flavor-copy { background:#050505; }
+      /* Keep the product triptych edge-to-edge, with its outer text aligned to the navigation rail. */
+      .range { padding:96px 0 0; }.range-top { max-width:none; margin:0; padding:0 5vw 40px; }.flavors { max-width:none; gap:0; }.flavor { min-height:0; border:0; border-radius:0; }.flavor + .flavor { border-left:1px solid rgba(242,239,232,.09); }.flavor-visual { height:390px; padding:22px; }.flavor-visual::after { width:58%; height:42px; left:21%; bottom:18px; }.flavor-product { height:345px; filter:drop-shadow(0 20px 13px rgba(0,0,0,.28)) drop-shadow(0 4px 3px rgba(0,0,0,.14)); }.peach .flavor-fruit { width:570px; left:-45px; bottom:-42px; }.grape .flavor-fruit { width:370px; right:-68px; top:-66px; }.lemon .flavor-fruit { width:385px; right:-40px; bottom:-14px; }.flavor-copy { padding:24px 28px 28px; }.flavor:first-child .flavor-copy { padding-left:clamp(16px,3vw,48px); }.flavor:last-child .flavor-copy { padding-right:clamp(16px,3vw,48px); }.flavor-copy h3 { font-size:28px; }.flavor-stats { margin-top:16px; gap:16px; }.flavor:hover,.flavor:focus-visible { box-shadow:none; }
+      /* Product range: a single restrained green-black surface; flavor remains in the product imagery only. */
+      .range { background:#121714; color:#f2f2f0; }
+      .range-top p { color:rgba(242,242,240,.72); }
+      .range .section-kicker,.social-head p,.signup .mono,.signup-response { color:#b5c4d1; }
+      .flavor,.flavor-visual,.flavor-copy { background:#121714; color:#f2f2f0; }
+      .flavor:hover,.flavor:focus-visible,.flavor:hover .flavor-visual,.flavor:focus-visible .flavor-visual,.flavor:hover .flavor-copy,.flavor:focus-visible .flavor-copy { background:#0d110f; }
+      .flavor { border-top:1px solid rgba(207,220,211,.18); }
+      .flavor + .flavor { border-color:rgba(207,220,211,.18); }
+      .flavor-copy h3 { color:#f2f2f0; }
+      .flavor-stats span { color:rgba(203,213,222,.58); }
+      .range.is-revealed .flavor-visual::before { animation:product-glow 5.5s ease-in-out infinite alternate; animation-delay:var(--glow-delay,0s); }
+      .range.is-revealed .flavor:nth-child(2) .flavor-visual::before { --glow-delay:.8s; }
+      .range.is-revealed .flavor:nth-child(3) .flavor-visual::before { --glow-delay:1.6s; }
+      .site-footer { overflow:hidden; color:var(--paper); background:#080b09; }
+      .social-feed { padding:90px 0 76px; border-bottom:1px solid rgba(238,242,243,.2); }
+      .social-head { display:flex; align-items:end; justify-content:space-between; gap:28px; padding:0 5.5vw 32px; }
+      .social-head p { margin:0; color:#b5c4d1; }
+      .social-head h2 { max-width:790px; margin:0; font-size:clamp(2.4rem,5.4vw,5.8rem); font-weight:400; line-height:.94; letter-spacing:-.05em; }
+      .social-marquee { overflow:hidden; width:100%; }
+      .social-track { display:flex; width:max-content; gap:16px; padding-left:5.5vw; animation:social-scroll 34s linear infinite; }
+      .social-marquee:hover .social-track,.social-marquee:focus-within .social-track { animation-play-state:paused; }
+      .social-card { width:clamp(210px,19vw,310px); flex:0 0 auto; margin:0; overflow:hidden; background:transparent; }
+      .social-card img { display:block; width:100%; aspect-ratio:4/5; object-fit:cover; filter:saturate(.78) contrast(1.03); transform-origin:center; transition:filter .25s ease,transform .4s ease; }
+      .social-card figcaption { position:relative; z-index:1; display:flex; align-items:center; gap:8px; padding:7px 0 8px; background:var(--surface-deep); color:rgba(242,240,234,.72); font:400 var(--text-ui)/1.2 Manrope,Arial,sans-serif; letter-spacing:.01em; text-transform:none; }
+      .social-card figcaption::before { content:""; width:8px; height:12px; flex:0 0 auto; background:linear-gradient(currentColor,currentColor) center 8px/1px 4px no-repeat,radial-gradient(circle at 50% 4px,transparent 0 2px,currentColor 2.5px 3px,transparent 3.5px); }
+      .location-pin { display:none; }
+      .social-card:hover img { filter:saturate(1) contrast(1); transform:scale(1.035); }
+      .footer-main { display:grid; grid-template-columns:minmax(0,1fr) minmax(250px,.62fr); gap:9vw; padding:76px 5.5vw 0; }
+      .signup .mono { margin:0 0 18px; color:#b5c4d1; }
+      .signup h2 { max-width:600px; margin:0 0 15px; font-size:clamp(2.5rem,4.5vw,5rem); font-weight:400; line-height:.94; letter-spacing:-.05em; }
+      .signup > p:not(.mono) { max-width:460px; margin:0 0 24px; color:rgba(238,242,243,.74); font-size:var(--text-body); font-weight:300; line-height:1.6; }
+      .signup-form { display:flex; max-width:510px; border-bottom:1px solid rgba(238,242,243,.6); }
+      .signup-form input { min-width:0; flex:1; padding:15px 0; border:0; outline:0; background:transparent; color:var(--paper); font:300 var(--text-body)/1.2 Manrope,sans-serif; }
+      .signup-form input::placeholder { color:rgba(238,242,243,.56); }
+      .signup-form button { padding:0 0 0 20px; border:0; background:transparent; color:var(--paper); cursor:pointer; font:300 28px/.8 Manrope,sans-serif; transition:color .18s ease,opacity .18s ease; }.signup-form button:disabled { color:rgba(238,236,229,.25); cursor:not-allowed; opacity:.6; }
+      .signup-note { display:block; max-width:500px; margin-top:13px; color:rgba(238,242,243,.42); font-size:var(--text-ui); font-weight:300; letter-spacing:.01em; line-height:1.45; }
+      .signup-response { min-height:20px; margin:12px 0 0; color:#b5c4d1; font-size:var(--text-ui); }
+      .signup-honeypot { position:absolute!important; left:-10000px!important; width:1px!important; height:1px!important; overflow:hidden!important; opacity:0!important; pointer-events:none!important; }
+      .footer-links { display:block; align-content:start; padding-top:8px; }
+      .footer-links a,.footer-links .footer-link-placeholder,.footer-email { position:relative; display:block; width:max-content; margin:0 0 11px; padding:0; border:0; background:transparent; color:var(--paper); font:300 var(--text-ui)/1.3 Manrope,Arial,sans-serif; text-align:left; text-decoration:none; }
+      .footer-links a::after,.footer-link-placeholder::after { position:absolute; top:50%; left:calc(100% + 9px); content:"↗"; opacity:0; transform:translate(-5px,-50%); transition:opacity .22s ease,transform .28s cubic-bezier(.16,1,.3,1); }
+      .footer-links a:hover::after,.footer-links a:focus-visible::after,.footer-link-placeholder:hover::after { opacity:1; transform:translate(0,-50%); }
+      .footer-email { cursor:pointer; }
+      .footer-email::after { position:absolute; top:50%; left:calc(100% + 10px); width:max-content; content:attr(data-copy-label); color:rgba(242,240,234,.56); font-size:var(--text-ui); opacity:0; transform:translate(-5px,-50%); transition:opacity .22s ease,transform .28s cubic-bezier(.16,1,.3,1); }
+      .footer-email:hover::after,.footer-email:focus-visible::after,.footer-email.is-copied::after { opacity:1; transform:translate(0,-50%); }
+      .footer-wordmark { display:flex; align-items:flex-end; justify-content:space-between; width:100%; margin:70px 0 -1.25vw; padding:0; color:rgba(238,242,243,.42); font-size:clamp(8rem,30vw,37rem); font-weight:400; line-height:.7; letter-spacing:0; text-align:center; white-space:nowrap; transform:scaleX(1.06); transform-origin:center bottom; }
+      .footer-letter { display:block; overflow:hidden; line-height:.7; }
+      .footer-letter > span { display:block; }
+      .js-motion .footer-wordmark .footer-letter > span { opacity:0; transform:translateY(112%); will-change:transform,opacity; }
+      .js-motion .footer-wordmark.is-revealed .footer-letter > span { animation:footer-letter-rise .78s cubic-bezier(.16,1,.3,1) var(--letter-delay,0ms) both; }
+      /* Palette normalization: warm paper and peach over nearly monochrome, blue-kissed charcoals. */
+      :root { --ink:#18191c; --paper:#f2f0ea; --quiet:#8d8e93; --line:rgba(242,240,234,.22); --surface-navy:#16171b; --surface-deep:#0b0c0f; --surface-raised:#1b1c21; --accent-blue:#b5c4d1; }
+      .hero { background:#101114; border-color:rgba(242,240,234,.20); }
+      .hero p { color:rgba(242,240,234,.84); }
+      .heritage { background:#f5f2ec; }
+      .proof-list { border-color:rgba(24,25,28,.28); }.proof { border-color:rgba(24,25,28,.20); }.proof p { color:#4e5055; }
+      .texture-story { background:#151b25; }.texture-stage::before { background:radial-gradient(circle at 50% 52%,#2b3a4d 0,transparent 43%),#151b25; }.texture-copy p,.texture-callout .mono,.ingredients .section-kicker { color:var(--accent-blue); }.texture-copy h2 { color:#c4ccd3; }.texture-callout { background:rgba(244,249,252,.022); border:0; border-left:1px solid rgba(181,196,209,.36); box-shadow:0 8px 24px rgba(0,0,0,.02); }.texture-callout h3 { color:#f2f0ea; }.texture-callout p { color:rgba(203,213,222,.5); font-size:var(--text-note); font-weight:300; line-height:1.45; }.texture-connectors path { stroke:var(--accent-blue); }.texture-connectors circle { fill:#151b25; stroke:#d1d9df; }
+      .ingredients { background:var(--surface-raised); }.formulation-bridge { background:linear-gradient(180deg,#151b25 0%,#111318 52%,var(--surface-deep) 100%); }
+      .range { background:var(--surface-navy); }.flavor,.flavor-visual,.flavor-copy { background:var(--surface-navy); }.flavor:hover,.flavor:focus-visible,.flavor:hover .flavor-visual,.flavor:focus-visible .flavor-visual,.flavor:hover .flavor-copy,.flavor:focus-visible .flavor-copy { background:#111216; }.flavor,.flavor + .flavor { border-color:rgba(181,196,209,.15); }
+      /* Fruit is a small edge signal on hover, never a card background. */
+      .flavor-fruit { left:50%; top:50%; width:145px; filter:saturate(.9) contrast(1); transform:translate(calc(-50% + var(--fruit-x,0px) + var(--fruit-enter-x,0px)),calc(-50% + var(--fruit-y,0px) + var(--fruit-enter-y,0px))) scale(.88) rotate(-7deg); }
+      .peach { --fruit-x:-160px; --fruit-y:70px; --fruit-enter-x:-26px; --fruit-enter-y:0px; }
+      .grape { --fruit-x:135px; --fruit-y:-120px; --fruit-enter-x:0px; --fruit-enter-y:-22px; }
+      .lemon { --fruit-x:160px; --fruit-y:10px; --fruit-enter-x:26px; --fruit-enter-y:0px; }
+      .flavor:hover .flavor-fruit,.flavor:focus-visible .flavor-fruit { opacity:.38; transform:translate(calc(-50% + var(--fruit-x,0px)),calc(-50% + var(--fruit-y,0px))) scale(1) rotate(0); }
+      .grape:hover .flavor-fruit,.grape:focus-visible .flavor-fruit { opacity:.62; filter:saturate(1.05) contrast(1.05); }
+      .grape .flavor-fruit { z-index:1; top:-46px; right:-46px; bottom:auto; left:auto; width:260px; transform:translate(32px,-32px) scale(.88) rotate(-7deg); }
+      .grape:hover .flavor-fruit,.grape:focus-visible .flavor-fruit { transform:translate(0,0) scale(1) rotate(0); }
+      .peach .flavor-fruit,.lemon .flavor-fruit { width:260px; }
+      .peach .flavor-fruit { z-index:1; top:120px; right:auto; bottom:auto; left:-46px; transform:translate(-32px,0) scale(.88) rotate(-7deg); }
+      .peach:hover .flavor-fruit,.peach:focus-visible .flavor-fruit { transform:translate(0,0) scale(1) rotate(0); }
+      .site-footer { background:var(--surface-deep); }.social-feed { border-color:rgba(242,240,234,.18); }.social-card { background:var(--surface-raised); }.signup .mono,.social-head p,.signup-response,.range .section-kicker { color:var(--accent-blue); }.signup > p:not(.mono) { color:rgba(242,240,234,.74); }.signup-form { border-color:rgba(242,240,234,.60); }.signup-form input::placeholder { color:rgba(242,240,234,.56); }.signup-note { color:rgba(242,240,234,.42); }.footer-wordmark { color:rgba(242,240,234,.42); }
+      @keyframes hero-video-settle { from { opacity:0; transform:scale(1.045); } to { opacity:.7; transform:scale(1); } }
+      @keyframes site-fade-up { from { opacity:0; transform:translateY(18px); } to { opacity:1; transform:none; } }
+      @keyframes footer-letter-rise { from { opacity:0; transform:translateY(112%); } to { opacity:1; transform:translateY(0); } }
+      @keyframes product-glow { from { opacity:.55; transform:scale(.94); } to { opacity:1; transform:scale(1.06); } }
+      @keyframes social-scroll { to { transform:translateX(calc(-50% - 8px)); } }
+      @media (max-width:760px) {
+        .nav { padding:18px 20px; }.nav-links { display:flex; gap:16px; font-size:11px; }.wordmark { font-size:16px; letter-spacing:.22em; }
+        .hero { min-height:760px; padding:0 24px 52px; }.hero h1 { font-size:clamp(3rem,12vw,4.25rem); letter-spacing:-.06em; }
+        .intro,.ingredients { padding:84px 24px; }.heritage { min-height:420px; padding:58px 24px; }.heritage-art { width:180px; margin-bottom:14px; }.heritage h2 { font-size:clamp(2.5rem,5.15vw,2.625rem); }.intro-grid,.ingredients-grid { display:block; }.intro-body { padding-top:40px; }.intro h2,.ingredients h2,.range h2 { font-size:3.1rem; }
+        .ingredient-rows { margin-top:42px; }.ingredient-row { grid-template-columns:32px 1fr; gap:8px; }.ingredient-row p { grid-column:2; }.formulation-bridge { height:120px; }
+        .texture-story { height:260svh; }.texture-copy p { top:7vh; left:24px; }.texture-copy h2 { width:96vw; font-size:16vw; }.texture-droplet { height:min(48vh,440px); max-width:70vw; top:53%; }.texture-callout { width:190px; }.texture-callout.one { top:23%; left:24px; }.texture-callout.two { top:auto; right:16px; bottom:25%; }.texture-callout.three { top:auto; left:16px; bottom:9%; }
+        .range { padding:84px 20px 58px; }.range-top { margin-bottom:34px; }.range-top p { margin-top:18px; }.flavors { grid-template-columns:1fr; gap:13px; }.flavor-product { height:315px; }.social-feed { padding:64px 0 56px; }.social-head { display:block; padding:0 24px 25px; }.social-track { gap:10px; padding-left:24px; }.social-card { width:190px; }.footer-main { display:block; padding:42px 24px 0; }.footer-links { margin-top:32px; }.footer-wordmark { margin-top:22px; padding:0; font-size:33vw; }.signup-form { max-width:none; }
+      }
+      @media (prefers-reduced-motion:reduce) { .nav,.hero video,.hero h1,.hero p,.hero .button,.range.is-revealed .flavor-visual::before { animation:none; } .js-motion [data-reveal],.js-motion .texture-title-reveal { opacity:1; transform:none; transition:none; } .js-motion .footer-wordmark .footer-letter > span { opacity:1; transform:none; animation:none; } .texture-droplet { opacity:1; transform:translate(-50%,-50%); }.texture-callout { opacity:1; transform:none; }.texture-connectors path { stroke-dashoffset:0; opacity:1; }.texture-connectors circle { opacity:1; transform:scale(1); } .texture-copy h2 { transform:translate(-50%,calc(-50% - 34vh)) scale(.6); } .heritage-art { opacity:1; } .hero .hero-character,.heritage .heritage-character,.heritage .mask-body,.heritage-mark { opacity:1!important; filter:none!important; transform:none!important; transition:none!important; } .social-track { animation:none; } }
+      .has-custom-cursor body,.has-custom-cursor .flavor,.has-custom-cursor a,.has-custom-cursor button { cursor:none; } .has-custom-cursor input,.has-custom-cursor textarea { cursor:text; } .has-custom-cursor select { cursor:default; }
+      @media (min-width:1280px) { .flavor-stats { grid-template-columns:repeat(4,minmax(0,1fr)); gap:10px; } }
+      @media (max-width:760px) { .range { padding:72px 0 0; }.range-top { padding:0 24px 32px; }.flavors { gap:0; }.flavor + .flavor { border-left:0; border-top:1px solid rgba(242,239,232,.09); }.flavor-visual { height:390px; }.flavor-product { height:335px; }.flavor-copy { padding:22px 24px 26px; }.flavor-stats { grid-template-columns:repeat(4,minmax(0,1fr)); gap:10px; } }
+      @media (min-width:641px) and (max-width:1000px) { .texture-droplet { height:min(50vh,450px); max-width:42vw; }.texture-copy h2 { width:min(900px,90vw); font-size:clamp(3.8rem,8.6vw,7rem); }.texture-callout { width:min(245px,28vw); }.texture-callout.one { top:38%; left:5vw; }.texture-callout.two { top:51%; right:1.5vw; bottom:auto; left:auto; }.texture-callout.three { top:72%; left:3vw; right:auto; bottom:auto; } }
+      @media (max-width:640px) { .texture-story { height:auto; }.texture-stage { position:relative; height:auto; min-height:0; display:flex; flex-direction:column; align-items:stretch; padding:72px 24px 84px; overflow:hidden; }.texture-copy { position:relative; inset:auto; order:1; display:block; pointer-events:auto; }.texture-title-reveal { position:relative; inset:auto; opacity:1!important; transform:none!important; }.texture-copy h2 { position:relative; top:auto; left:auto; width:100%; margin:0; font-size:clamp(3.1rem,12vw,5rem); line-height:.88; text-align:left; transform:none!important; }.texture-droplet { position:relative; order:2; left:auto; top:auto; align-self:center; height:min(48vh,420px); max-width:80vw; margin:38px auto 34px; opacity:1!important; transform:none!important; }.texture-connectors { display:none; }.texture-callout,.texture-callout.one,.texture-callout.two,.texture-callout.three { position:relative; top:auto; right:auto; bottom:auto; left:auto; order:3; width:100%; margin:0; padding:20px 0; background:none; border-left:0; border-top:1px solid rgba(143,201,214,.3); opacity:1!important; transform:none!important; backdrop-filter:none; -webkit-backdrop-filter:none; }.texture-callout + .texture-callout { order:4; }.texture-callout h3 { font-size:15px; }.texture-callout p { max-width:390px; font-size:var(--text-note); } }
+      @media (prefers-reduced-motion:reduce) { .js-motion .range .flavor { opacity:1; transform:none; transition:none; } }
+      @media (max-width:760px) { .flavor + .flavor { border-color:rgba(181,196,209,.15); } }
+      .faq { padding:64px 5.5vw; background:var(--paper); color:var(--ink); }
+      .faq-inner { max-width:1120px; margin:auto; display:grid; grid-template-columns:.9fr 1.4fr; gap:5vw; }
+      .faq h2 { margin:0; font-size:clamp(2.25rem,4vw,3.75rem); font-weight:400; line-height:1; letter-spacing:-.05em; }
+      .faq-list { border-top:1px solid rgba(24,25,28,.25); }
+      .faq details { border-bottom:1px solid rgba(24,25,28,.25); }
+      .faq details.is-animating { overflow:hidden; }
+      .faq summary { position:relative; display:flex; align-items:center; justify-content:space-between; gap:20px; padding:18px 36px 18px 0; font-size:15px; font-weight:500; list-style:none; cursor:pointer; }
+      .faq summary::-webkit-details-marker { display:none; }
+      .faq summary::before,.faq summary::after { content:''; position:absolute; right:5px; top:50%; width:16px; height:1px; background:currentColor; transform:translateY(-50%); }
+      .faq summary::before { transform:translateY(-50%) rotate(90deg); transition:transform 360ms cubic-bezier(.22,1,.36,1); will-change:transform; }
+      .faq details.is-expanded summary::before { transform:translateY(-50%) rotate(0deg); }
+      .faq summary:focus-visible { outline:2px solid var(--ink); outline-offset:5px; }
+      .faq details p { margin:0; padding:0 28px 18px 0; font-size:14px; line-height:1.6; color:#4e5055; }
+      .faq a { color:inherit; font-weight:700; text-decoration:none; }
+      .faq a:focus-visible { outline:2px solid var(--ink); outline-offset:3px; }
+      /* Heading hierarchy: hero H1, shared feature headings, then shared closing headings. */
+      .range h2,.heritage h2,.social-head h2 { font-size:clamp(2.5rem,5.15vw,6.9rem); line-height:1.04; letter-spacing:-.06em; }
+      .faq h2,.signup h2 { font-size:clamp(2.25rem,4vw,3.75rem); line-height:1; letter-spacing:-.05em; }
+      @media(max-width:760px) { .faq { padding:48px 24px; }.faq-inner { grid-template-columns:1fr; gap:24px; }.range h2,.heritage h2,.social-head h2 { font-size:clamp(2.5rem,5.15vw,2.625rem); } }
+      @media (prefers-reduced-motion:reduce) { .faq summary::before { transition:none; } }
+      /* Hero: one type family, one visual axis, and one restrained call to action. */
+      .wordmark { font-size:18px; letter-spacing:.28em; }
+      .nav-links { gap:34px; font-size:13px; }
+      .hero { min-height:max(760px,100svh); align-items:flex-end; padding:140px 5.5vw 72px; }
+      .hero .hero-media { opacity:.62; filter:grayscale(.82) contrast(1.06); }
+      .hero::after { background:linear-gradient(90deg,rgba(7,8,10,.9) 0%,rgba(7,8,10,.65) 44%,rgba(7,8,10,.14) 82%),linear-gradient(0deg,rgba(7,8,10,.58) 0%,transparent 45%); }
+      .hero-content { width:min(660px,100%); max-width:none; }
+      .hero .hero-eyebrow { display:block; width:auto; margin:0 0 14px; color:var(--accent-blue); font-size:11px; font-weight:500; letter-spacing:.14em; line-height:1.2; }
+      .hero h1 { max-width:660px; margin:0 0 25px; font-size:clamp(4rem,6.4vw,6.8rem); font-weight:400; line-height:.94; letter-spacing:-.055em; }
+      .hero h1 > span { white-space:nowrap; }
+      .hero > .hero-content > p:not(.hero-eyebrow) { width:min(500px,100%); margin:0 0 34px; color:rgba(242,240,234,.72); font-size:16px; line-height:1.6; }
+      .hero-signup { width:min(500px,100%); }
+      .hero-signup-form { display:flex; gap:0; align-items:stretch; padding:0; border:1px solid rgba(242,240,234,.26); border-radius:2px; background:rgba(16,17,20,.5); transition:border-color .2s ease,box-shadow .2s ease,background .2s ease; }
+      .hero-signup-form:focus-within { border-color:var(--accent-blue); background:rgba(16,17,20,.68); box-shadow:0 0 0 1px rgba(181,196,209,.12); }
+      .hero-signup-form input { min-width:0; min-height:56px; flex:1; border:0; background:transparent; color:var(--paper); padding:0 16px 0 18px; font:400 14px/1.2 Manrope,Arial,sans-serif; border-radius:0; outline:0; }
+      .hero-signup-form input::placeholder { color:rgba(242,240,234,.55); }
+      .hero-signup-form input:focus-visible { outline:0; }
+      .hero-signup-form .button { min-height:56px; padding:0 18px; border:0; background:var(--paper); color:var(--ink); cursor:pointer; font-size:13px; letter-spacing:.02em; white-space:nowrap; }
+      .hero-signup-form .button:hover,.hero-signup-form .button:focus-visible { background:var(--accent-blue); color:var(--ink); }
+      .hero .hero-signup-offer { width:auto; margin:13px 0 0; color:rgba(242,240,234,.58); font-size:12px; line-height:1.45; }
+      .hero .hero-signup-response { width:auto; margin:10px 0 0; font-size:12px; color:var(--accent-blue); }
+      .hero-signup .signup-note { display:none; }
+      .view-cursor,.cursor-trail { display:none!important; }
+      @media (hover:hover) and (pointer:fine) { body { cursor:auto; } a,button,.flavor { cursor:pointer; } input,textarea { cursor:text; } }
+      .js-motion .hero .hero-character { opacity:1; transform:none; transition:none; }
+      .hero-content { animation:none; }
+      .hero .hero-eyebrow { animation:hero-content-enter .6s .1s both cubic-bezier(.16,1,.3,1); }
+      .hero h1 { animation:hero-content-enter .6s .35s both cubic-bezier(.16,1,.3,1); }
+      .hero > .hero-content > p:not(.hero-eyebrow) { animation:hero-content-enter .6s .6s both cubic-bezier(.16,1,.3,1); }
+      .hero-signup { animation:hero-content-enter .6s .85s both cubic-bezier(.16,1,.3,1); }
+      .hero-signup .button,.hero-signup p { animation:none; }
+      @keyframes hero-content-enter { from { opacity:0; transform:translateY(16px); } to { opacity:1; transform:none; } }
+      @media(max-width:760px) { .hero { min-height:720px; padding:124px 24px 58px; }.hero::after { background:linear-gradient(180deg,rgba(7,8,10,.28),rgba(7,8,10,.7) 58%,rgba(7,8,10,.94)),linear-gradient(90deg,rgba(7,8,10,.82),rgba(7,8,10,.28)); }.hero h1 { font-size:clamp(2.8rem,12vw,4rem); }.hero > .hero-content > p:not(.hero-eyebrow) { font-size:15px; }.hero video { object-position:58% center; } }
+      @media(max-width:520px) { .nav { padding:15px 16px; }.nav-links { gap:10px; font-size:10px; }.wordmark { font-size:14px; }.hero-signup-form input { width:55%; padding-left:14px; }.hero-signup-form .button { padding:0 14px; font-size:12px; } }
+      @media(prefers-reduced-motion:reduce) { .hero .hero-eyebrow,.hero h1,.hero > .hero-content > p:not(.hero-eyebrow),.hero-signup { animation:none; } }
+    </style>
+  </head>
+  <body>
+    <header class="nav">
+      <a class="wordmark" href="#top" aria-label="OREHA home">OREHA</a>
+      <nav class="nav-links mono" aria-label="Primary navigation"><a href="#about">About</a><a href="#products">Products</a><a href="#cart">Cart</a></nav>
+    </header>
+    <main id="top">
+      <section class="hero" aria-labelledby="hero-title">
+        <img class="hero-media" src="footage-review.jpg" alt="" />
+        <div class="hero-content">
+          <p class="hero-eyebrow">COMING TO CANADA · LATE 2026</p>
+          <h1 id="hero-title"><span>Gel energy.</span><span>Made smoother.</span></h1>
+          <p>Performance jelly engineered in Japan for endurance sport. Smooth texture. Purposeful ingredients.</p>
+          <div class="hero-signup">
+            <form class="hero-signup-form" id="hero-signup-form" data-signup-source="hero">
+              <label class="sr-only" for="hero-email">Email address</label>
+              <input id="hero-email" name="email" type="email" autocomplete="email" placeholder="Your email address" required />
+              <div class="signup-honeypot" aria-hidden="true"><label for="hero-company">Company</label><input id="hero-company" name="company" type="text" tabindex="-1" autocomplete="off" /></div>
+              <button class="button" type="submit">Join the launch</button>
+            </form>
+            <p class="hero-signup-offer">Be the first to know when OREHA arrives.</p>
+            <small class="signup-note">By signing up, you agree to receive emails from OREHA. Unsubscribe anytime.</small>
+            <p class="hero-signup-response" id="hero-signup-response" role="status"></p>
+          </div>
+        </div>
+      </section>
+      <section class="range" id="products" aria-labelledby="flavor-title">
+        <div class="range-top"><div class="range-copy"><h2 id="flavor-title">Pick your fuel</h2></div><p>One 45g pouch. Three flavours to choose from.</p></div>
+        <div class="flavors">
+          <article class="flavor peach" tabindex="0"><div class="flavor-visual"><img class="flavor-fruit" src="peach-accent.png" alt="" /><img class="flavor-product" src="oreha-peach-transparent.png" alt="OREHA Peach performance jelly" /></div><div class="flavor-copy"><h3>Peach</h3><div class="flavor-stats"><div><strong>21.3 g</strong><span>Carbs</span></div><div><strong>104 kcal</strong><span>Calories</span></div><div><strong>15,700 mg</strong><span>Palatinose</span></div><div><strong>2,200 mg</strong><span>MCT oil</span></div></div></div></article>
+          <article class="flavor grape" tabindex="0"><div class="flavor-visual"><img class="flavor-fruit" src="grape-accent.png" alt="" /><img class="flavor-product" src="oreha-grape-transparent.png" alt="OREHA Grape performance jelly" /></div><div class="flavor-copy"><h3>Grape</h3><div class="flavor-stats"><div><strong>22.7 g</strong><span>Carbs</span></div><div><strong>109 kcal</strong><span>Calories</span></div><div><strong>15,700 mg</strong><span>Palatinose</span></div><div><strong>2,200 mg</strong><span>MCT oil</span></div></div></div></article>
+          <article class="flavor lemon" tabindex="0"><div class="flavor-visual"><img class="flavor-fruit" src="lemon-accent.png" alt="" /><img class="flavor-product" src="oreha-honey-lemon-transparent.png" alt="OREHA Honey Lemon performance jelly" /></div><div class="flavor-copy"><h3>Honey Lemon</h3><div class="flavor-stats"><div><strong>26.6 g</strong><span>Carbs</span></div><div><strong>109 kcal</strong><span>Calories</span></div><div><strong>12,800 mg</strong><span>Palatinose</span></div><div><strong>500 mg</strong><span>MCT oil</span></div></div></div></article>
+        </div>
+      </section>
+      <section class="heritage" id="about" aria-labelledby="heritage-title">
+        <div class="heritage-copy">
+          <svg class="heritage-art" viewBox="0 0 600 330" role="img" aria-label="A pagoda and snowcapped mountain beneath a red moon">
+            <path class="heritage-landscape" d="M 35 296 C 52 294 65 287 81 287 L 105 287 L 105 260 C 105 252 90 253 82 248 Q 81 246 86 245 C 107 243 111 238 111 219 L 111 207 C 111 201 97 204 91 199 Q 89 197 95 195 C 111 191 115 186 115 170 C 115 164 102 167 96 162 Q 94 160 100 158 C 116 154 119 150 119 135 C 119 130 107 132 101 128 Q 98 126 104 124 C 119 120 130 111 139 105 L 139 66 L 142 104 C 152 112 164 119 177 123 Q 183 125 178 128 C 171 132 158 129 158 135 C 158 150 162 154 178 158 Q 184 160 182 162 C 176 167 163 164 163 170 C 163 186 167 191 184 195 Q 189 197 187 199 C 181 204 167 201 167 207 L 167 219 C 167 238 172 243 193 245 Q 198 247 194 249 C 186 253 173 252 173 260 L 173 287 C 201 282 226 263 257 239 C 279 221 298 200 315 181 L 346 148 L 357 135 L 368 140 L 380 130 L 398 151 L 429 187 L 414 180 L 402 193 L 386 176 L 374 187 L 359 170 L 345 185 L 333 177 L 315 181 L 346 148 L 357 135 L 368 140 L 380 130 L 398 151 L 429 187 C 453 211 479 237 507 259 C 526 274 540 282 549 294" />
+            <circle class="heritage-moon" cx="422" cy="65" r="30" transform="rotate(-90 422 65)" />
+          </svg>
+          <h2 id="heritage-title"><span class="mask-line"><span class="mask-reveal">500 years of precision.</span></span><span class="mask-line"><span class="mask-reveal" style="--reveal-delay:120ms">Built for the distance.</span></span></h2>
+          <p class="mask-body">Built on a five-century family legacy in Japan, OREHA applies a patented formulation to smooth texture, fruit-forward flavour, and purpose-built energy.</p>
+          <span class="heritage-mark" aria-hidden="true"></span>
+        </div>
+      </section>
+      <section class="texture-story" id="texture" aria-labelledby="texture-title">
+        <div class="texture-stage">
+          <div class="texture-copy"><div class="texture-title-reveal"><h2 id="texture-title">Formulation<br />that matters</h2></div></div>
+          <svg class="texture-connectors" viewBox="0 0 1000 1000" preserveAspectRatio="none" aria-hidden="true"><g data-texture-link="0"><path d="" /><circle r="5" /></g><g data-texture-link="1"><path d="" /><circle r="5" /></g><g data-texture-link="2"><path d="" /><circle r="5" /></g></svg>
+          <img class="texture-droplet" src="oreha-water-droplet.png" alt="Clear water droplet" />
+          <article class="texture-callout one" data-texture-step="0"><span class="mono">01</span><h3>JELLY BY DESIGN</h3><p>A smooth, agar-based alternative to thick gels—no water needed to wash it down.</p></article>
+          <article class="texture-callout two" data-texture-step="1"><span class="mono">02</span><h3>PALATINOSE AT THE CORE</h3><p>Palatinose, fructose and dextrin form OREHA’s carbohydrate blend for endurance fueling.</p></article>
+          <article class="texture-callout three" data-texture-step="2"><span class="mono">03</span><h3>BEYOND CARBOHYDRATES</h3><p>Magnesium, MCT oil and sodium round out the formula with minerals and energy from fat.</p></article>
+        </div>
+      </section>
+      <div class="formulation-bridge" aria-hidden="true"></div>
+      <section class="faq" id="faq" aria-labelledby="faq-title">
+        <div class="faq-inner">
+          <h2 id="faq-title">Frequently asked<br />questions</h2>
+          <div class="faq-list">
+            <details><summary>How is OREHA different from an energy gel?</summary><p>Made in Japan, OREHA combines a Palatinose-based carbohydrate blend with a smooth jelly texture—less sticky on the run and easier on the stomach.</p></details>
+            <details><summary>How many carbohydrates are in each pouch?</summary><p>Peach contains 21.3 g, Grape 22.7 g and Honey Lemon 26.6 g of carbohydrates per 45 g pouch.</p></details>
+            <details><summary>When should I take OREHA?</summary><p>Before or during endurance exercise. Practise with OREHA in training to find the timing and amount that work for you.</p></details>
+            <details><summary>What’s inside OREHA?</summary><p>Palatinose, fructose and dextrin provide carbohydrates. MCT oil adds energy from fat, magnesium supports normal muscle function, and agar creates the jelly texture.</p></details>
+            <details><summary>Is OREHA vegan?</summary><p>Honey Lemon contains honey and is not vegan. See each flavour’s ingredient list for dietary and allergen information.</p></details>
+            <details><summary>Is OREHA tested for banned substances?</summary><p>OREHA Gel Energy is <a href="https://choice.wetestyoutrust.com/ja/node/442754" target="_blank" rel="noopener noreferrer">Informed Choice certified</a>. View the certification directory for product details and tested-batch records.</p></details>
+          </div>
+        </div>
+      </section>
+    </main>
+    <footer class="site-footer" id="cart">
+      <section class="social-feed" aria-labelledby="social-title">
+        <div class="social-head"><h2 id="social-title">Same effort,<br />different cities</h2></div>
+        <div class="social-marquee" aria-label="Placeholder Instagram posts">
+          <div class="social-track">
+            <figure class="social-card"><img src="01-trail.png" alt="Runner on a trail carrying OREHA fuel" /><figcaption>Vancouver</figcaption></figure>
+            <figure class="social-card"><img src="02-track.png" alt="Runner training on a track with OREHA fuel" /><figcaption>Tokyo</figcaption></figure>
+            <figure class="social-card"><img src="03-club.png" alt="OREHA running club placeholder post" /><figcaption>Madrid</figcaption></figure>
+            <figure class="social-card"><img src="06-seawall-run.png" alt="Runner by the seawall placeholder post" /><figcaption>Hong Kong</figcaption></figure>
+            <figure class="social-card"><img src="04-tear-open.png" alt="OREHA pouch placeholder post" /><figcaption>Melbourne</figcaption></figure>
+            <figure class="social-card"><img src="05-five-colours.png" alt="OREHA assortment placeholder post" /><figcaption>London</figcaption></figure>
+            <figure class="social-card" aria-hidden="true"><img src="01-trail.png" alt="" /><figcaption>Vancouver</figcaption></figure>
+            <figure class="social-card" aria-hidden="true"><img src="02-track.png" alt="" /><figcaption>Tokyo</figcaption></figure>
+            <figure class="social-card" aria-hidden="true"><img src="03-club.png" alt="" /><figcaption>Madrid</figcaption></figure>
+            <figure class="social-card" aria-hidden="true"><img src="06-seawall-run.png" alt="" /><figcaption>Hong Kong</figcaption></figure>
+            <figure class="social-card" aria-hidden="true"><img src="04-tear-open.png" alt="" /><figcaption>Melbourne</figcaption></figure>
+            <figure class="social-card" aria-hidden="true"><img src="05-five-colours.png" alt="" /><figcaption>London</figcaption></figure>
+          </div>
+        </div>
+      </section>
+      <div class="footer-main">
+        <section class="signup" aria-labelledby="signup-title">
+          <h2 id="signup-title">Ready for the next mile?</h2>
+          <p>Get 5% off your first order and hear about new flavours.</p>
+          <form class="signup-form" id="signup-form" data-signup-source="footer"><label class="sr-only" for="footer-email">Email address</label><input id="footer-email" name="email" type="email" autocomplete="email" placeholder="Your email address" required /><div class="signup-honeypot" aria-hidden="true"><label for="footer-company">Company</label><input id="footer-company" name="company" type="text" tabindex="-1" autocomplete="off" /></div><button type="submit" aria-label="Get 5% off" disabled>→</button></form>
+          <small class="signup-note">By signing up, you agree to receive emails from OREHA. Unsubscribe anytime.</small>
+          <p class="signup-response" id="signup-response" aria-live="polite"></p>
+        </section>
+        <nav class="footer-links" aria-label="Footer navigation"><div><a href="https://www.instagram.com/oreha.ca/" target="_blank" rel="noopener noreferrer">Instagram</a><span class="footer-link-placeholder">Amazon</span><span class="footer-link-placeholder">Privacy and Terms</span><button class="footer-email" type="button" data-copy-label="Copy email" aria-label="Copy hello@oreha.ca">hello@oreha.ca</button><span class="sr-only" id="email-copy-status" aria-live="polite"></span></div></nav>
+      </div>
+      <p class="footer-wordmark" aria-label="OREHA"><span class="footer-letter"><span aria-hidden="true">O</span></span><span class="footer-letter"><span aria-hidden="true" style="--letter-delay:80ms">R</span></span><span class="footer-letter"><span aria-hidden="true" style="--letter-delay:160ms">E</span></span><span class="footer-letter"><span aria-hidden="true" style="--letter-delay:240ms">H</span></span><span class="footer-letter"><span aria-hidden="true" style="--letter-delay:320ms">A</span></span></p>
+    </footer>
+    <div class="cursor-trail" aria-hidden="true"></div>
+    <div class="view-cursor" aria-hidden="true"><span class="cursor-label">View</span><span class="cursor-arrow">↗</span></div>
+    <script src="signup-config.js"></script>
+    <script>
+      document.documentElement.classList.add('js-motion');
+      let scrollVelocity = 0;
+      let lastScrollPosition = window.scrollY;
+      let lastScrollTime = performance.now();
+      const heroCharacters = [];
+      document.querySelectorAll('.hero h1 > span').forEach((line, lineIndex) => {
+        const text = line.textContent;
+        line.setAttribute('aria-label', text);
+        line.replaceChildren(...[...text].map((character, characterIndex) => {
+          const span = document.createElement('span');
+          span.className = 'hero-character';
+          span.setAttribute('aria-hidden', 'true');
+          span.textContent = character === ' ' ? '\u00a0' : character;
+          span.style.setProperty('--character-delay', `${lineIndex * 240 + characterIndex * 10}ms`);
+          heroCharacters.push(span);
+          return span;
+        }));
+      });
+      requestAnimationFrame(() => heroCharacters.forEach((character) => character.classList.add('is-visible')));
+      document.querySelectorAll('.heritage .mask-reveal').forEach((line, lineIndex) => {
+        const text = line.textContent;
+        line.setAttribute('aria-label', text);
+        line.replaceChildren(...[...text].map((character, characterIndex) => {
+          const span = document.createElement('span');
+          span.className = 'heritage-character';
+          span.setAttribute('aria-hidden', 'true');
+          span.textContent = character === ' ' ? '\u00a0' : character;
+          const lineDelay = lineIndex * 280;
+          span.style.setProperty('--character-delay', `${lineDelay + characterIndex * 11}ms`);
+          return span;
+        }));
+      });
+      const reducedMotionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+      const revealTargets = [
+        ['.range-top', 'up'],
+        ['.social-head', 'up'],
+        ['.faq h2', 'up'],
+        ['.signup', 'up'],
+        ['.footer-links', 'soft']
+      ];
+      const dependentReveals = [
+        ['.social-head', '.social-marquee', 'soft'],
+        ['.faq h2', '.faq-list', 'soft'],
+        ['.signup', '.footer-wordmark', 'wordmark']
+      ];
+      dependentReveals.forEach(([, targetSelector, style]) => {
+        const target = document.querySelector(targetSelector);
+        if (target) target.dataset.reveal = style;
+      });
+      function revealRangeCards() {
+        document.querySelector('.range')?.classList.add('is-revealed');
+      }
+      const revealObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          entry.target.classList.add('is-revealed');
+          if (entry.target.matches('.range-top')) {
+            window.setTimeout(revealRangeCards, 720);
+          }
+          dependentReveals.forEach(([triggerSelector, targetSelector]) => {
+            if (!entry.target.matches(triggerSelector)) return;
+            window.setTimeout(() => document.querySelector(targetSelector)?.classList.add('is-revealed'), 720);
+          });
+          observer.unobserve(entry.target);
+        });
+      }, { threshold:.16, rootMargin:'0px 0px -6% 0px' });
+      revealTargets.forEach(([selector, style], index) => {
+        const target = document.querySelector(selector);
+        if (!target || reducedMotionQuery.matches) return;
+        target.dataset.reveal = style;
+        target.style.setProperty('--reveal-delay', `${index === 1 ? 40 : 0}ms`);
+        const waitForHeroCta = selector === '.range-top' && window.scrollY < 80;
+        if (waitForHeroCta) {
+          window.setTimeout(() => revealObserver.observe(target), 1850);
+        } else {
+          revealObserver.observe(target);
+        }
+      });
+      const heritageSection = document.querySelector('.heritage');
+      const heritageArt = document.querySelector('.heritage-art');
+      const heritageTitle = document.querySelector('#heritage-title');
+      const heritageLandscape = heritageArt?.querySelector('.heritage-landscape');
+      const heritageMoon = heritageArt?.querySelector('.heritage-moon');
+      const landscapeLength = heritageLandscape?.getTotalLength() || 0;
+      const moonLength = heritageMoon?.getTotalLength() || 0;
+      let heritageTimelineStarted = false;
+      if (heritageLandscape) {
+        heritageLandscape.style.strokeDasharray = landscapeLength;
+        heritageLandscape.style.strokeDashoffset = landscapeLength;
+        heritageLandscape.style.opacity = '0';
+      }
+      if (heritageMoon) {
+        heritageMoon.style.strokeDasharray = moonLength;
+        heritageMoon.style.strokeDashoffset = moonLength;
+        heritageMoon.style.opacity = '0';
+        heritageMoon.style.fillOpacity = '0';
+      }
+      function revealHeritageText() {
+        heritageSection?.classList.add('is-revealed');
+      }
+      function completeHeritageArtImmediately() {
+        if (!heritageSection) return;
+        heritageTimelineStarted = true;
+        heritageSection.classList.add('is-art-animating', 'is-art-complete');
+        if (heritageLandscape) {
+          heritageLandscape.style.transition = 'none';
+          heritageLandscape.style.strokeDashoffset = '0';
+          heritageLandscape.style.opacity = '1';
+        }
+        if (heritageMoon) {
+          heritageMoon.style.transition = 'none';
+          heritageMoon.style.strokeDashoffset = '0';
+          heritageMoon.style.opacity = '1';
+          heritageMoon.style.fillOpacity = '1';
+        }
+        requestAnimationFrame(() => {
+          heritageSection.classList.add('is-instant');
+          revealHeritageText();
+        });
+      }
+      function startHeritageTimeline() {
+        if (!heritageSection || heritageTimelineStarted) return;
+        heritageTimelineStarted = true;
+        if (reducedMotionQuery.matches) {
+          heritageSection.classList.add('is-art-complete');
+          revealHeritageText();
+          return;
+        }
+        heritageSection.classList.add('is-art-animating');
+        requestAnimationFrame(() => {
+          if (heritageLandscape) {
+            heritageLandscape.style.transition = 'stroke-dashoffset .56s cubic-bezier(.16,1,.3,1), opacity .1s ease';
+            heritageLandscape.style.strokeDashoffset = '0';
+            heritageLandscape.style.opacity = '1';
+          }
+          if (heritageMoon) {
+            heritageMoon.style.transition = 'stroke-dashoffset .22s .35s ease, opacity .14s .35s ease, fill-opacity .22s .43s ease';
+            heritageMoon.style.strokeDashoffset = '0';
+            heritageMoon.style.opacity = '1';
+            heritageMoon.style.fillOpacity = '1';
+          }
+        });
+        window.setTimeout(() => {
+          heritageSection.classList.add('is-art-complete');
+          window.setTimeout(revealHeritageText, 100);
+        }, 680);
+      }
+      const heritageObserver = new IntersectionObserver(([entry], observer) => {
+        if (!entry.isIntersecting) return;
+        startHeritageTimeline();
+        observer.disconnect();
+      }, { threshold:.4 });
+      if (heritageSection) heritageObserver.observe(heritageSection);
+      const heritageTextSafetyObserver = new IntersectionObserver(([entry], observer) => {
+        if (!entry.isIntersecting || heritageSection?.classList.contains('is-revealed')) return;
+        // Fast scrolls should always favour readable content over completing a decorative timeline.
+        // Slow scrolling retains the complete art-to-type sequence.
+        if (scrollVelocity < 1.2) return;
+        completeHeritageArtImmediately();
+        observer.disconnect();
+      }, { threshold:.45 });
+      if (heritageTitle && !reducedMotionQuery.matches) heritageTextSafetyObserver.observe(heritageTitle);
+      function updateHeritageArt() {
+        if (!reducedMotionQuery.matches || heritageTimelineStarted) return;
+        startHeritageTimeline();
+      }
+      reducedMotionQuery.addEventListener('change', updateHeritageArt);
+
+      const refreshedPouches = {
+        'oreha-peach-transparent.png':'../product-shots/clean-3d/oreha-peach.png',
+        'oreha-grape-transparent.png':'../product-shots/clean-3d/oreha-grape.png',
+        'oreha-honey-lemon-transparent.png':'../product-shots/clean-3d/oreha-honey-lemon.png'
+      };
+      document.querySelectorAll('img[src*="oreha-"]').forEach((image) => {
+        const filename = image.getAttribute('src').split('/').pop();
+        if (refreshedPouches[filename]) image.src = refreshedPouches[filename];
+      });
+      const viewCursor = document.querySelector('.view-cursor');
+      const cursorTrail = document.querySelector('.cursor-trail');
+      const supportsCustomCursor = !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if (supportsCustomCursor && viewCursor && cursorTrail) {
+        let pointerPosition = null;
+        let trailPosition = null;
+        let trailAnimationFrame = null;
+        const updateTrail = () => {
+          if (!pointerPosition || !trailPosition) return;
+          trailPosition.x += (pointerPosition.x - trailPosition.x) * .28;
+          trailPosition.y += (pointerPosition.y - trailPosition.y) * .28;
+          cursorTrail.style.transform = `translate3d(${trailPosition.x}px,${trailPosition.y}px,0) translate(-50%,-50%)`;
+          if (Math.hypot(pointerPosition.x - trailPosition.x, pointerPosition.y - trailPosition.y) > .15) {
+            trailAnimationFrame = requestAnimationFrame(updateTrail);
+          } else {
+            trailAnimationFrame = null;
+          }
+        };
+        const moveCursor = (event) => {
+          pointerPosition = { x:event.clientX, y:event.clientY };
+          if (!trailPosition) trailPosition = { ...pointerPosition };
+          viewCursor.style.left = `${event.clientX}px`;
+          viewCursor.style.top = `${event.clientY}px`;
+          if (!trailAnimationFrame) trailAnimationFrame = requestAnimationFrame(updateTrail);
+        };
+        document.addEventListener('mousemove', (event) => {
+          document.documentElement.classList.add('has-custom-cursor');
+          moveCursor(event);
+          viewCursor.classList.add('is-active');
+          cursorTrail.classList.add('is-active');
+          if (!event.target.closest('.flavor')) {
+            viewCursor.classList.remove('is-card', 'is-entering');
+            cursorTrail.classList.remove('is-card');
+          }
+        });
+        document.querySelectorAll('.flavor').forEach((card) => {
+          card.addEventListener('mouseenter', (event) => {
+            moveCursor(event);
+            viewCursor.classList.remove('is-entering');
+            void viewCursor.offsetWidth;
+            viewCursor.classList.add('is-active', 'is-card', 'is-entering');
+            cursorTrail.classList.add('is-active', 'is-card');
+          });
+          card.addEventListener('mouseleave', () => {
+            viewCursor.classList.remove('is-card', 'is-entering');
+            cursorTrail.classList.remove('is-card');
+          });
+          card.addEventListener('mousemove', moveCursor);
+        });
+        window.addEventListener('scroll', () => {
+          if (!pointerPosition || !viewCursor.classList.contains('is-card')) return;
+          const elementUnderPointer = document.elementFromPoint(pointerPosition.x, pointerPosition.y);
+          if (!elementUnderPointer?.closest('.flavor')) {
+            viewCursor.classList.remove('is-card', 'is-entering');
+            cursorTrail.classList.remove('is-card');
+          }
+        }, { passive:true });
+        window.addEventListener('blur', () => {
+          viewCursor.classList.remove('is-active', 'is-card', 'is-entering');
+          cursorTrail.classList.remove('is-active', 'is-card');
+        });
+      }
+      const textureStory = document.querySelector('.texture-story');
+      const reducedMotion = reducedMotionQuery;
+      const textureStage = textureStory?.querySelector('.texture-stage');
+      const textureTitleReveal = textureStory?.querySelector('.texture-title-reveal');
+      const textureDroplet = textureStory?.querySelector('.texture-droplet');
+      const textureCallouts = textureStory ? [...textureStory.querySelectorAll('[data-texture-step]')] : [];
+      const textureLinks = textureStory ? [...textureStory.querySelectorAll('[data-texture-link]')] : [];
+      const siteNav = document.querySelector('.nav');
+      function updateNavState() {
+        // Switch while the header is still on screen, avoiding a visible exit/re-entry.
+        siteNav?.classList.toggle('is-sticky', window.scrollY > 16);
+      }
+      function drawTextureConnectors() {
+        if (!textureStage || !textureDroplet || !textureLinks.length) return;
+        const stageRect = textureStage.getBoundingClientRect();
+        const dropletRect = textureDroplet.getBoundingClientRect();
+        const map = textureStory.querySelector('.texture-connectors');
+        map.setAttribute('viewBox', `0 0 ${stageRect.width} ${stageRect.height}`);
+        const targets = [[.37,.46],[.75,.52],[.36,.74]].map(([x,y]) => [dropletRect.left - stageRect.left + dropletRect.width * x, dropletRect.top - stageRect.top + dropletRect.height * y]);
+        textureLinks.forEach((link, index) => {
+          const note = textureCallouts[index].getBoundingClientRect();
+          const target = targets[index];
+          const fromLeft = note.left - stageRect.left < target[0];
+          const startX = fromLeft ? note.right - stageRect.left : note.left - stageRect.left;
+          const startY = note.top - stageRect.top + note.height * .5;
+          const bend = Math.max(34, Math.abs(target[0] - startX) * .42) * (fromLeft ? 1 : -1);
+          const path = link.querySelector('path');
+          path.setAttribute('d', `M ${startX} ${startY} C ${startX + bend} ${startY}, ${target[0] - bend} ${target[1]}, ${target[0]} ${target[1]}`);
+          path.style.setProperty('--path-length', path.getTotalLength().toFixed(1));
+          const endpoint = link.querySelector('circle'); endpoint.setAttribute('cx', target[0]); endpoint.setAttribute('cy', target[1]);
+        });
+      }
+      function updateTextureScroll() {
+        if (!textureStory) return;
+        if (reducedMotion.matches) {
+          textureTitleReveal?.style.setProperty('--formula-reveal', '1');
+          textureTitleReveal?.style.setProperty('--formula-title-scale', '1');
+          textureStory.style.setProperty('--droplet-opacity', '1');
+          drawTextureConnectors();
+          textureCallouts.forEach((callout) => callout.classList.add('active'));
+          textureLinks.forEach((link) => link.classList.add('active'));
+          return;
+        }
+        const rect = textureStory.getBoundingClientRect();
+        const scrollableDistance = Math.max(1, rect.height - window.innerHeight);
+        const progress = Math.max(0, Math.min(1, -rect.top / scrollableDistance));
+        const dropletProgress = Math.max(0, Math.min(1, (progress - .22) / .42));
+        textureStory.style.setProperty('--droplet-opacity', Math.min(1, dropletProgress * 3.5).toFixed(3));
+        textureStory.style.setProperty('--droplet-offset', `${((1 - dropletProgress) * window.innerHeight * .88).toFixed(1)}px`);
+        textureStory.style.setProperty('--droplet-scale', (.9 + dropletProgress * .1).toFixed(3));
+        const formulaReveal = Math.min(1, progress / .42);
+        textureTitleReveal?.style.setProperty('--formula-reveal', formulaReveal.toFixed(3));
+        textureTitleReveal?.style.setProperty('--formula-title-scale', (.9 + formulaReveal * .1).toFixed(3));
+        const formulaProgress = Math.max(0, Math.min(1, (progress - .42) / .3));
+        textureStory.style.setProperty('--formula-shift', `${(formulaProgress * window.innerHeight * .34).toFixed(1)}px`);
+        textureStory.style.setProperty('--formula-scale', (1 - formulaProgress * .4).toFixed(3));
+        drawTextureConnectors();
+        const thresholds = [.68,.79,.9];
+        textureCallouts.forEach((callout) => callout.classList.toggle('active', progress >= thresholds[Number(callout.dataset.textureStep)]));
+        textureLinks.forEach((link) => link.classList.toggle('active', progress >= thresholds[Number(link.dataset.textureLink)]));
+      }
+      let motionFrame;
+      function scheduleScrollMotion() {
+        const now = performance.now();
+        const elapsed = Math.max(1, now - lastScrollTime);
+        scrollVelocity = Math.abs(window.scrollY - lastScrollPosition) / elapsed;
+        lastScrollPosition = window.scrollY;
+        lastScrollTime = now;
+        if (motionFrame) return;
+        motionFrame = requestAnimationFrame(() => {
+          updateTextureScroll();
+          updateHeritageArt();
+          updateNavState();
+          motionFrame = undefined;
+        });
+      }
+      window.addEventListener('scroll', scheduleScrollMotion, { passive:true });
+      window.addEventListener('resize', updateTextureScroll);
+      window.addEventListener('resize', updateHeritageArt);
+      updateTextureScroll();
+      updateHeritageArt();
+      updateNavState();
+
+      // Animate the native disclosure control while keeping its keyboard and
+      // assistive-technology behaviour intact.
+      document.querySelectorAll('.faq details').forEach((details) => {
+        const summary = details.querySelector('summary');
+        let animation;
+        let isClosing = false;
+        details.classList.toggle('is-expanded', details.open);
+
+        function finishAnimation(closed) {
+          if (closed) details.open = false;
+          details.classList.remove('is-animating');
+          details.style.height = '';
+          details.style.overflow = '';
+          animation = undefined;
+          isClosing = false;
+        }
+
+        function animate(opening) {
+          const startHeight = details.getBoundingClientRect().height;
+          animation?.cancel();
+
+          if (opening) {
+            isClosing = false;
+            details.open = true;
+            details.classList.add('is-expanded');
+          } else {
+            isClosing = true;
+            details.classList.remove('is-expanded');
+          }
+
+          const endHeight = opening
+            ? details.getBoundingClientRect().height
+            : summary.getBoundingClientRect().height;
+
+          details.classList.add('is-animating');
+          details.style.height = `${startHeight}px`;
+          const currentAnimation = details.animate(
+            { height: [`${startHeight}px`, `${endHeight}px`] },
+            { duration: 360, easing: 'cubic-bezier(.22,1,.36,1)' }
+          );
+          animation = currentAnimation;
+          currentAnimation.onfinish = () => {
+            if (animation === currentAnimation) finishAnimation(!opening);
+          };
+          currentAnimation.oncancel = () => {
+            if (animation === currentAnimation) animation = undefined;
+          };
+        }
+
+        summary.addEventListener('click', (event) => {
+          event.preventDefault();
+          const opening = !details.open || isClosing;
+          if (reducedMotion.matches) {
+            animation?.cancel();
+            details.open = opening;
+            details.classList.toggle('is-expanded', opening);
+            isClosing = false;
+            return;
+          }
+          animate(opening);
+        });
+      });
+
+      const signupForm = document.querySelector('#signup-form');
+      const signupResponse = document.querySelector('#signup-response');
+      const signupEmail = document.querySelector('#footer-email');
+      const signupButton = signupForm?.querySelector('button[type="submit"]');
+      function updateSignupButton() {
+        if (!signupEmail || !signupButton) return;
+        signupButton.disabled = !signupEmail.validity.valid;
+      }
+      signupEmail?.addEventListener('input', updateSignupButton);
+      updateSignupButton();
+
+      function getSignupConfig() {
+        const config = window.OREHA_SIGNUP_CONFIG || {};
+        const supabaseUrl = String(config.supabaseUrl || '').replace(/\/$/, '');
+        const supabasePublishableKey = String(config.supabasePublishableKey || '');
+        if (!supabaseUrl.startsWith('https://') || !supabasePublishableKey || supabasePublishableKey.startsWith('YOUR_')) {
+          throw new Error('Signup database is not configured.');
+        }
+        return { supabaseUrl, supabasePublishableKey };
+      }
+
+      async function saveSignup(email, source) {
+        const { supabaseUrl, supabasePublishableKey } = getSignupConfig();
+        const response = await fetch(`${supabaseUrl}/rest/v1/email_signups`, {
+          method: 'POST',
+          headers: {
+            apikey: supabasePublishableKey,
+            'Content-Type': 'application/json',
+            Prefer: 'return=minimal'
+          },
+          body: JSON.stringify({
+            email: email.trim().toLowerCase(),
+            source,
+            consent_version: 'website-2026-09'
+          })
+        });
+        if (response.ok) return;
+        const error = await response.json().catch(() => ({}));
+        if (response.status === 409 && error.code === '23505') return;
+        throw new Error(error.message || `Signup failed (${response.status}).`);
+      }
+
+      function connectSignupForm(form, responseElement) {
+        if (!form || !responseElement) return;
+        const emailInput = form.querySelector('input[name="email"]');
+        const honeypot = form.querySelector('input[name="company"]');
+        const button = form.querySelector('button[type="submit"]');
+        form.addEventListener('submit', async (event) => {
+          event.preventDefault();
+          if (!emailInput?.reportValidity()) return;
+          if (honeypot?.value) {
+            responseElement.textContent = 'You’re on the list.';
+            form.reset();
+            updateSignupButton();
+            return;
+          }
+          button.disabled = true;
+          button.setAttribute('aria-busy', 'true');
+          responseElement.textContent = 'Joining…';
+          try {
+            await saveSignup(emailInput.value, form.dataset.signupSource || 'website');
+            responseElement.textContent = form.id === 'signup-form'
+              ? 'You’re on the list. Your 5% code is coming soon.'
+              : 'You’re on the launch list.';
+            form.reset();
+          } catch (error) {
+            console.error('Email signup failed:', error);
+            responseElement.textContent = 'We couldn’t save your email right now. Please try again.';
+          } finally {
+            button.removeAttribute('aria-busy');
+            if (form.id === 'signup-form') updateSignupButton();
+            else button.disabled = false;
+          }
+        });
+      }
+
+      connectSignupForm(document.querySelector('#hero-signup-form'), document.querySelector('#hero-signup-response'));
+      connectSignupForm(signupForm, signupResponse);
+
+      const footerEmail = document.querySelector('.footer-email');
+      const emailCopyStatus = document.querySelector('#email-copy-status');
+      footerEmail?.addEventListener('click', async () => {
+        const email = 'hello@oreha.ca';
+        try {
+          if (navigator.clipboard?.writeText) {
+            await navigator.clipboard.writeText(email);
+          } else {
+            const temporaryField = document.createElement('textarea');
+            temporaryField.value = email;
+            temporaryField.style.position = 'fixed';
+            temporaryField.style.opacity = '0';
+            document.body.append(temporaryField);
+            temporaryField.select();
+            document.execCommand('copy');
+            temporaryField.remove();
+          }
+          footerEmail.dataset.copyLabel = 'Copied';
+          footerEmail.classList.add('is-copied');
+          emailCopyStatus.textContent = 'Email copied to clipboard.';
+          window.setTimeout(() => {
+            footerEmail.dataset.copyLabel = 'Copy email';
+            footerEmail.classList.remove('is-copied');
+          }, 1800);
+        } catch {
+          footerEmail.dataset.copyLabel = 'Copy unavailable';
+          emailCopyStatus.textContent = 'Copy email unavailable.';
+        }
+      });
+    </script>
+  </body>
+</html>
