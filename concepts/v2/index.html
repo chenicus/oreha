@@ -61,11 +61,11 @@
       .heritage .mask-reveal { display:block; }
       .heritage-character { display:inline-block; }
       .js-motion .heritage .heritage-character { opacity:0; transform:translateY(9px); transition:opacity .28s ease,transform .52s cubic-bezier(.16,1,.3,1); transition-delay:var(--character-delay,0ms); will-change:opacity,transform; }
-      .js-motion .heritage .mask-body { opacity:0; transform:translateY(10px); transition:opacity .32s ease .72s,transform .42s cubic-bezier(.16,1,.3,1) .72s; }
+      .js-motion .heritage .mask-body { opacity:0; transform:translateY(10px); transition:opacity .32s ease 1.1s,transform .42s cubic-bezier(.16,1,.3,1) 1.1s; }
       .js-motion .heritage.is-revealed .heritage-character { opacity:1; transform:none; }
       .js-motion .heritage.is-revealed .mask-body { opacity:1; transform:none; }
       .js-motion .heritage.is-instant .heritage-character,.js-motion .heritage.is-instant .mask-body { transition:none; }
-      .js-motion .heritage-mark { transform:scaleX(0); transform-origin:left; transition:transform .46s 1.18s cubic-bezier(.16,1,.3,1); }
+      .js-motion .heritage-mark { transform:scaleX(0); transform-origin:left; transition:transform .46s 1.62s cubic-bezier(.16,1,.3,1); }
       .js-motion .heritage.is-revealed .heritage-mark { transform:scaleX(1); }
       .intro-grid { display:grid; grid-template-columns:minmax(0,1.1fr) minmax(330px,.9fr); gap:9vw; max-width:1280px; margin:auto; align-items:start; }
       .section-kicker { margin:0 0 22px; }
@@ -286,14 +286,14 @@
       .hero .hero-eyebrow { animation:hero-content-enter .6s .1s both cubic-bezier(.16,1,.3,1); }
       /* The headline owns its entrance character-by-character; do not also animate the whole block. */
       .hero h1 { animation:none; }
-      .hero > .hero-content > p:not(.hero-eyebrow) { animation:hero-content-enter .52s .82s both cubic-bezier(.16,1,.3,1); }
-      .hero-signup { animation:hero-content-enter .52s 1.08s both cubic-bezier(.16,1,.3,1); }
+      .hero > .hero-content > p:not(.hero-eyebrow) { animation:hero-content-enter .52s 1.06s both cubic-bezier(.16,1,.3,1); }
+      .hero-signup { animation:hero-content-enter .52s 1.32s both cubic-bezier(.16,1,.3,1); }
       .hero-signup .button,.hero-signup p { animation:none; }
       @keyframes hero-content-enter { from { opacity:0; transform:translateY(16px); } to { opacity:1; transform:none; } }
       /* A fast scroll completes the decorative drawing but preserves a short, readable type sequence. */
       .js-motion .heritage.is-fast .heritage-character { transition-duration:.2s,.32s; }
-      .js-motion .heritage.is-fast .mask-body { transition-delay:.34s,.34s; transition-duration:.24s,.34s; }
-      .js-motion .heritage.is-fast .heritage-mark { transition-delay:.64s; transition-duration:.32s; }
+      .js-motion .heritage.is-fast .mask-body { transition-delay:.66s,.66s; transition-duration:.24s,.34s; }
+      .js-motion .heritage.is-fast .heritage-mark { transition-delay:.96s; transition-duration:.32s; }
       @media(max-width:760px) { .hero { min-height:720px; padding:124px 24px 58px; }.hero::after { background:linear-gradient(180deg,rgba(3,4,5,.08) 0%,rgba(3,4,5,.26) 54%,rgba(8,9,10,.76) 80%,var(--surface-navy) 100%),linear-gradient(90deg,rgba(7,8,10,.82),rgba(7,8,10,.28)); }.hero h1 { font-size:clamp(2.8rem,12vw,4rem); }.hero > .hero-content > p:not(.hero-eyebrow) { font-size:15px; }.hero video { object-position:58% center; } }
       @media(max-width:520px) { .nav { width:calc(100vw - 24px); padding:15px 16px; }.nav-links { gap:10px; font-size:10px; }.wordmark { font-size:14px; }.hero-signup-form input { width:55%; padding-left:14px; }.hero-signup-form .button { padding:0 14px; font-size:12px; } }
       @media(prefers-reduced-motion:reduce) { .hero .hero-eyebrow,.hero h1,.hero > .hero-content > p:not(.hero-eyebrow),.hero-signup { animation:none; } }
@@ -488,36 +488,37 @@
       function startFaqContent(fast = isFastArrival()) {
         if (faqContentStarted) return;
         faqContentStarted = true;
-        window.setTimeout(() => document.querySelector('.faq-list')?.classList.add('is-revealed', ...(fast ? ['is-fast-reveal'] : [])), fast ? 240 : 720);
-        // Heading transition + six-row question cascade (.08s + .55s + .58s).
+        // Copy begins only after its header has landed; fast mode is quicker, never overlapping.
+        window.setTimeout(() => document.querySelector('.faq-list')?.classList.add('is-revealed', ...(fast ? ['is-fast-reveal'] : [])), fast ? 420 : 800);
+        // Header landing + six-row question cascade.
         window.setTimeout(() => {
           revealState.faqFinished = true;
           tryPendingReveals();
-        }, fast ? 900 : 1930);
+        }, fast ? 1080 : 2030);
       }
       function startSocialContent(fast = isFastArrival()) {
         if (socialContentStarted) return;
         socialContentStarted = true;
-        window.setTimeout(() => document.querySelector('.social-marquee')?.classList.add('is-revealed', ...(fast ? ['is-fast-reveal'] : [])), fast ? 240 : 720);
+        window.setTimeout(() => document.querySelector('.social-marquee')?.classList.add('is-revealed', ...(fast ? ['is-fast-reveal'] : [])), fast ? 420 : 800);
         window.setTimeout(() => {
           revealState.socialFinished = true;
           tryPendingReveals();
-        }, fast ? 600 : 1460);
+        }, fast ? 1120 : 1560);
       }
       function startSignupContent(fast = isFastArrival()) {
         if (signupContentStarted) return;
         signupContentStarted = true;
-        window.setTimeout(() => document.querySelector('.footer-wordmark')?.classList.add('is-revealed', ...(fast ? ['is-fast-reveal'] : [])), fast ? 240 : 720);
+        window.setTimeout(() => document.querySelector('.footer-wordmark')?.classList.add('is-revealed', ...(fast ? ['is-fast-reveal'] : [])), fast ? 420 : 800);
         window.setTimeout(() => {
           revealState.signupFinished = true;
           tryPendingReveals();
-        }, fast ? 600 : 1450);
+        }, fast ? 1120 : 1560);
       }
       function revealTarget(target) {
         if (target.classList.contains('is-revealed')) return;
         const fast = isFastArrival();
         target.classList.add('is-revealed', ...(fast ? ['is-fast-reveal'] : []));
-        if (target.matches('.range-top')) window.setTimeout(() => revealRangeCards(fast), fast ? 240 : 720);
+        if (target.matches('.range-top')) window.setTimeout(() => revealRangeCards(fast), fast ? 420 : 800);
         if (target.matches('.faq h2')) startFaqContent(fast);
         if (target.matches('.social-head')) startSocialContent(fast);
         if (target.matches('.signup')) startSignupContent(fast);
