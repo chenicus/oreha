@@ -257,14 +257,22 @@
       .hero > .hero-content > p:not(.hero-eyebrow) { width:min(500px,100%); margin:0 0 34px; color:rgba(242,240,234,.72); font-size:16px; line-height:1.6; }
       .hero-signup { width:min(500px,100%); }
       .hero-signup-form { display:flex; gap:0; align-items:stretch; padding:0; border:1px solid rgba(242,240,234,.26); border-radius:2px; background:rgba(16,17,20,.5); transition:border-color .2s ease,box-shadow .2s ease,background .2s ease; }
-      .hero-signup-form:focus-within { border-color:var(--accent-blue); background:rgba(16,17,20,.68); box-shadow:0 0 0 1px rgba(181,196,209,.12); }
+      .hero-signup-form:focus-within { border-color:rgba(242,240,234,.58); background:rgba(16,17,20,.68); box-shadow:none; }
       .hero-signup-form input { min-width:0; min-height:56px; flex:1; border:0; background:transparent; color:var(--paper); padding:0 16px 0 18px; font:400 14px/1.2 Manrope,Arial,sans-serif; border-radius:0; outline:0; }
       .hero-signup-form input::placeholder { color:rgba(242,240,234,.55); }
       .hero-signup-form input:focus-visible { outline:0; }
+      .hero-signup-form input:-webkit-autofill,.hero-signup-form input:-webkit-autofill:hover,.hero-signup-form input:-webkit-autofill:focus { -webkit-text-fill-color:var(--paper); caret-color:var(--paper); -webkit-box-shadow:0 0 0 1000px #101114 inset; box-shadow:0 0 0 1000px #101114 inset; }
+      .hero-signup-form input:autofill { color:var(--paper); box-shadow:0 0 0 1000px #101114 inset; }
       .hero-signup-form .button { min-height:56px; padding:0 18px; border:0; background:var(--paper); color:var(--ink); cursor:pointer; font-size:13px; letter-spacing:.02em; white-space:nowrap; }
-      .hero-signup-form .button:hover,.hero-signup-form .button:focus-visible { background:var(--accent-blue); color:var(--ink); }
+      .hero-signup-form .button:hover,.hero-signup-form .button:focus-visible { background:var(--paper); color:var(--ink); }
+      .hero-signup-form .button:focus-visible { outline:2px solid var(--ink); outline-offset:-4px; }
       .hero .hero-signup-offer { width:auto; margin:13px 0 0; color:rgba(242,240,234,.58); font-size:12px; line-height:1.45; }
-      .hero .hero-signup-response { width:auto; margin:10px 0 0; font-size:12px; color:var(--accent-blue); }
+      .hero .hero-signup-response { display:none; width:auto; margin:0; }
+      .hero-signup.has-response .hero-signup-response { display:block; margin-top:10px; color:rgba(242,240,234,.72); font-size:12px; }
+      .hero-signup.is-submitted .hero-signup-form,.hero-signup.is-submitted .hero-signup-offer { display:none; }
+      .hero-signup.is-submitted .hero-signup-response { display:flex; min-height:58px; align-items:center; gap:12px; margin:0; padding:0 18px; border:1px solid rgba(242,240,234,.28); border-radius:2px; background:rgba(16,17,20,.68); color:var(--paper); font-size:13px; line-height:1.4; }
+      .signup-success-icon { display:none; width:19px; height:19px; flex:0 0 auto; color:var(--accent-blue); }
+      .hero-signup.is-submitted .signup-success-icon { display:block; }
       .hero-signup .signup-note { display:none; }
       .view-cursor,.cursor-trail { display:none!important; }
       @media (hover:hover) and (pointer:fine) { body { cursor:auto; } a,button,.flavor { cursor:pointer; } input,textarea { cursor:text; } }
@@ -302,7 +310,7 @@
             </form>
             <p class="hero-signup-offer">Be the first to know when OREHA arrives.</p>
             <small class="signup-note">By signing up, you agree to receive emails from OREHA. Unsubscribe anytime.</small>
-            <p class="hero-signup-response" id="hero-signup-response" role="status"></p>
+            <p class="hero-signup-response" id="hero-signup-response" role="status"><svg class="signup-success-icon" viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="8.25" fill="none" stroke="currentColor" stroke-width="1.25"/><path d="m6.4 10.1 2.25 2.25 4.95-5.05" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg><span></span></p>
           </div>
         </div>
       </section>
@@ -809,27 +817,37 @@
         const emailInput = form.querySelector('input[name="email"]');
         const honeypot = form.querySelector('input[name="company"]');
         const button = form.querySelector('button[type="submit"]');
+        const heroSignup = form.closest('.hero-signup');
+        const responseText = responseElement.querySelector('span');
+        function showResponse(message, state) {
+          if (responseText) responseText.textContent = message;
+          else responseElement.textContent = message;
+          heroSignup?.classList.toggle('has-response', state === 'pending' || state === 'error');
+          heroSignup?.classList.toggle('is-submitted', state === 'success');
+        }
         form.addEventListener('submit', async (event) => {
           event.preventDefault();
           if (!emailInput?.reportValidity()) return;
           if (honeypot?.value) {
-            responseElement.textContent = 'You’re on the list.';
+            showResponse(form.id === 'hero-signup-form'
+              ? 'Thanks — you’ll be the first to know when OREHA arrives.'
+              : 'You’re on the list.', 'success');
             form.reset();
             updateSignupButton();
             return;
           }
           button.disabled = true;
           button.setAttribute('aria-busy', 'true');
-          responseElement.textContent = 'Joining…';
+          showResponse('Joining…', 'pending');
           try {
             await saveSignup(emailInput.value, form.dataset.signupSource || 'website');
-            responseElement.textContent = form.id === 'signup-form'
+            showResponse(form.id === 'signup-form'
               ? 'You’re on the list. Your 5% code is coming soon.'
-              : 'You’re on the launch list.';
+              : 'Thanks — you’ll be the first to know when OREHA arrives.', 'success');
             form.reset();
           } catch (error) {
             console.error('Email signup failed:', error);
-            responseElement.textContent = 'We couldn’t save your email right now. Please try again.';
+            showResponse('We couldn’t save your email right now. Please try again.', 'error');
           } finally {
             button.removeAttribute('aria-busy');
             if (form.id === 'signup-form') updateSignupButton();
