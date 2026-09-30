@@ -125,6 +125,9 @@
       .range { background:#000; }.flavor,.flavor-visual,.flavor-copy { background:#101010; }.flavor:hover,.flavor:focus-visible,.flavor:hover .flavor-visual,.flavor:focus-visible .flavor-visual,.flavor:hover .flavor-copy,.flavor:focus-visible .flavor-copy { background:#050505; }
       /* Keep the product triptych edge-to-edge, with its outer text aligned to the navigation rail. */
       .range { padding:96px 0 0; }.range-top { max-width:none; margin:0; padding:0 5vw 40px; }.flavors { max-width:none; gap:0; }.flavor { min-height:0; border:0; border-radius:0; }.flavor + .flavor { border-left:1px solid rgba(242,239,232,.09); }.flavor-visual { height:390px; padding:22px; }.flavor-visual::after { width:58%; height:42px; left:21%; bottom:18px; }.flavor-product { height:345px; filter:drop-shadow(0 20px 13px rgba(0,0,0,.28)) drop-shadow(0 4px 3px rgba(0,0,0,.14)); }.peach .flavor-fruit { width:570px; left:-45px; bottom:-42px; }.grape .flavor-fruit { width:370px; right:-68px; top:-66px; }.lemon .flavor-fruit { width:385px; right:-40px; bottom:-14px; }.flavor-copy { padding:24px 28px 28px; }.flavor:first-child .flavor-copy { padding-left:clamp(16px,3vw,48px); }.flavor:last-child .flavor-copy { padding-right:clamp(16px,3vw,48px); }.flavor-copy h3 { font-size:28px; }.flavor-stats { margin-top:16px; gap:16px; }.flavor:hover,.flavor:focus-visible { box-shadow:none; }
+      /* The current Peach pouch has more transparent padding than the other two renders. */
+      .peach .flavor-product { transform:translateY(-2px) scale(1.08); }
+      .peach:hover .flavor-product,.peach:focus-visible .flavor-product { transform:translateY(-7px) scale(1.08); }
       /* Product range: a single restrained green-black surface; flavor remains in the product imagery only. */
       .range { background:#121714; color:#f2f2f0; }
       .range-top p { color:rgba(242,242,240,.72); }
@@ -138,6 +141,9 @@
       .range.is-revealed .flavor-visual::before { animation:product-glow 5.5s ease-in-out infinite alternate; animation-delay:var(--glow-delay,0s); }
       .range.is-revealed .flavor:nth-child(2) .flavor-visual::before { --glow-delay:.8s; }
       .range.is-revealed .flavor:nth-child(3) .flavor-visual::before { --glow-delay:1.6s; }
+      /* Product imagery must remain visible even if an embedded browser delays
+         IntersectionObserver callbacks until after the section is scrolled. */
+      .js-motion .range .flavor { opacity:1; transform:none; }
       .site-footer { overflow:hidden; color:var(--paper); background:#080b09; }
       .social-feed { padding:90px 0 76px; border-bottom:1px solid rgba(238,242,243,.2); }
       .social-head { display:flex; align-items:end; justify-content:space-between; gap:28px; padding:0 5.5vw 32px; }
@@ -303,7 +309,7 @@
       <section class="range" id="products" aria-labelledby="flavor-title">
         <div class="range-top"><div class="range-copy"><h2 id="flavor-title">Pick your fuel</h2></div><p>One 45g pouch. Three flavours to choose from.</p></div>
         <div class="flavors">
-          <article class="flavor peach" tabindex="0"><div class="flavor-visual"><img class="flavor-fruit" src="peach-accent.png" alt="" /><img class="flavor-product" src="oreha-peach-transparent.png" alt="OREHA Peach performance jelly" /></div><div class="flavor-copy"><h3>Peach</h3><div class="flavor-stats"><div><strong>21.3 g</strong><span>Carbs</span></div><div><strong>104 kcal</strong><span>Calories</span></div><div><strong>15,700 mg</strong><span>Palatinose</span></div><div><strong>2,200 mg</strong><span>MCT oil</span></div></div></div></article>
+          <article class="flavor peach" tabindex="0"><div class="flavor-visual"><img class="flavor-fruit" src="peach-accent.png" alt="" /><img class="flavor-product" src="oreha-peach.png" alt="OREHA Peach performance jelly" /></div><div class="flavor-copy"><h3>Peach</h3><div class="flavor-stats"><div><strong>21.3 g</strong><span>Carbs</span></div><div><strong>104 kcal</strong><span>Calories</span></div><div><strong>15,700 mg</strong><span>Palatinose</span></div><div><strong>2,200 mg</strong><span>MCT oil</span></div></div></div></article>
           <article class="flavor grape" tabindex="0"><div class="flavor-visual"><img class="flavor-fruit" src="grape-accent.png" alt="" /><img class="flavor-product" src="oreha-grape-transparent.png" alt="OREHA Grape performance jelly" /></div><div class="flavor-copy"><h3>Grape</h3><div class="flavor-stats"><div><strong>22.7 g</strong><span>Carbs</span></div><div><strong>109 kcal</strong><span>Calories</span></div><div><strong>15,700 mg</strong><span>Palatinose</span></div><div><strong>2,200 mg</strong><span>MCT oil</span></div></div></div></article>
           <article class="flavor lemon" tabindex="0"><div class="flavor-visual"><img class="flavor-fruit" src="lemon-accent.png" alt="" /><img class="flavor-product" src="oreha-honey-lemon-transparent.png" alt="OREHA Honey Lemon performance jelly" /></div><div class="flavor-copy"><h3>Honey Lemon</h3><div class="flavor-stats"><div><strong>26.6 g</strong><span>Carbs</span></div><div><strong>109 kcal</strong><span>Calories</span></div><div><strong>12,800 mg</strong><span>Palatinose</span></div><div><strong>500 mg</strong><span>MCT oil</span></div></div></div></article>
         </div>
@@ -548,15 +554,6 @@
       }
       reducedMotionQuery.addEventListener('change', updateHeritageArt);
 
-      const refreshedPouches = {
-        'oreha-peach-transparent.png':'../product-shots/clean-3d/oreha-peach.png',
-        'oreha-grape-transparent.png':'../product-shots/clean-3d/oreha-grape.png',
-        'oreha-honey-lemon-transparent.png':'../product-shots/clean-3d/oreha-honey-lemon.png'
-      };
-      document.querySelectorAll('img[src*="oreha-"]').forEach((image) => {
-        const filename = image.getAttribute('src').split('/').pop();
-        if (refreshedPouches[filename]) image.src = refreshedPouches[filename];
-      });
       const viewCursor = document.querySelector('.view-cursor');
       const cursorTrail = document.querySelector('.cursor-trail');
       const supportsCustomCursor = !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
