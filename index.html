@@ -355,6 +355,22 @@
         .social-marquee { padding-left:var(--wide-gutter); }
         .footer-main { padding-left:var(--wide-gutter); padding-right:var(--wide-gutter); }
       }
+      /* The heritage reveal animates characters, but words must remain indivisible. */
+      .heritage-word { display:inline-block; white-space:nowrap; }
+      .heritage-word + .heritage-word { margin-left:.24em; }
+      @media (min-width:761px) {
+        .heritage-copy,.heritage h2 { max-width:1200px; }
+        .heritage h2 { font-size:clamp(2.5rem,5.15vw,6.2rem); }
+      }
+      @media (max-width:760px) {
+        .heritage h2 { font-size:clamp(1.6rem,8.4vw,2.25rem); }
+        .heritage .mask-reveal { white-space:normal; }
+        .footer-links > div { display:flex; flex-direction:column; }
+        .footer-links a,.footer-links .footer-link-placeholder,.footer-email { display:flex; min-height:44px; align-items:center; margin:0; }
+      }
+      /* The reel should loop continuously; interaction may steer it, but never leave it paused. */
+      .social-marquee:focus-within .social-track { animation-play-state:running; }
+      @media (hover:hover) and (pointer:fine) { .social-marquee:hover .social-track { animation-play-state:running; } }
     </style>
   </head>
   <body>
@@ -488,16 +504,23 @@
       });
       requestAnimationFrame(() => heroCharacters.forEach((character) => character.classList.add('is-visible')));
       document.querySelectorAll('.heritage .mask-reveal').forEach((line, lineIndex) => {
-        const text = line.textContent;
+        const text = line.textContent.trim();
         line.setAttribute('aria-label', text);
-        line.replaceChildren(...[...text].map((character, characterIndex) => {
-          const span = document.createElement('span');
-          span.className = 'heritage-character';
-          span.setAttribute('aria-hidden', 'true');
-          span.textContent = character === ' ' ? '\u00a0' : character;
-          const lineDelay = lineIndex * 280;
-          span.style.setProperty('--character-delay', `${lineDelay + characterIndex * 11}ms`);
-          return span;
+        let characterIndex = 0;
+        line.replaceChildren(...text.split(/\s+/).map((word) => {
+          const wordElement = document.createElement('span');
+          wordElement.className = 'heritage-word';
+          wordElement.setAttribute('aria-hidden', 'true');
+          [...word].forEach((character) => {
+            const span = document.createElement('span');
+            span.className = 'heritage-character';
+            span.textContent = character;
+            const lineDelay = lineIndex * 280;
+            span.style.setProperty('--character-delay', `${lineDelay + characterIndex * 11}ms`);
+            characterIndex += 1;
+            wordElement.append(span);
+          });
+          return wordElement;
         }));
       });
       const reducedMotionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
@@ -535,7 +558,7 @@
         };
         const scheduleResume = () => {
           window.clearTimeout(resumeTimer);
-          resumeTimer = window.setTimeout(resumeReel, 850);
+          resumeReel();
         };
         socialMarquee.addEventListener('pointerdown', (event) => {
           if (event.button !== 0 && event.pointerType === 'mouse') return;
