@@ -1,0 +1,4 @@
+# macOS and local generated output
+.DS_Store
+.launch-build/
+output/
