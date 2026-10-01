@@ -337,6 +337,11 @@
       /* Let the footer call to action use its available width, but never clip its final word. */
       .footer-main { gap:clamp(36px,5vw,72px); }
       .footer-signup h2 { white-space:normal; text-wrap:balance; overflow-wrap:normal; word-break:normal; }
+      /* On ultra-wide screens, retain a full-bleed backdrop but keep the formulation story legible and compact. */
+      @media (min-width:1400px) {
+        .texture-callout.one,.texture-callout.three { left:max(5.5vw,calc(50% - 640px)); }
+        .texture-callout.two { right:max(5.5vw,calc(50% - 640px)); }
+      }
     </style>
   </head>
   <body>
