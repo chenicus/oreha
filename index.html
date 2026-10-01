@@ -329,6 +329,11 @@
       @media(max-width:760px) { .nav { padding:5px 20px; }.nav-links { gap:16px; font-size:14px; }.nav-links a { display:inline-flex; min-height:44px; align-items:center; }.hero { min-height:720px; padding:124px 24px 58px; }.hero::after { background:linear-gradient(180deg,rgba(3,4,5,.06) 0%,rgba(3,4,5,.16) 45%,rgba(3,4,5,.42) 64%,#090a0c 82%,var(--surface-navy) 100%),linear-gradient(90deg,rgba(7,8,10,.82),rgba(7,8,10,.28)); }.hero h1 { font-size:clamp(2.8rem,12vw,4rem); }.hero > .hero-content > p:not(.hero-eyebrow) { font-size:15px; }.hero .hero-signup-offer { color:rgba(242,240,234,.72); font-size:13px; }.footer-links a,.footer-email { display:flex; min-height:44px; align-items:center; margin-bottom:4px; }.hero video { object-position:58% center; } }
       @media(max-width:520px) { .nav { width:calc(100vw - 24px); padding:5px 16px; }.nav-links { gap:12px; font-size:14px; }.wordmark img { width:78px; }.hero-signup-form input { width:55%; padding-left:14px; }.hero-signup-form .button { padding:0 14px; font-size:14px; } }
       @media(prefers-reduced-motion:reduce) { .hero .hero-eyebrow,.hero h1,.hero > .hero-content > p:not(.hero-eyebrow),.hero-signup { animation:none; } }
+      /* Compact mobile: keep the page rail comfortable while avoiding a stranded final word in the hero introduction. */
+      @media (max-width:520px) {
+        .hero { padding-inline:20px; }
+        .hero > .hero-content > p:not(.hero-eyebrow) { width:100%; text-wrap:balance; }
+      }
     </style>
   </head>
   <body>
