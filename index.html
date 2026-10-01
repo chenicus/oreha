@@ -15,8 +15,7 @@
     <meta name="twitter:title" content="OREHA — Performance Jelly" />
     <meta name="twitter:description" content="Japanese performance jelly for serious endurance." />
     <meta name="twitter:image" content="/social-preview.png" />
-    <meta name="twitter:image:alt" content="Three OREHA energy jelly pouches fanned across a textured black background." />
-    <title>OREHA — Performance Jelly</title>
+    <title>OREHA — Energy Gel</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500&display=swap" rel="stylesheet" />
@@ -31,9 +30,8 @@
       /* Clean over the hero; a compact glass rail once the page moves underneath it. */
       .nav { position:absolute; z-index:5; top:18px; left:50%; width:min(1600px,calc(100vw - 64px)); translate:-50% 0; display:flex; align-items:center; justify-content:space-between; padding:18px 26px; border:1px solid transparent; border-radius:10px; color:var(--paper); background:transparent; transition:background-color .42s cubic-bezier(.16,1,.3,1),border-color .42s cubic-bezier(.16,1,.3,1),backdrop-filter .42s cubic-bezier(.16,1,.3,1); animation:site-fade-up .7s both cubic-bezier(.16,1,.3,1); }
       .nav.is-sticky { position:fixed; border-color:rgba(238,242,243,.12); background:rgba(14,16,20,.76); backdrop-filter:blur(16px) saturate(120%); -webkit-backdrop-filter:blur(16px) saturate(120%); }
-      .wordmark { display:inline-flex; align-items:center; color:var(--paper); text-decoration:none; }
-      .wordmark img { display:block; width:104px; height:auto; filter:invert(1); }
-      .nav-links { display:flex; gap:26px; font-family:Manrope,Arial,sans-serif; font-size:var(--text-ui); font-weight:500; letter-spacing:0; text-transform:none; }
+      .wordmark { font-weight:500; font-size:20px; letter-spacing:.25em; text-decoration:none; }
+      .nav-links { display:flex; gap:26px; font-family:Manrope,Arial,sans-serif; font-size:var(--text-ui); font-weight:400; letter-spacing:0; text-transform:none; }
       .nav-links a { position:relative; color:var(--paper); opacity:.8; text-decoration:none; transition:opacity .2s ease; }
       .nav-links a::after { position:absolute; right:0; bottom:-7px; left:0; height:1px; background:currentColor; content:""; transform:scaleX(0); transform-origin:right; transition:transform .28s cubic-bezier(.16,1,.3,1); }
       .nav-links a:hover,.nav-links a:focus-visible { opacity:1; }
@@ -59,25 +57,26 @@
       .js-motion [data-reveal="wordmark"] { transform:translateY(20px) scaleX(1.02); }
       .js-motion [data-reveal].is-revealed { opacity:1; transform:none; }
       .js-motion [data-reveal="wordmark"].is-revealed { transform:scaleX(1.06); }
+      /* Fast arrivals keep the same fade language, simply at a more responsive tempo. */
+      .js-motion [data-reveal].is-fast-reveal { transition-duration:.22s,.34s; transition-delay:0ms; }
       .intro { padding:130px 5.5vw; background:var(--paper); }
       .heritage { min-height:70svh; display:grid; place-items:center; padding:64px 5.5vw; background:#f1f4f4; text-align:center; }
-      .heritage-copy { width:min(1400px,100%); }
+      .heritage-copy { width:min(1050px,100%); }
       .heritage-art { width:min(250px,52vw); height:auto; display:block; margin:0 auto 22px; overflow:visible; }
       .heritage-landscape { fill:none; stroke:#272923; stroke-width:2.5; stroke-linecap:round; stroke-linejoin:round; }
       .heritage-moon { fill:#C83232; stroke:#171717; stroke-width:2.5; }
-      .heritage h2 { max-width:1400px; margin:auto; font-size:clamp(2.5rem,5.15vw,6.9rem); font-weight:400; line-height:1.04; letter-spacing:-.06em; }
+      .heritage h2 { max-width:850px; margin:auto; font-size:clamp(2.5rem,5.15vw,6.9rem); font-weight:400; line-height:1.04; letter-spacing:-.06em; }
       .heritage p { max-width:660px; margin:25px auto 0; font-size:var(--text-body); line-height:1.6; }
       .heritage-mark { display:block; width:44px; height:1px; margin:42px auto 0; background:var(--ink); }
       .heritage .mask-line { display:block; overflow:hidden; padding:.04em .06em .12em; margin:-.04em -.06em -.12em; }
       .heritage .mask-reveal { display:block; }
-      .heritage-word { display:inline-block; white-space:nowrap; }
       .heritage-character { display:inline-block; }
       .js-motion .heritage .heritage-character { opacity:0; transform:translateY(9px); transition:opacity .28s ease,transform .52s cubic-bezier(.16,1,.3,1); transition-delay:var(--character-delay,0ms); will-change:opacity,transform; }
-      .js-motion .heritage .mask-body { opacity:0; transform:translateY(10px); transition:opacity .32s ease .72s,transform .42s cubic-bezier(.16,1,.3,1) .72s; }
+      .js-motion .heritage .mask-body { opacity:0; transform:translateY(10px); transition:opacity .32s ease 1.1s,transform .42s cubic-bezier(.16,1,.3,1) 1.1s; }
       .js-motion .heritage.is-revealed .heritage-character { opacity:1; transform:none; }
       .js-motion .heritage.is-revealed .mask-body { opacity:1; transform:none; }
       .js-motion .heritage.is-instant .heritage-character,.js-motion .heritage.is-instant .mask-body { transition:none; }
-      .js-motion .heritage-mark { transform:scaleX(0); transform-origin:left; transition:transform .46s 1.18s cubic-bezier(.16,1,.3,1); }
+      .js-motion .heritage-mark { transform:scaleX(0); transform-origin:left; transition:transform .46s 1.62s cubic-bezier(.16,1,.3,1); }
       .js-motion .heritage.is-revealed .heritage-mark { transform:scaleX(1); }
       .intro-grid { display:grid; grid-template-columns:minmax(0,1.1fr) minmax(330px,.9fr); gap:9vw; max-width:1280px; margin:auto; align-items:start; }
       .section-kicker { margin:0 0 22px; }
@@ -91,11 +90,10 @@
       .proof .mono { padding-top:3px; }
       .texture-story { height:230svh; color:var(--paper); background:#10191c; overflow:visible; }
       .texture-stage { position:sticky; top:0; height:100svh; isolation:isolate; overflow:hidden; }
-      .texture-composition { position:absolute; inset:0; width:min(1600px,100%); height:100%; margin:auto; }
       .texture-stage::before { content:""; position:absolute; inset:0; z-index:-3; background:radial-gradient(circle at 50% 52%,#315360 0,transparent 43%),#10191c; }
-      .texture-copy { position:absolute; z-index:2; inset:0; max-width:none; pointer-events:none; }.texture-copy p { position:absolute; top:7vh; left:min(5.5vw,88px); margin:0; color:#8fc9d6; font-size:var(--text-body); }.texture-title-reveal { position:absolute; inset:0; }.js-motion .texture-title-reveal { opacity:var(--formula-reveal,0); transform:scale(var(--formula-title-scale,.9)); will-change:opacity,transform; }.texture-copy h2 { position:absolute; top:38%; left:50%; width:min(1120px,94vw); margin:0; color:#bfd4da; font-size:clamp(4.4rem,10.8vw,12rem); font-weight:400; line-height:.78; letter-spacing:-.06em; text-align:center; transform:translate(-50%,calc(-50% - var(--formula-shift,0px))) scale(var(--formula-scale,1)); transform-origin:center center; will-change:transform; }.texture-title-line { display:block; overflow:hidden; padding:.05em .04em .11em; margin:-.05em -.04em -.11em; }.texture-title-line > span { display:block; opacity:var(--title-line-opacity,0); transform:translateY(var(--title-line-offset,34px)); will-change:opacity,transform; }
+      .texture-copy { position:absolute; z-index:2; inset:0; max-width:none; pointer-events:none; }.texture-copy p { position:absolute; top:7vh; left:5.5vw; margin:0; color:#8fc9d6; font-size:var(--text-body); }.texture-title-reveal { position:absolute; inset:0; }.js-motion .texture-title-reveal { opacity:var(--formula-reveal,0); transform:scale(var(--formula-title-scale,.9)); will-change:opacity,transform; }.texture-copy h2 { position:absolute; top:38%; left:50%; width:min(1120px,94vw); margin:0; color:#bfd4da; font-size:clamp(4.4rem,10.8vw,12rem); font-weight:400; line-height:.78; letter-spacing:-.06em; text-align:center; transform:translate(-50%,calc(-50% - var(--formula-shift,0px))) scale(var(--formula-scale,1)); transform-origin:center center; will-change:transform; }.texture-title-line { display:block; overflow:hidden; padding:.05em .04em .11em; margin:-.05em -.04em -.11em; }.texture-title-line > span { display:block; opacity:var(--title-line-opacity,0); transform:translateY(var(--title-line-offset,34px)); will-change:opacity,transform; }
       .texture-droplet { position:absolute; z-index:3; left:50%; top:55%; height:min(62vh,560px); width:auto; max-width:48vw; object-fit:contain; opacity:var(--droplet-opacity,0); transform:translate(-50%,calc(-50% + var(--droplet-offset,88vh))) scale(var(--droplet-scale,.9)); filter:drop-shadow(0 28px 26px rgba(0,0,0,.36)); will-change:transform,opacity; }
-      .texture-callout { position:absolute; z-index:5; width:min(310px,26vw); padding:11px 13px; opacity:0; background:rgba(16,25,28,.12); border:0; border-left:1px solid rgba(143,201,214,.42); box-shadow:none; backdrop-filter:blur(5px); -webkit-backdrop-filter:blur(5px); transform:translateY(14px); transition:opacity .38s ease,transform .48s ease; }.texture-callout.active { opacity:1; transform:translateY(0); }.texture-callout .mono { display:block; margin:0 0 8px; color:#8fc9d6; }.texture-callout h3 { margin:0 0 7px; color:#f0f6f7; font-size:var(--text-ui); font-weight:400; letter-spacing:.03em; }.texture-callout p { margin:0; color:rgba(225,237,240,.8); font-size:var(--text-body); font-weight:300; line-height:1.5; }.texture-callout.one { top:39%; left:min(8vw,128px); }.texture-callout.two { top:51%; right:min(2vw,32px); }.texture-callout.three { top:72%; left:min(5vw,80px); }
+      .texture-callout { position:absolute; z-index:5; width:min(310px,26vw); padding:11px 13px; opacity:0; background:rgba(16,25,28,.12); border:0; border-left:1px solid rgba(143,201,214,.42); box-shadow:none; backdrop-filter:blur(5px); -webkit-backdrop-filter:blur(5px); transform:translateY(14px); transition:opacity .38s ease,transform .48s ease; }.texture-callout.active { opacity:1; transform:translateY(0); }.texture-callout .mono { display:block; margin:0 0 8px; color:#8fc9d6; }.texture-callout h3 { margin:0 0 7px; color:#f0f6f7; font-size:var(--text-ui); font-weight:400; letter-spacing:.03em; }.texture-callout p { margin:0; color:rgba(225,237,240,.8); font-size:var(--text-body); font-weight:300; line-height:1.5; }.texture-callout.one { top:39%; left:8vw; }.texture-callout.two { top:51%; right:2vw; }.texture-callout.three { top:72%; left:5vw; }
       .texture-connectors { position:absolute; z-index:4; inset:0; width:100%; height:100%; overflow:visible; pointer-events:none; }.texture-connectors path { fill:none; stroke:#8fc9d6; stroke-width:1.4; stroke-linecap:round; stroke-dasharray:var(--path-length,150); stroke-dashoffset:var(--path-length,150); filter:drop-shadow(0 0 1.5px #091013); opacity:0; transition:stroke-dashoffset .76s cubic-bezier(.2,.7,.2,1),opacity .28s ease; }.texture-connectors circle { fill:#122327; stroke:#c3e1e7; stroke-width:1.8; filter:drop-shadow(0 0 1px #091013); opacity:0; transform-box:fill-box; transform-origin:center; transform:scale(.45); transition:opacity .2s ease,transform .3s ease .45s; }.texture-connectors .active path { stroke-dashoffset:0; opacity:1; }.texture-connectors .active circle { opacity:1; transform:scale(1); }
       .ingredients { padding:122px 5.5vw; color:var(--paper); background:#151d1f; }
       .ingredients-grid { display:grid; grid-template-columns:minmax(0,.8fr) minmax(410px,1.2fr); gap:9vw; max-width:1280px; margin:auto; align-items:end; }
@@ -140,9 +138,6 @@
       .range { background:#000; }.flavor,.flavor-visual,.flavor-copy { background:#101010; }.flavor:hover,.flavor:focus-visible,.flavor:hover .flavor-visual,.flavor:focus-visible .flavor-visual,.flavor:hover .flavor-copy,.flavor:focus-visible .flavor-copy { background:#050505; }
       /* Keep the product triptych edge-to-edge, with its outer text aligned to the navigation rail. */
       .range { padding:96px 0 0; }.range-top { max-width:none; margin:0; padding:0 5vw 40px; }.flavors { max-width:none; gap:0; }.flavor { min-height:0; border:0; border-radius:0; }.flavor + .flavor { border-left:1px solid rgba(242,239,232,.09); }.flavor-visual { height:390px; padding:22px; }.flavor-visual::after { width:58%; height:42px; left:21%; bottom:18px; }.flavor-product { height:345px; filter:drop-shadow(0 20px 13px rgba(0,0,0,.28)) drop-shadow(0 4px 3px rgba(0,0,0,.14)); }.peach .flavor-fruit { width:570px; left:-45px; bottom:-42px; }.grape .flavor-fruit { width:370px; right:-68px; top:-66px; }.lemon .flavor-fruit { width:385px; right:-40px; bottom:-14px; }.flavor-copy { padding:24px 28px 28px; }.flavor:first-child .flavor-copy { padding-left:clamp(16px,3vw,48px); }.flavor:last-child .flavor-copy { padding-right:clamp(16px,3vw,48px); }.flavor-copy h3 { font-size:28px; }.flavor-stats { margin-top:16px; gap:16px; }.flavor:hover,.flavor:focus-visible { box-shadow:none; }
-      /* The current Peach pouch has more transparent padding than the other two renders. */
-      .peach .flavor-product { transform:translateY(-2px) scale(1.08); }
-      .peach:hover .flavor-product,.peach:focus-visible .flavor-product { transform:translateY(-7px) scale(1.08); }
       /* Product range: a single restrained green-black surface; flavor remains in the product imagery only. */
       .range { background:#121714; color:#f2f2f0; }
       .range-top p { color:rgba(242,242,240,.72); }
@@ -156,16 +151,14 @@
       .range.is-revealed .flavor-visual::before { animation:product-glow 5.5s ease-in-out infinite alternate; animation-delay:var(--glow-delay,0s); }
       .range.is-revealed .flavor:nth-child(2) .flavor-visual::before { --glow-delay:.8s; }
       .range.is-revealed .flavor:nth-child(3) .flavor-visual::before { --glow-delay:1.6s; }
-      /* Product imagery must remain visible even if an embedded browser delays
-         IntersectionObserver callbacks until after the section is scrolled. */
-      .js-motion .range .flavor { opacity:1; transform:none; }
       .site-footer { overflow:hidden; color:var(--paper); background:#080b09; }
       .social-feed { padding:90px 0 76px; border-bottom:1px solid rgba(238,242,243,.2); }
       .social-head { display:flex; align-items:end; justify-content:space-between; gap:28px; padding:0 5.5vw 32px; }
       .social-head p { margin:0; color:#b5c4d1; }
       .social-head h2 { max-width:790px; margin:0; font-size:clamp(2.4rem,5.4vw,5.8rem); font-weight:400; line-height:.94; letter-spacing:-.05em; }
-      .social-marquee { overflow:hidden; width:100%; }
-      .social-track { display:flex; width:max-content; gap:16px; padding-left:5.5vw; animation:social-scroll 34s linear infinite; }
+      .social-marquee { overflow:hidden; width:100%; padding-left:5.5vw; }
+      .social-track { display:flex; width:max-content; animation:social-scroll 34s linear infinite; }
+      .social-set { display:flex; flex:0 0 auto; gap:16px; padding-right:16px; }
       .social-marquee:hover .social-track,.social-marquee:focus-within .social-track { animation-play-state:paused; }
       .social-card { width:clamp(210px,19vw,310px); flex:0 0 auto; margin:0; overflow:hidden; background:transparent; }
       .social-card img { display:block; width:100%; aspect-ratio:4/5; object-fit:cover; filter:saturate(.78) contrast(1.03); transform-origin:center; transition:filter .25s ease,transform .4s ease; }
@@ -183,16 +176,20 @@
       .signup-form button { padding:0 0 0 20px; border:0; background:transparent; color:var(--paper); cursor:pointer; font:300 28px/.8 Manrope,sans-serif; transition:color .18s ease,opacity .18s ease; }.signup-form button:disabled { color:rgba(238,236,229,.25); cursor:not-allowed; opacity:.6; }
       .signup-note { display:block; max-width:500px; margin-top:13px; color:rgba(238,242,243,.42); font-size:var(--text-ui); font-weight:300; letter-spacing:.01em; line-height:1.45; }
       .signup-response { min-height:20px; margin:12px 0 0; color:#b5c4d1; font-size:var(--text-ui); }
-      .signup-honeypot { position:absolute!important; left:-10000px!important; width:1px!important; height:1px!important; overflow:hidden!important; opacity:0!important; pointer-events:none!important; }
       .footer-links { display:block; align-content:start; padding-top:8px; }
       .footer-links a,.footer-links .footer-link-placeholder,.footer-email { position:relative; display:block; width:max-content; margin:0 0 11px; padding:0; border:0; background:transparent; color:var(--paper); font:300 var(--text-ui)/1.3 Manrope,Arial,sans-serif; text-align:left; text-decoration:none; }
-      .footer-links a::after,.footer-link-placeholder::after { position:absolute; top:50%; left:calc(100% + 9px); content:"↗"; opacity:0; transform:translate(-5px,-50%); transition:opacity .22s ease,transform .28s cubic-bezier(.16,1,.3,1); }
+      .footer-links a::after,.footer-link-placeholder::after { position:absolute; top:50%; left:calc(100% + 9px); content:"→"; opacity:0; transform:translate(-5px,-50%); transition:opacity .22s ease,transform .28s cubic-bezier(.16,1,.3,1); }
       .footer-links a:hover::after,.footer-links a:focus-visible::after,.footer-link-placeholder:hover::after { opacity:1; transform:translate(0,-50%); }
       .footer-email { cursor:pointer; }
       .footer-email::after { position:absolute; top:50%; left:calc(100% + 10px); width:max-content; content:attr(data-copy-label); color:rgba(242,240,234,.56); font-size:var(--text-ui); opacity:0; transform:translate(-5px,-50%); transition:opacity .22s ease,transform .28s cubic-bezier(.16,1,.3,1); }
       .footer-email:hover::after,.footer-email:focus-visible::after,.footer-email.is-copied::after { opacity:1; transform:translate(0,-50%); }
-      .footer-wordmark { display:block; width:100%; margin:70px 0 -1.25vw; padding:0; transform:scaleX(1.06); transform-origin:center bottom; }
-      .footer-wordmark img { display:block; width:100%; height:auto; filter:invert(1); opacity:.42; }
+      .footer-wordmark { display:flex; align-items:flex-end; justify-content:space-between; width:100%; margin:70px 0 -1.25vw; padding:0; color:rgba(238,242,243,.42); font-size:clamp(8rem,30vw,37rem); font-weight:400; line-height:.7; letter-spacing:0; text-align:center; white-space:nowrap; transform:scaleX(1.06); transform-origin:center bottom; }
+      .footer-letter { display:block; overflow:hidden; margin-inline:-.035em; padding-inline:.035em; line-height:.7; }
+      .footer-letter > span { display:block; }
+      .js-motion .footer-wordmark .footer-letter > span { opacity:0; transform:translateY(112%); will-change:transform,opacity; }
+      .js-motion .footer-wordmark .footer-letter--drop > span { transform:translateY(-112%); }
+      .js-motion .footer-wordmark.is-revealed .footer-letter > span { animation:footer-letter-rise .88s cubic-bezier(.16,1,.3,1) var(--letter-delay,0ms) both; }
+      .js-motion .footer-wordmark.is-revealed .footer-letter--drop > span { animation-name:footer-letter-drop; }
       /* Palette normalization: warm paper and peach over nearly monochrome, blue-kissed charcoals. */
       :root { --ink:#18191c; --paper:#f2f0ea; --quiet:#8d8e93; --line:rgba(242,240,234,.22); --surface-navy:#16171b; --surface-deep:#0b0c0f; --surface-raised:#1b1c21; --accent-blue:#b5c4d1; }
       .hero { background:#101114; border-color:rgba(242,240,234,.20); }
@@ -217,23 +214,27 @@
       .site-footer { background:var(--surface-deep); }.social-feed { border-color:rgba(242,240,234,.18); }.social-card { background:var(--surface-raised); }.signup .mono,.social-head p,.signup-response,.range .section-kicker { color:var(--accent-blue); }.signup > p:not(.mono) { color:rgba(242,240,234,.74); }.signup-form { border-color:rgba(242,240,234,.60); }.signup-form input::placeholder { color:rgba(242,240,234,.56); }.signup-note { color:rgba(242,240,234,.42); }.footer-wordmark { color:rgba(242,240,234,.42); }
       @keyframes hero-video-settle { from { opacity:0; transform:scale(1.045); } to { opacity:.7; transform:scale(1); } }
       @keyframes site-fade-up { from { opacity:0; transform:translateY(18px); } to { opacity:1; transform:none; } }
+      @keyframes content-fade { from { opacity:0; transform:translateY(12px); } to { opacity:1; transform:none; } }
       @keyframes footer-letter-rise { from { opacity:0; transform:translateY(112%); } to { opacity:1; transform:translateY(0); } }
+      @keyframes footer-letter-drop { from { opacity:0; transform:translateY(-112%); } to { opacity:1; transform:translateY(0); } }
       @keyframes product-glow { from { opacity:.55; transform:scale(.94); } to { opacity:1; transform:scale(1.06); } }
-      @keyframes social-scroll { to { transform:translateX(calc(-50% - 8px)); } }
+      @keyframes social-scroll { to { transform:translateX(-50%); } }
       @media (max-width:760px) {
-        .nav { padding:18px 20px; }.nav-links { display:flex; gap:16px; font-size:11px; }.wordmark img { width:94px; }
+        .nav { padding:18px 20px; }.nav-links { display:flex; gap:16px; font-size:11px; }.wordmark { font-size:16px; letter-spacing:.22em; }
         .hero { min-height:760px; padding:0 24px 52px; }.hero h1 { font-size:clamp(3rem,12vw,4.25rem); letter-spacing:-.06em; }
         .intro,.ingredients { padding:84px 24px; }.heritage { min-height:420px; padding:58px 24px; }.heritage-art { width:180px; margin-bottom:14px; }.heritage h2 { font-size:clamp(2.5rem,5.15vw,2.625rem); }.intro-grid,.ingredients-grid { display:block; }.intro-body { padding-top:40px; }.intro h2,.ingredients h2,.range h2 { font-size:3.1rem; }
         .ingredient-rows { margin-top:42px; }.ingredient-row { grid-template-columns:32px 1fr; gap:8px; }.ingredient-row p { grid-column:2; }.formulation-bridge { height:120px; }
         .texture-story { height:230svh; }.texture-copy p { top:7vh; left:24px; }.texture-copy h2 { width:96vw; font-size:16vw; }.texture-droplet { height:min(48vh,440px); max-width:70vw; top:53%; }.texture-callout { width:190px; }.texture-callout.one { top:23%; left:24px; }.texture-callout.two { top:auto; right:16px; bottom:25%; }.texture-callout.three { top:auto; left:16px; bottom:9%; }
-        .range { padding:84px 20px 58px; }.range-top { margin-bottom:34px; }.range-top p { margin-top:18px; }.flavors { grid-template-columns:1fr; gap:13px; }.flavor-product { height:315px; }.social-feed { padding:64px 0 56px; }.social-head { display:block; padding:0 24px 25px; }.social-track { gap:10px; padding-left:24px; }.social-card { width:190px; }.footer-main { display:block; padding:42px 24px 0; }.footer-links { margin-top:32px; }.footer-wordmark { margin-top:22px; padding:0; }.signup-form { max-width:none; }
+        .range { padding:84px 20px 58px; }.range-top { margin-bottom:34px; }.range-top p { margin-top:18px; }.flavors { grid-template-columns:1fr; gap:13px; }.flavor-product { height:315px; }.social-feed { padding:64px 0 56px; }.social-head { display:block; padding:0 24px 25px; }.social-track { gap:10px; padding-left:24px; }.social-card { width:190px; }.footer-main { display:block; padding:42px 24px 0; }.footer-links { margin-top:32px; }.footer-wordmark { margin-top:22px; padding:0; font-size:33vw; }.signup-form { max-width:none; }
       }
+      @media (max-width:760px) { .social-marquee { padding-left:24px; }.social-track { padding-left:0; }.social-set { gap:10px; padding-right:10px; } }
       @media (prefers-reduced-motion:reduce) { .nav,.hero video,.hero h1,.hero p,.hero .button,.range.is-revealed .flavor-visual::before { animation:none; } .js-motion [data-reveal],.js-motion .texture-title-reveal { opacity:1; transform:none; transition:none; } .js-motion .footer-wordmark .footer-letter > span { opacity:1; transform:none; animation:none; } .texture-droplet { opacity:1; transform:translate(-50%,-50%); }.texture-callout { opacity:1; transform:none; }.texture-connectors path { stroke-dashoffset:0; opacity:1; }.texture-connectors circle { opacity:1; transform:scale(1); } .texture-copy h2 { transform:translate(-50%,calc(-50% - 34vh)) scale(.6); } .heritage-art { opacity:1; } .hero .hero-character,.heritage .heritage-character,.heritage .mask-body,.heritage-mark { opacity:1!important; filter:none!important; transform:none!important; transition:none!important; } .social-track { animation:none; } }
       .has-custom-cursor body,.has-custom-cursor .flavor,.has-custom-cursor a,.has-custom-cursor button { cursor:none; } .has-custom-cursor input,.has-custom-cursor textarea { cursor:text; } .has-custom-cursor select { cursor:default; }
       @media (min-width:1280px) { .flavor-stats { grid-template-columns:repeat(4,minmax(0,1fr)); gap:10px; } }
       @media (max-width:760px) { .range { padding:72px 0 0; }.range-top { padding:0 24px 32px; }.flavors { gap:0; }.flavor + .flavor { border-left:0; border-top:1px solid rgba(242,239,232,.09); }.flavor-visual { height:390px; }.flavor-product { height:335px; }.flavor-copy { padding:22px 24px 26px; }.flavor-stats { grid-template-columns:repeat(4,minmax(0,1fr)); gap:10px; } }
       @media (min-width:641px) and (max-width:1000px) { .texture-droplet { height:min(50vh,450px); max-width:42vw; }.texture-copy h2 { width:min(900px,90vw); font-size:clamp(3.8rem,8.6vw,7rem); }.texture-callout { width:min(245px,28vw); }.texture-callout.one { top:38%; left:5vw; }.texture-callout.two { top:51%; right:1.5vw; bottom:auto; left:auto; }.texture-callout.three { top:72%; left:3vw; right:auto; bottom:auto; } }
-      @media (max-width:640px) { .texture-story { height:auto; }.texture-stage { position:relative; height:auto; min-height:0; padding:72px 24px 84px; overflow:hidden; }.texture-composition { position:relative; inset:auto; width:100%; height:auto; display:flex; flex-direction:column; align-items:stretch; }.texture-copy { position:relative; inset:auto; order:1; display:block; pointer-events:auto; }.texture-title-reveal { position:relative; inset:auto; opacity:1!important; transform:none!important; }.texture-copy h2 { position:relative; top:auto; left:auto; width:100%; margin:0; font-size:clamp(3.1rem,12vw,5rem); line-height:.88; text-align:left; transform:none!important; }.texture-title-line > span { opacity:1!important; transform:none!important; }.texture-droplet { position:relative; order:2; left:auto; top:auto; align-self:center; height:min(48vh,420px); max-width:80vw; margin:38px auto 34px; opacity:1!important; transform:none!important; }.texture-connectors { display:none; }.texture-callout,.texture-callout.one,.texture-callout.two,.texture-callout.three { position:relative; top:auto; right:auto; bottom:auto; left:auto; order:3; width:100%; margin:0; padding:20px 0; background:none; border-left:0; border-top:1px solid rgba(143,201,214,.3); opacity:1!important; transform:none!important; backdrop-filter:none; -webkit-backdrop-filter:none; }.texture-callout + .texture-callout { order:4; }.texture-callout h3 { font-size:15px; }.texture-callout p { max-width:390px; font-size:var(--text-note); } }
+      @media (max-width:640px) { .texture-story { height:auto; }.texture-stage { position:relative; height:auto; min-height:0; display:flex; flex-direction:column; align-items:stretch; padding:72px 24px 84px; overflow:hidden; }.texture-copy { position:relative; inset:auto; order:1; display:block; pointer-events:auto; }.texture-title-reveal { position:relative; inset:auto; opacity:1!important; transform:none!important; }.texture-copy h2 { position:relative; top:auto; left:auto; width:100%; margin:0; font-size:clamp(3.1rem,12vw,5rem); line-height:.88; text-align:left; transform:none!important; }.texture-droplet { position:relative; order:2; left:auto; top:auto; align-self:center; height:min(48vh,420px); max-width:80vw; margin:38px auto 34px; opacity:1!important; transform:none!important; }.texture-connectors { display:none; }.texture-callout,.texture-callout.one,.texture-callout.two,.texture-callout.three { position:relative; top:auto; right:auto; bottom:auto; left:auto; order:3; width:100%; margin:0; padding:20px 0; background:none; border-left:0; border-top:1px solid rgba(143,201,214,.3); opacity:1!important; transform:none!important; backdrop-filter:none; -webkit-backdrop-filter:none; }.texture-callout + .texture-callout { order:4; }.texture-callout h3 { font-size:15px; }.texture-callout p { max-width:390px; font-size:var(--text-note); } }
+      @media (max-width:640px) { .texture-title-line > span { opacity:1!important; transform:none!important; } }
       @media (prefers-reduced-motion:reduce) { .js-motion .range .flavor { opacity:1; transform:none; transition:none; } }
       @media (max-width:760px) { .flavor + .flavor { border-color:rgba(181,196,209,.15); } }
       .faq { padding:64px 5.5vw; background:var(--paper); color:var(--ink); }
@@ -251,12 +252,23 @@
       .faq details p { margin:0; padding:0 28px 18px 0; font-size:14px; line-height:1.6; color:#4e5055; }
       .faq a { color:inherit; font-weight:700; text-decoration:none; }
       .faq a:focus-visible { outline:2px solid var(--ink); outline-offset:3px; }
+      /* FAQ rows arrive as a clearly readable cascade, not a single block fade. */
+      .js-motion .faq-list.is-revealed details { opacity:0; transform:translateY(20px); animation:content-fade .58s cubic-bezier(.16,1,.3,1) calc(.08s + var(--faq-delay,0ms)) both; }
+      .js-motion .faq-list.is-revealed details:nth-child(1) { --faq-delay:0ms; }.js-motion .faq-list.is-revealed details:nth-child(2) { --faq-delay:110ms; }.js-motion .faq-list.is-revealed details:nth-child(3) { --faq-delay:220ms; }.js-motion .faq-list.is-revealed details:nth-child(4) { --faq-delay:330ms; }.js-motion .faq-list.is-revealed details:nth-child(5) { --faq-delay:440ms; }.js-motion .faq-list.is-revealed details:nth-child(6) { --faq-delay:550ms; }
+      .js-motion .faq-list.is-fast-reveal details { animation-duration:.32s; }.js-motion .faq-list.is-fast-reveal details:nth-child(1) { --faq-delay:0ms; }.js-motion .faq-list.is-fast-reveal details:nth-child(2) { --faq-delay:45ms; }.js-motion .faq-list.is-fast-reveal details:nth-child(3) { --faq-delay:90ms; }.js-motion .faq-list.is-fast-reveal details:nth-child(4) { --faq-delay:135ms; }.js-motion .faq-list.is-fast-reveal details:nth-child(5) { --faq-delay:180ms; }.js-motion .faq-list.is-fast-reveal details:nth-child(6) { --faq-delay:225ms; }
+      .js-motion .range.is-fast-reveal .flavor { transition-duration:.28s,.42s,.42s,.32s,.32s,.35s; }.js-motion .range.is-fast-reveal .flavor:nth-child(2) { transition-delay:.07s; }.js-motion .range.is-fast-reveal .flavor:nth-child(3) { transition-delay:.14s; }
+      /* Product content cannot paint until the range heading transition has completed. */
+      .js-motion .range:not(.is-revealed) .flavors { visibility:hidden; }.js-motion .range.is-revealed .flavors { visibility:visible; }
+      .js-motion .signup.is-revealed > * { opacity:0; transform:translateY(12px); animation:content-fade .5s cubic-bezier(.16,1,.3,1) var(--signup-delay,0ms) both; }
+      .js-motion .signup.is-revealed > :nth-child(1) { --signup-delay:80ms; }.js-motion .signup.is-revealed > :nth-child(2) { --signup-delay:170ms; }.js-motion .signup.is-revealed > :nth-child(3) { --signup-delay:260ms; }.js-motion .signup.is-revealed > :nth-child(4) { --signup-delay:350ms; }.js-motion .signup.is-revealed > :nth-child(5) { --signup-delay:440ms; }
       /* Heading hierarchy: hero H1, shared feature headings, then shared closing headings. */
       .range h2,.heritage h2,.social-head h2 { font-size:clamp(2.5rem,5.15vw,6.9rem); line-height:1.04; letter-spacing:-.06em; }
       .faq h2,.signup h2 { font-size:clamp(2.25rem,4vw,3.75rem); line-height:1; letter-spacing:-.05em; }
       @media(max-width:760px) { .faq { padding:48px 24px; }.faq-inner { grid-template-columns:1fr; gap:24px; }.range h2,.heritage h2,.social-head h2 { font-size:clamp(2.5rem,5.15vw,2.625rem); } }
-      @media (prefers-reduced-motion:reduce) { .faq summary::before { transition:none; } }
+      @media (prefers-reduced-motion:reduce) { .faq summary::before { transition:none; }.js-motion .faq-list.is-revealed details,.js-motion .signup.is-revealed > * { opacity:1; transform:none; animation:none; } }
+      @media (prefers-reduced-motion:reduce) { .js-motion .range:not(.is-revealed) .flavors { visibility:visible; } }
       /* Hero: one type family, one visual axis, and one restrained call to action. */
+      .wordmark { font-size:21px; letter-spacing:.28em; }
       .nav-links { gap:38px; font-size:14px; }
       .hero { min-height:max(760px,100svh); align-items:flex-end; padding:140px 5.5vw 72px; }
       .hero video { opacity:.62; filter:grayscale(.82) contrast(1.06); }
@@ -274,51 +286,62 @@
       .hero-signup-form input:focus-visible { outline:0; }
       .hero-signup-form input:-webkit-autofill,.hero-signup-form input:-webkit-autofill:hover,.hero-signup-form input:-webkit-autofill:focus { -webkit-text-fill-color:var(--paper); caret-color:var(--paper); -webkit-box-shadow:0 0 0 1000px #101114 inset; box-shadow:0 0 0 1000px #101114 inset; }
       .hero-signup-form input:autofill { color:var(--paper); box-shadow:0 0 0 1000px #101114 inset; }
+      .footer-signup .hero-signup-form input:-webkit-autofill,.footer-signup .hero-signup-form input:-webkit-autofill:hover,.footer-signup .hero-signup-form input:-webkit-autofill:focus { -webkit-box-shadow:0 0 0 1000px var(--surface-deep) inset; box-shadow:0 0 0 1000px var(--surface-deep) inset; }
+      .footer-signup .hero-signup-form input:autofill { box-shadow:0 0 0 1000px var(--surface-deep) inset; }
       .hero-signup-form .button { min-height:56px; padding:0 18px; border:0; background:var(--paper); color:var(--ink); cursor:pointer; font-size:13px; letter-spacing:.02em; white-space:nowrap; }
       .hero-signup-form .button:hover,.hero-signup-form .button:focus-visible { background:var(--paper); color:var(--ink); }
       .hero-signup-form .button:focus-visible { outline:2px solid var(--ink); outline-offset:-4px; }
       .hero .hero-signup-offer { width:auto; margin:13px 0 0; color:rgba(242,240,234,.58); font-size:12px; line-height:1.45; }
       .hero .hero-signup-response { display:none; width:auto; margin:0; }
-      .hero-signup.has-response .hero-signup-response { display:block; margin-top:10px; color:rgba(242,240,234,.72); font-size:12px; }
+      .hero-signup.has-response .hero-signup-response { display:block; margin-top:12px; color:var(--paper); font-size:13px; }
+      .hero-signup.has-response .signup-success-icon { display:none; }
+      .hero-signup-form button:disabled { opacity:.6; cursor:wait; }
       .hero-signup.is-submitted .hero-signup-form,.hero-signup.is-submitted .hero-signup-offer { display:none; }
-      .hero-signup.is-submitted .hero-signup-response { display:flex; min-height:58px; align-items:center; gap:12px; margin:0; padding:0 18px; border:1px solid rgba(242,240,234,.28); border-radius:2px; background:rgba(16,17,20,.68); color:var(--paper); font-size:13px; line-height:1.4; }
-      .signup-success-icon { display:none; width:19px; height:19px; flex:0 0 auto; color:var(--accent-blue); }
-      .hero-signup.is-submitted .signup-success-icon { display:block; }
+      .hero-signup.is-submitted .hero-signup-response { display:flex; min-height:58px; align-items:center; gap:12px; padding:0 18px; border:1px solid rgba(242,240,234,.28); border-radius:2px; background:rgba(16,17,20,.68); color:var(--paper); font-size:13px; line-height:1.4; }
+      .signup-success-icon { width:19px; height:19px; flex:0 0 auto; color:var(--accent-blue); }
       .hero-signup .signup-note { display:none; }
+      .footer-signup .signup-note { display:block; }
+      .footer-signup.is-submitted .signup-note { display:none; }
+      .footer-signup .hero-signup-response { display:none; margin:0; }
+      .footer-signup.has-response .hero-signup-response { display:block; margin-top:12px; color:var(--paper); font-size:13px; }
+      .footer-signup.is-submitted .hero-signup-response { display:flex; min-height:58px; align-items:center; gap:12px; padding:0 18px; border:1px solid rgba(242,240,234,.28); border-radius:2px; background:rgba(16,17,20,.68); color:var(--paper); font-size:13px; line-height:1.4; }
       @media (hover:hover) and (pointer:fine) { body { cursor:auto; } a,button,.flavor { cursor:pointer; } input,textarea { cursor:text; } }
-      .js-motion .hero .hero-character { opacity:1; transform:none; transition:none; }
       .hero-content { animation:none; }
       .hero .hero-eyebrow { animation:hero-content-enter .6s .1s both cubic-bezier(.16,1,.3,1); }
-      .hero h1 { animation:hero-content-enter .6s .35s both cubic-bezier(.16,1,.3,1); }
-      .hero > .hero-content > p:not(.hero-eyebrow) { animation:hero-content-enter .6s .6s both cubic-bezier(.16,1,.3,1); }
-      .hero-signup { animation:hero-content-enter .6s .85s both cubic-bezier(.16,1,.3,1); }
+      /* The headline owns its entrance character-by-character; do not also animate the whole block. */
+      .hero h1 { animation:none; }
+      .hero > .hero-content > p:not(.hero-eyebrow) { animation:hero-content-enter .52s 1.06s both cubic-bezier(.16,1,.3,1); }
+      .hero-signup { animation:hero-content-enter .52s 1.32s both cubic-bezier(.16,1,.3,1); }
       .hero-signup .button,.hero-signup p { animation:none; }
       @keyframes hero-content-enter { from { opacity:0; transform:translateY(16px); } to { opacity:1; transform:none; } }
+      /* A fast scroll completes the decorative drawing but preserves a short, readable type sequence. */
+      .js-motion .heritage.is-fast .heritage-character { transition-duration:.2s,.32s; }
+      .js-motion .heritage.is-fast .mask-body { transition-delay:.66s,.66s; transition-duration:.24s,.34s; }
+      .js-motion .heritage.is-fast .heritage-mark { transition-delay:.96s; transition-duration:.32s; }
       @media(max-width:760px) { .hero { min-height:720px; padding:124px 24px 58px; }.hero::after { background:linear-gradient(180deg,rgba(3,4,5,.06) 0%,rgba(3,4,5,.16) 45%,rgba(3,4,5,.42) 64%,#090a0c 82%,var(--surface-navy) 100%),linear-gradient(90deg,rgba(7,8,10,.82),rgba(7,8,10,.28)); }.hero h1 { font-size:clamp(2.8rem,12vw,4rem); }.hero > .hero-content > p:not(.hero-eyebrow) { font-size:15px; }.hero video { object-position:58% center; } }
-      @media(max-width:520px) { .nav { width:calc(100vw - 24px); padding:15px 16px; }.nav-links { gap:10px; font-size:10px; }.wordmark img { width:78px; }.hero-signup-form input { width:55%; padding-left:14px; }.hero-signup-form .button { padding:0 14px; font-size:12px; } }
+      @media(max-width:520px) { .nav { width:calc(100vw - 24px); padding:15px 16px; }.nav-links { gap:10px; font-size:10px; }.wordmark { font-size:14px; }.hero-signup-form input { width:55%; padding-left:14px; }.hero-signup-form .button { padding:0 14px; font-size:12px; } }
       @media(prefers-reduced-motion:reduce) { .hero .hero-eyebrow,.hero h1,.hero > .hero-content > p:not(.hero-eyebrow),.hero-signup { animation:none; } }
     </style>
   </head>
   <body>
     <header class="nav">
-      <a class="wordmark" href="#top" aria-label="OREHA home"><img src="assets/oreha-wordmark.svg" alt="" /></a>
+      <a class="wordmark" href="#top" aria-label="OREHA home">OREHA</a>
       <nav class="nav-links mono" aria-label="Primary navigation"><a href="#products">Products</a><a href="#about">About</a></nav>
     </header>
     <main id="top">
       <section class="hero" aria-labelledby="hero-title">
-        <video autoplay muted loop playsinline preload="metadata" poster="hero-poster.jpg?v=20261001"><source src="oreha-hero-480.mp4?v=20261001" type="video/mp4" /></video>
+        <video autoplay muted loop playsinline preload="auto"><source src="oreha-hero.mp4" type="video/mp4" /></video>
         <div class="hero-content">
           <p class="hero-eyebrow">COMING TO CANADA · LATE 2026</p>
           <h1 id="hero-title"><span>Gel energy.</span><span>Made smoother.</span></h1>
-          <p>Performance jelly engineered in Japan for endurance sport. Smooth texture. Purposeful ingredients.</p>
+          <p>Performance jelly engineered in Japan for serious endurance. Smooth texture. Purposeful ingredients.</p>
           <div class="hero-signup">
-            <form class="hero-signup-form" id="hero-signup-form" data-signup-source="hero">
+            <form class="hero-signup-form" id="hero-signup-form">
               <label class="sr-only" for="hero-email">Email address</label>
               <input id="hero-email" name="email" type="email" autocomplete="email" placeholder="Your email address" required />
-              <div class="signup-honeypot" aria-hidden="true"><label for="hero-company">Company</label><input id="hero-company" name="company" type="text" tabindex="-1" autocomplete="off" /></div>
               <button class="button" type="submit">Join the launch</button>
             </form>
-            <p class="hero-signup-offer">Be the first to know when OREHA arrives.</p>
+            <p class="hero-signup-offer">Get launch updates and 5% off your first order.</p>
             <small class="signup-note">By signing up, you agree to receive emails from OREHA. Unsubscribe anytime.</small>
             <p class="hero-signup-response" id="hero-signup-response" role="status"><svg class="signup-success-icon" viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="8.25" fill="none" stroke="currentColor" stroke-width="1.25"/><path d="m6.4 10.1 2.25 2.25 4.95-5.05" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg><span></span></p>
           </div>
@@ -327,9 +350,9 @@
       <section class="range" id="products" aria-labelledby="flavor-title">
         <div class="range-top"><div class="range-copy"><h2 id="flavor-title">Pick your fuel</h2></div><p>One 45g pouch. Three flavours to choose from.</p></div>
         <div class="flavors">
-          <article class="flavor peach" tabindex="0"><div class="flavor-visual"><img class="flavor-fruit" src="peach-accent.webp?v=20261001" alt="" loading="lazy" decoding="async" /><img class="flavor-product" src="oreha-peach.webp?v=20261001" alt="OREHA Peach performance jelly" decoding="async" /></div><div class="flavor-copy"><h3>Peach</h3><div class="flavor-stats"><div><strong>21.3 g</strong><span>Carbs</span></div><div><strong>104 kcal</strong><span>Calories</span></div><div><strong>15,700 mg</strong><span>Palatinose</span></div><div><strong>2,200 mg</strong><span>MCT oil</span></div></div></div></article>
-          <article class="flavor grape" tabindex="0"><div class="flavor-visual"><img class="flavor-fruit" src="grape-accent.webp?v=20261001" alt="" loading="lazy" decoding="async" /><img class="flavor-product" src="oreha-grape-transparent.webp?v=20261001" alt="OREHA Grape performance jelly" decoding="async" /></div><div class="flavor-copy"><h3>Grape</h3><div class="flavor-stats"><div><strong>22.7 g</strong><span>Carbs</span></div><div><strong>109 kcal</strong><span>Calories</span></div><div><strong>15,700 mg</strong><span>Palatinose</span></div><div><strong>2,200 mg</strong><span>MCT oil</span></div></div></div></article>
-          <article class="flavor lemon" tabindex="0"><div class="flavor-visual"><img class="flavor-fruit" src="lemon-accent.webp?v=20261001" alt="" loading="lazy" decoding="async" /><img class="flavor-product" src="oreha-honey-lemon-transparent.webp?v=20261001" alt="OREHA Honey Lemon performance jelly" decoding="async" /></div><div class="flavor-copy"><h3>Honey Lemon</h3><div class="flavor-stats"><div><strong>26.6 g</strong><span>Carbs</span></div><div><strong>109 kcal</strong><span>Calories</span></div><div><strong>12,800 mg</strong><span>Palatinose</span></div><div><strong>500 mg</strong><span>MCT oil</span></div></div></div></article>
+          <article class="flavor peach" tabindex="0"><div class="flavor-visual"><img class="flavor-fruit" src="concepts/hero-directions/assets/fruit/peach-accent.png" alt="" /><img class="flavor-product" src="concepts/hero-directions/assets/oreha-peach-transparent.png" alt="OREHA Peach performance jelly" /></div><div class="flavor-copy"><h3>Peach</h3><div class="flavor-stats"><div><strong>21.3 g</strong><span>Carbs</span></div><div><strong>104 kcal</strong><span>Calories</span></div><div><strong>15,700 mg</strong><span>Palatinose</span></div><div><strong>2,200 mg</strong><span>MCT oil</span></div></div></div></article>
+          <article class="flavor grape" tabindex="0"><div class="flavor-visual"><img class="flavor-fruit" src="concepts/hero-directions/assets/fruit/grape-accent.png" alt="" /><img class="flavor-product" src="concepts/hero-directions/assets/oreha-grape-transparent.png" alt="OREHA Grape performance jelly" /></div><div class="flavor-copy"><h3>Grape</h3><div class="flavor-stats"><div><strong>22.7 g</strong><span>Carbs</span></div><div><strong>109 kcal</strong><span>Calories</span></div><div><strong>15,700 mg</strong><span>Palatinose</span></div><div><strong>2,200 mg</strong><span>MCT oil</span></div></div></div></article>
+          <article class="flavor lemon" tabindex="0"><div class="flavor-visual"><img class="flavor-fruit" src="concepts/hero-directions/assets/fruit/lemon-accent.png" alt="" /><img class="flavor-product" src="concepts/hero-directions/assets/oreha-honey-lemon-transparent.png" alt="OREHA Honey Lemon performance jelly" /></div><div class="flavor-copy"><h3>Honey Lemon</h3><div class="flavor-stats"><div><strong>26.6 g</strong><span>Carbs</span></div><div><strong>109 kcal</strong><span>Calories</span></div><div><strong>12,800 mg</strong><span>Palatinose</span></div><div><strong>500 mg</strong><span>MCT oil</span></div></div></div></article>
         </div>
       </section>
       <section class="heritage" id="about" aria-labelledby="heritage-title">
@@ -345,14 +368,12 @@
       </section>
       <section class="texture-story" id="texture" aria-labelledby="texture-title">
         <div class="texture-stage">
-          <div class="texture-composition">
-            <div class="texture-copy"><div class="texture-title-reveal"><h2 id="texture-title"><span class="texture-title-line"><span>Formulation</span></span><span class="texture-title-line"><span>that matters</span></span></h2></div></div>
-            <svg class="texture-connectors" viewBox="0 0 1000 1000" preserveAspectRatio="none" aria-hidden="true"><g data-texture-link="0"><path d="" /><circle r="5" /></g><g data-texture-link="1"><path d="" /><circle r="5" /></g><g data-texture-link="2"><path d="" /><circle r="5" /></g></svg>
-            <img class="texture-droplet" src="oreha-water-droplet.webp?v=20261001" alt="Clear water droplet" loading="lazy" decoding="async" />
-            <article class="texture-callout one" data-texture-step="0"><span class="mono">01</span><h3>JELLY BY DESIGN</h3><p>A smooth, agar-based alternative to thick gels—no water needed to wash it down.</p></article>
-            <article class="texture-callout two" data-texture-step="1"><span class="mono">02</span><h3>PALATINOSE AT THE CORE</h3><p>Palatinose, fructose and dextrin form OREHA’s carbohydrate blend for endurance fueling.</p></article>
-            <article class="texture-callout three" data-texture-step="2"><span class="mono">03</span><h3>BEYOND CARBOHYDRATES</h3><p>Magnesium, MCT oil and sodium round out the formula with minerals and energy from fat.</p></article>
-          </div>
+          <div class="texture-copy"><div class="texture-title-reveal"><h2 id="texture-title"><span class="texture-title-line"><span>Formulation</span></span><span class="texture-title-line"><span>that matters</span></span></h2></div></div>
+          <svg class="texture-connectors" viewBox="0 0 1000 1000" preserveAspectRatio="none" aria-hidden="true"><g data-texture-link="0"><path d="" /><circle r="5" /></g><g data-texture-link="1"><path d="" /><circle r="5" /></g><g data-texture-link="2"><path d="" /><circle r="5" /></g></svg>
+          <img class="texture-droplet" src="concepts/v2/assets/oreha-water-droplet.png" alt="Clear water droplet" />
+          <article class="texture-callout one" data-texture-step="0"><span class="mono">01</span><h3>JELLY BY DESIGN</h3><p>A smooth, agar-based alternative to thick gels—no water needed to wash it down.</p></article>
+          <article class="texture-callout two" data-texture-step="1"><span class="mono">02</span><h3>PALATINOSE AT THE CORE</h3><p>Palatinose, fructose and dextrin form OREHA’s carbohydrate blend for endurance fueling.</p></article>
+          <article class="texture-callout three" data-texture-step="2"><span class="mono">03</span><h3>BEYOND CARBOHYDRATES</h3><p>Magnesium, MCT oil and sodium round out the formula with minerals and energy from fat.</p></article>
         </div>
       </section>
       <div class="formulation-bridge" aria-hidden="true"></div>
@@ -372,35 +393,39 @@
     </main>
     <footer class="site-footer" id="cart">
       <section class="social-feed" aria-labelledby="social-title">
-        <div class="social-head"><h2 id="social-title">Same effort,<br />different cities</h2></div>
+        <div class="social-head"><h2 id="social-title">One fuel.<br />Every pursuit.</h2></div>
         <div class="social-marquee" aria-label="Placeholder Instagram posts">
           <div class="social-track">
-            <figure class="social-card"><img src="01-trail.webp?v=20261001" alt="Runner on a trail carrying OREHA fuel" loading="lazy" decoding="async" fetchpriority="low" /><figcaption>Vancouver</figcaption></figure>
-            <figure class="social-card"><img src="02-track.webp?v=20261001" alt="Runner training on a track with OREHA fuel" loading="lazy" decoding="async" fetchpriority="low" /><figcaption>Tokyo</figcaption></figure>
-            <figure class="social-card"><img src="03-club.webp?v=20261001" alt="OREHA running club placeholder post" loading="lazy" decoding="async" fetchpriority="low" /><figcaption>Madrid</figcaption></figure>
-            <figure class="social-card"><img src="06-seawall-run.webp?v=20261001" alt="Runner by the seawall placeholder post" loading="lazy" decoding="async" fetchpriority="low" /><figcaption>Hong Kong</figcaption></figure>
-            <figure class="social-card"><img src="04-tear-open.webp?v=20261001" alt="OREHA pouch placeholder post" loading="lazy" decoding="async" fetchpriority="low" /><figcaption>Melbourne</figcaption></figure>
-            <figure class="social-card"><img src="05-five-colours.webp?v=20261001" alt="OREHA assortment placeholder post" loading="lazy" decoding="async" fetchpriority="low" /><figcaption>London</figcaption></figure>
-            <figure class="social-card" aria-hidden="true"><img src="01-trail.webp?v=20261001" alt="" loading="lazy" decoding="async" fetchpriority="low" /><figcaption>Vancouver</figcaption></figure>
-            <figure class="social-card" aria-hidden="true"><img src="02-track.webp?v=20261001" alt="" loading="lazy" decoding="async" fetchpriority="low" /><figcaption>Tokyo</figcaption></figure>
-            <figure class="social-card" aria-hidden="true"><img src="03-club.webp?v=20261001" alt="" loading="lazy" decoding="async" fetchpriority="low" /><figcaption>Madrid</figcaption></figure>
-            <figure class="social-card" aria-hidden="true"><img src="06-seawall-run.webp?v=20261001" alt="" loading="lazy" decoding="async" fetchpriority="low" /><figcaption>Hong Kong</figcaption></figure>
-            <figure class="social-card" aria-hidden="true"><img src="04-tear-open.webp?v=20261001" alt="" loading="lazy" decoding="async" fetchpriority="low" /><figcaption>Melbourne</figcaption></figure>
-            <figure class="social-card" aria-hidden="true"><img src="05-five-colours.webp?v=20261001" alt="" loading="lazy" decoding="async" fetchpriority="low" /><figcaption>London</figcaption></figure>
+            <div class="social-set">
+            <figure class="social-card"><img src="concepts/social-with-gels/01-trail.png" alt="Runner on a trail carrying OREHA fuel" /><figcaption>Hong Kong</figcaption></figure>
+            <figure class="social-card"><img src="concepts/social-with-gels/02-track.png" alt="Runner training on a track with OREHA fuel" /><figcaption>Madrid</figcaption></figure>
+            <figure class="social-card"><img src="concepts/social-with-gels/03-club.png" alt="OREHA running club placeholder post" /><figcaption>Tokyo</figcaption></figure>
+            <figure class="social-card"><img src="concepts/varied-active/posts/06-seawall-run.png" alt="Runner by the seawall placeholder post" /><figcaption>Vancouver</figcaption></figure>
+            <figure class="social-card"><img src="concepts/varied-active/posts/04-tear-open.png" alt="OREHA pouch placeholder post" /><figcaption>Melbourne</figcaption></figure>
+            <figure class="social-card"><img src="concepts/varied-active/posts/05-five-colours.png" alt="OREHA assortment placeholder post" /><figcaption>London</figcaption></figure>
+            </div>
+            <div class="social-set" aria-hidden="true">
+            <figure class="social-card"><img src="concepts/social-with-gels/01-trail.png" alt="" /><figcaption>Hong Kong</figcaption></figure>
+            <figure class="social-card" aria-hidden="true"><img src="concepts/social-with-gels/02-track.png" alt="" /><figcaption>Madrid</figcaption></figure>
+            <figure class="social-card" aria-hidden="true"><img src="concepts/social-with-gels/03-club.png" alt="" /><figcaption>Tokyo</figcaption></figure>
+            <figure class="social-card" aria-hidden="true"><img src="concepts/varied-active/posts/06-seawall-run.png" alt="" /><figcaption>Vancouver</figcaption></figure>
+            <figure class="social-card" aria-hidden="true"><img src="concepts/varied-active/posts/04-tear-open.png" alt="" /><figcaption>Melbourne</figcaption></figure>
+            <figure class="social-card"><img src="concepts/varied-active/posts/05-five-colours.png" alt="" /><figcaption>London</figcaption></figure>
+            </div>
           </div>
         </div>
       </section>
       <div class="footer-main">
-        <section class="signup" aria-labelledby="signup-title">
+        <section class="signup hero-signup footer-signup" aria-labelledby="signup-title">
           <h2 id="signup-title">Ready for the next mile?</h2>
-          <p>Get 5% off your first order and hear about new flavours.</p>
-          <form class="signup-form" id="signup-form" data-signup-source="footer"><label class="sr-only" for="footer-email">Email address</label><input id="footer-email" name="email" type="email" autocomplete="email" placeholder="Your email address" required /><div class="signup-honeypot" aria-hidden="true"><label for="footer-company">Company</label><input id="footer-company" name="company" type="text" tabindex="-1" autocomplete="off" /></div><button type="submit" aria-label="Get 5% off" disabled>→</button></form>
+          <p>Get launch updates and 5% off your first order.</p>
+          <form class="signup-form hero-signup-form" id="signup-form"><label class="sr-only" for="footer-email">Email address</label><input id="footer-email" type="email" autocomplete="email" placeholder="Your email address" required /><button class="button" type="submit">Join the launch</button></form>
           <small class="signup-note">By signing up, you agree to receive emails from OREHA. Unsubscribe anytime.</small>
-          <p class="signup-response" id="signup-response" aria-live="polite"></p>
+          <p class="signup-response hero-signup-response" id="signup-response" role="status"><svg class="signup-success-icon" viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="8.25" fill="none" stroke="currentColor" stroke-width="1.25"/><path d="m6.4 10.1 2.25 2.25 4.95-5.05" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg><span></span></p>
         </section>
-        <nav class="footer-links" aria-label="Footer navigation"><div><a href="https://www.instagram.com/oreha.ca/" target="_blank" rel="noopener noreferrer">Instagram</a><span class="footer-link-placeholder">Amazon</span><span class="footer-link-placeholder">Privacy and Terms</span><button class="footer-email" type="button" data-copy-label="Copy email" aria-label="Copy hello@oreha.ca">hello@oreha.ca</button><span class="sr-only" id="email-copy-status" aria-live="polite"></span></div></nav>
+        <nav class="footer-links" aria-label="Footer navigation"><div><a href="https://www.instagram.com/oreha.ca/" target="_blank" rel="noopener noreferrer">Instagram</a><span class="footer-link-placeholder">Amazon</span><a href="https://oresshu.com/" target="_blank" rel="noopener noreferrer">OREHA Japan</a><span class="footer-link-placeholder">Privacy and Terms</span><button class="footer-email" type="button" data-copy-label="Copy email" aria-label="Copy hello@oreha.ca">hello@oreha.ca</button><span class="sr-only" id="email-copy-status" aria-live="polite"></span></div></nav>
       </div>
-      <div class="footer-wordmark" aria-label="OREHA"><img src="assets/oreha-wordmark.svg" alt="" /></div>
+      <p class="footer-wordmark" aria-label="OREHA"><span class="footer-letter"><span aria-hidden="true">O</span></span><span class="footer-letter footer-letter--drop"><span aria-hidden="true" style="--letter-delay:80ms">R</span></span><span class="footer-letter"><span aria-hidden="true" style="--letter-delay:160ms">E</span></span><span class="footer-letter footer-letter--drop"><span aria-hidden="true" style="--letter-delay:240ms">H</span></span><span class="footer-letter"><span aria-hidden="true" style="--letter-delay:320ms">A</span></span></p>
     </footer>
     <div class="cursor-trail" aria-hidden="true"></div>
     <div class="view-cursor" aria-hidden="true"><span class="cursor-label">View</span><span class="cursor-arrow">↗</span></div>
@@ -419,7 +444,8 @@
           span.className = 'hero-character';
           span.setAttribute('aria-hidden', 'true');
           span.textContent = character === ' ' ? '\u00a0' : character;
-          span.style.setProperty('--character-delay', `${lineIndex * 240 + characterIndex * 10}ms`);
+          // The eyebrow leads; the headline then resolves in a quick, legible cascade.
+          span.style.setProperty('--character-delay', `${220 + lineIndex * 220 + characterIndex * 10}ms`);
           heroCharacters.push(span);
           return span;
         }));
@@ -428,29 +454,19 @@
       document.querySelectorAll('.heritage .mask-reveal').forEach((line, lineIndex) => {
         const text = line.textContent;
         line.setAttribute('aria-label', text);
-        let characterIndex = 0;
-        const fragments = text.split(/(\s+)/).map((fragment) => {
-          if (/^\s+$/.test(fragment)) return document.createTextNode(fragment);
-
-          const word = document.createElement('span');
-          word.className = 'heritage-word';
-          word.setAttribute('aria-hidden', 'true');
-          word.replaceChildren(...[...fragment].map((character) => {
-            const span = document.createElement('span');
-            span.className = 'heritage-character';
-            span.setAttribute('aria-hidden', 'true');
-            span.textContent = character;
-            const lineDelay = lineIndex * 280;
-            span.style.setProperty('--character-delay', `${lineDelay + characterIndex * 11}ms`);
-            characterIndex += 1;
-            return span;
-          }));
-          characterIndex += 1;
-          return word;
-        });
-        line.replaceChildren(...fragments);
+        line.replaceChildren(...[...text].map((character, characterIndex) => {
+          const span = document.createElement('span');
+          span.className = 'heritage-character';
+          span.setAttribute('aria-hidden', 'true');
+          span.textContent = character === ' ' ? '\u00a0' : character;
+          const lineDelay = lineIndex * 280;
+          span.style.setProperty('--character-delay', `${lineDelay + characterIndex * 11}ms`);
+          return span;
+        }));
       });
       const reducedMotionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+      let rangeCardsStarted = false;
+      let rangeCardsFinished = false;
       const revealTargets = [
         ['.range-top', 'up'],
         ['.social-head', 'up'],
@@ -463,25 +479,121 @@
         ['.faq h2', '.faq-list', 'soft'],
         ['.signup', '.footer-wordmark', 'wordmark']
       ];
+      const revealState = { faqFinished:false, socialFinished:false, signupFinished:false };
+      const pendingReveals = new Set();
+      let faqContentStarted = false;
+      let socialContentStarted = false;
+      let signupContentStarted = false;
+      const isFastArrival = () => scrollVelocity > .75;
       dependentReveals.forEach(([, targetSelector, style]) => {
         const target = document.querySelector(targetSelector);
         if (target) target.dataset.reveal = style;
       });
-      function revealRangeCards() {
-        document.querySelector('.range')?.classList.add('is-revealed');
+      function revealRangeCards(fast = isFastArrival()) {
+        if (rangeCardsStarted) return;
+        rangeCardsStarted = true;
+        document.querySelector('.range')?.classList.add('is-revealed', ...(fast ? ['is-fast-reveal'] : []));
+        // The final card has a .28s stagger and a 1.05s transform, so the next section
+        // cannot begin until the full product sequence has had time to land.
+        window.setTimeout(() => {
+          rangeCardsFinished = true;
+          document.dispatchEvent(new Event('range-cards-finished'));
+        }, fast ? 620 : 1380);
+      }
+      function canReveal(target) {
+        if (target.matches('.social-head')) return revealState.faqFinished;
+        if (target.matches('.signup')) return revealState.socialFinished;
+        if (target.matches('.footer-links')) return revealState.signupFinished;
+        return true;
+      }
+      function tryPendingReveals() {
+        [...pendingReveals].forEach((target) => {
+          if (!canReveal(target)) return;
+          pendingReveals.delete(target);
+          revealTarget(target);
+        });
+      }
+      function afterHeaderSettles(target, fast, callback) {
+        let complete = false;
+        const run = () => {
+          if (complete) return;
+          complete = true;
+          target.removeEventListener('transitionend', onTransitionEnd);
+          callback();
+        };
+        const onTransitionEnd = (event) => {
+          if (event.target === target && event.propertyName === 'transform') run();
+        };
+        target.addEventListener('transitionend', onTransitionEnd);
+        // A fallback protects the handoff if a browser suppresses transition events.
+        window.setTimeout(run, fast ? 460 : 860);
+      }
+      function startFaqContent(fast = isFastArrival()) {
+        if (faqContentStarted) return;
+        faqContentStarted = true;
+        document.querySelector('.faq-list')?.classList.add('is-revealed', ...(fast ? ['is-fast-reveal'] : []));
+        // Six-row question cascade, after its header has fully settled.
+        window.setTimeout(() => {
+          revealState.faqFinished = true;
+          tryPendingReveals();
+        }, fast ? 680 : 1250);
+      }
+      function startSocialContent(fast = isFastArrival()) {
+        if (socialContentStarted) return;
+        socialContentStarted = true;
+        document.querySelector('.social-marquee')?.classList.add('is-revealed', ...(fast ? ['is-fast-reveal'] : []));
+        window.setTimeout(() => {
+          revealState.socialFinished = true;
+          tryPendingReveals();
+        }, fast ? 420 : 780);
+      }
+      function startSignupContent(fast = isFastArrival()) {
+        if (signupContentStarted) return;
+        signupContentStarted = true;
+        document.querySelector('.footer-wordmark')?.classList.add('is-revealed', ...(fast ? ['is-fast-reveal'] : []));
+        window.setTimeout(() => {
+          revealState.signupFinished = true;
+          tryPendingReveals();
+        }, fast ? 420 : 780);
+      }
+      function revealTarget(target) {
+        if (target.classList.contains('is-revealed')) return;
+        const fast = isFastArrival();
+        target.classList.add('is-revealed', ...(fast ? ['is-fast-reveal'] : []));
+        if (target.matches('.range-top')) afterHeaderSettles(target, fast, () => revealRangeCards(fast));
+        if (target.matches('.faq h2')) afterHeaderSettles(target, fast, () => startFaqContent(fast));
+        if (target.matches('.social-head')) afterHeaderSettles(target, fast, () => startSocialContent(fast));
+        if (target.matches('.signup')) afterHeaderSettles(target, fast, () => startSignupContent(fast));
+        revealObserver.unobserve(target);
       }
       const revealObserver = new IntersectionObserver((entries, observer) => {
         entries.forEach((entry) => {
           if (!entry.isIntersecting) return;
-          entry.target.classList.add('is-revealed');
-          if (entry.target.matches('.range-top')) {
-            window.setTimeout(revealRangeCards, 720);
+          if (!canReveal(entry.target)) {
+            pendingReveals.add(entry.target);
+            // Deep links should still be usable: complete unseen upstream content
+            // before showing the section the visitor asked to view.
+            if (entry.target.matches('.social-head') && !faqContentStarted) {
+              document.querySelector('.faq h2')?.classList.add('is-revealed');
+              startFaqContent();
+            }
+            if (entry.target.matches('.signup') && !socialContentStarted) {
+              document.querySelector('.faq h2')?.classList.add('is-revealed');
+              startFaqContent();
+              document.querySelector('.social-head')?.classList.add('is-revealed');
+              startSocialContent();
+            }
+            if (entry.target.matches('.footer-links') && !signupContentStarted) {
+              document.querySelector('.faq h2')?.classList.add('is-revealed');
+              startFaqContent();
+              document.querySelector('.social-head')?.classList.add('is-revealed');
+              startSocialContent();
+              document.querySelector('.signup')?.classList.add('is-revealed');
+              startSignupContent();
+            }
+            return;
           }
-          dependentReveals.forEach(([triggerSelector, targetSelector]) => {
-            if (!entry.target.matches(triggerSelector)) return;
-            window.setTimeout(() => document.querySelector(targetSelector)?.classList.add('is-revealed'), 720);
-          });
-          observer.unobserve(entry.target);
+          revealTarget(entry.target);
         });
       }, { threshold:.16, rootMargin:'0px 0px -6% 0px' });
       revealTargets.forEach(([selector, style], index) => {
@@ -533,10 +645,13 @@
           heritageMoon.style.opacity = '1';
           heritageMoon.style.fillOpacity = '1';
         }
-        requestAnimationFrame(() => {
-          heritageSection.classList.add('is-instant');
-          revealHeritageText();
+        // Decorative art may catch up on a fast scroll, but copy should still enter
+        // smoothly rather than popping on screen.
+        heritageSection.classList.add('is-fast');
+        heritageSection.querySelectorAll('.heritage-character').forEach((character, index) => {
+          character.style.setProperty('--character-delay', `${index * 6}ms`);
         });
+        requestAnimationFrame(revealHeritageText);
       }
       function startHeritageTimeline() {
         if (!heritageSection || heritageTimelineStarted) return;
@@ -565,12 +680,28 @@
           window.setTimeout(revealHeritageText, 100);
         }, 680);
       }
+      let heritageIsVisible = false;
+      function maybeStartHeritageTimeline() {
+        if (!heritageIsVisible || heritageTimelineStarted) return;
+        if (!rangeCardsFinished) {
+          // This also makes a direct #about link safe: finish the unseen range sequence
+          // first, instead of leaving the heritage section blank indefinitely.
+          if (!rangeCardsStarted) {
+            document.querySelector('.range-top')?.classList.add('is-revealed');
+            revealRangeCards();
+          }
+          return;
+        }
+        startHeritageTimeline();
+      }
       const heritageObserver = new IntersectionObserver(([entry], observer) => {
         if (!entry.isIntersecting) return;
-        startHeritageTimeline();
+        heritageIsVisible = true;
+        maybeStartHeritageTimeline();
         observer.disconnect();
       }, { threshold:.4 });
       if (heritageSection) heritageObserver.observe(heritageSection);
+      document.addEventListener('range-cards-finished', maybeStartHeritageTimeline, { once:true });
       const heritageTextSafetyObserver = new IntersectionObserver(([entry], observer) => {
         if (!entry.isIntersecting || heritageSection?.classList.contains('is-revealed')) return;
         // Fast scrolls should always favour readable content over completing a decorative timeline.
@@ -650,7 +781,7 @@
       }
       const textureStory = document.querySelector('.texture-story');
       const reducedMotion = reducedMotionQuery;
-      const textureStage = textureStory?.querySelector('.texture-composition');
+      const textureStage = textureStory?.querySelector('.texture-stage');
       const textureTitleReveal = textureStory?.querySelector('.texture-title-reveal');
       const textureTitleLines = [...(textureStory?.querySelectorAll('.texture-title-line > span') || [])];
       const textureDroplet = textureStory?.querySelector('.texture-droplet');
@@ -699,12 +830,15 @@
         const rect = textureStory.getBoundingClientRect();
         const scrollableDistance = Math.max(1, rect.height - window.innerHeight);
         const progress = Math.max(0, Math.min(1, -rect.top / scrollableDistance));
+        // Start the title while this scene is still entering the viewport, not only
+        // after the sticky stage has reached the viewport top.
         const titleEntryProgress = Math.max(0, Math.min(1, (window.innerHeight * .65 - rect.top) / (window.innerHeight * .3)));
         const titleMotionProgress = Math.max(0, Math.min(1, (window.innerHeight * .65 - rect.top) / (scrollableDistance + window.innerHeight * .65)));
         const dropletProgress = Math.max(0, Math.min(1, (progress - .1) / .3));
         textureStory.style.setProperty('--droplet-opacity', Math.min(1, dropletProgress * 3.5).toFixed(3));
         textureStory.style.setProperty('--droplet-offset', `${((1 - dropletProgress) * window.innerHeight * .88).toFixed(1)}px`);
         textureStory.style.setProperty('--droplet-scale', (.9 + dropletProgress * .1).toFixed(3));
+        // A masked, two-line arrival begins before the sticky scene locks in place.
         const formulaReveal = titleEntryProgress;
         textureTitleReveal?.style.setProperty('--formula-reveal', formulaReveal.toFixed(3));
         textureTitleReveal?.style.setProperty('--formula-title-scale', (.9 + formulaReveal * .1).toFixed(3));
@@ -713,6 +847,7 @@
           line.style.setProperty('--title-line-opacity', lineProgress.toFixed(3));
           line.style.setProperty('--title-line-offset', `${((1 - lineProgress) * 34).toFixed(1)}px`);
         });
+        // Its scale and position respond continuously from entry through the scene.
         const formulaProgress = titleMotionProgress;
         textureStory.style.setProperty('--formula-shift', `${(formulaProgress * window.innerHeight * .34).toFixed(1)}px`);
         textureStory.style.setProperty('--formula-scale', (1 - formulaProgress * .4).toFixed(3));
@@ -812,88 +947,61 @@
       const signupButton = signupForm?.querySelector('button[type="submit"]');
       function updateSignupButton() {
         if (!signupEmail || !signupButton) return;
-        signupButton.disabled = !signupEmail.validity.valid;
+        signupButton.disabled = signupButton.hasAttribute('aria-busy');
       }
       signupEmail?.addEventListener('input', updateSignupButton);
       updateSignupButton();
 
-      function getSignupConfig() {
-        const config = window.OREHA_SIGNUP_CONFIG || {};
-        const supabaseUrl = String(config.supabaseUrl || '').replace(/\/$/, '');
-        const supabasePublishableKey = String(config.supabasePublishableKey || '');
-        if (!supabaseUrl.startsWith('https://') || !supabasePublishableKey || supabasePublishableKey.startsWith('YOUR_')) {
-          throw new Error('Signup database is not configured.');
-        }
-        return { supabaseUrl, supabasePublishableKey };
-      }
-
       async function saveSignup(email, source) {
-        const { supabaseUrl, supabasePublishableKey } = getSignupConfig();
-        const response = await fetch(`${supabaseUrl}/rest/v1/email_signups`, {
+        const config = window.OREHA_SIGNUP_CONFIG || {};
+        if (!config.supabaseUrl || !config.supabasePublishableKey) throw new Error('Signup is not configured.');
+        const response = await fetch(`${config.supabaseUrl}/rest/v1/email_signups`, {
           method: 'POST',
-          headers: {
-            apikey: supabasePublishableKey,
-            'Content-Type': 'application/json',
-            Prefer: 'return=minimal'
-          },
-          body: JSON.stringify({
-            email: email.trim().toLowerCase(),
-            source,
-            consent_version: 'website-2026-09'
-          })
+          headers: { apikey: config.supabasePublishableKey, 'Content-Type': 'application/json', Prefer: 'return=minimal' },
+          body: JSON.stringify({ email: email.trim().toLowerCase(), source, consent_version: 'website-2026-09' }),
+          signal: AbortSignal.timeout(15000)
         });
         if (response.ok) return;
         const error = await response.json().catch(() => ({}));
         if (response.status === 409 && error.code === '23505') return;
-        throw new Error(error.message || `Signup failed (${response.status}).`);
+        throw new Error(`Signup failed (${response.status}).`);
       }
 
-      function connectSignupForm(form, responseElement) {
+      function connectSignupForm(form, responseElement, source) {
         if (!form || !responseElement) return;
-        const emailInput = form.querySelector('input[name="email"]');
-        const honeypot = form.querySelector('input[name="company"]');
+        const input = form.querySelector('input[type="email"]');
         const button = form.querySelector('button[type="submit"]');
-        const heroSignup = form.closest('.hero-signup');
-        const responseText = responseElement.querySelector('span');
+        const hero = form.closest('.hero-signup');
+        const text = responseElement.querySelector('span') || responseElement;
+        let pending = false;
         function showResponse(message, state) {
-          if (responseText) responseText.textContent = message;
-          else responseElement.textContent = message;
-          heroSignup?.classList.toggle('has-response', state === 'pending' || state === 'error');
-          heroSignup?.classList.toggle('is-submitted', state === 'success');
+          text.textContent = message;
+          hero?.classList.toggle('has-response', state !== 'success');
+          hero?.classList.toggle('is-submitted', state === 'success');
         }
         form.addEventListener('submit', async (event) => {
           event.preventDefault();
-          if (!emailInput?.reportValidity()) return;
-          if (honeypot?.value) {
-            showResponse(form.id === 'hero-signup-form'
-              ? 'Thanks — you’ll be the first to know when OREHA arrives.'
-              : 'You’re on the list.', 'success');
-            form.reset();
-            updateSignupButton();
-            return;
-          }
+          if (pending || !input.reportValidity()) return;
+          pending = true;
           button.disabled = true;
           button.setAttribute('aria-busy', 'true');
           showResponse('Joining…', 'pending');
           try {
-            await saveSignup(emailInput.value, form.dataset.signupSource || 'website');
-            showResponse(form.id === 'signup-form'
-              ? 'You’re on the list. Your 5% code is coming soon.'
-              : 'Thanks — you’ll be the first to know when OREHA arrives.', 'success');
+            await saveSignup(input.value, source);
+            showResponse('You’re on the list!', 'success');
             form.reset();
           } catch (error) {
-            console.error('Email signup failed:', error);
             showResponse('We couldn’t save your email right now. Please try again.', 'error');
           } finally {
+            pending = false;
             button.removeAttribute('aria-busy');
-            if (form.id === 'signup-form') updateSignupButton();
+            if (source === 'footer') updateSignupButton();
             else button.disabled = false;
           }
         });
       }
-
-      connectSignupForm(document.querySelector('#hero-signup-form'), document.querySelector('#hero-signup-response'));
-      connectSignupForm(signupForm, signupResponse);
+      connectSignupForm(document.querySelector('#hero-signup-form'), document.querySelector('#hero-signup-response'), 'hero');
+      connectSignupForm(signupForm, signupResponse, 'footer');
 
       const footerEmail = document.querySelector('.footer-email');
       const emailCopyStatus = document.querySelector('#email-copy-status');
