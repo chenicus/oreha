@@ -334,6 +334,9 @@
         .nav { width:calc(100vw - 48px); }
         .hero > .hero-content > p:not(.hero-eyebrow) { width:100%; text-wrap:balance; }
       }
+      /* Let the footer call to action use its available width, but never clip its final word. */
+      .footer-main { gap:clamp(36px,5vw,72px); }
+      .footer-signup h2 { white-space:normal; text-wrap:balance; overflow-wrap:normal; word-break:normal; }
     </style>
   </head>
   <body>
