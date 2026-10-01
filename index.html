@@ -60,15 +60,16 @@
       .js-motion [data-reveal="wordmark"].is-revealed { transform:scaleX(1.06); }
       .intro { padding:130px 5.5vw; background:var(--paper); }
       .heritage { min-height:70svh; display:grid; place-items:center; padding:64px 5.5vw; background:#f1f4f4; text-align:center; }
-      .heritage-copy { width:min(1050px,100%); }
+      .heritage-copy { width:min(1400px,100%); }
       .heritage-art { width:min(250px,52vw); height:auto; display:block; margin:0 auto 22px; overflow:visible; }
       .heritage-landscape { fill:none; stroke:#272923; stroke-width:2.5; stroke-linecap:round; stroke-linejoin:round; }
       .heritage-moon { fill:#C83232; stroke:#171717; stroke-width:2.5; }
-      .heritage h2 { max-width:850px; margin:auto; font-size:clamp(2.5rem,5.15vw,6.9rem); font-weight:400; line-height:1.04; letter-spacing:-.06em; }
+      .heritage h2 { max-width:1400px; margin:auto; font-size:clamp(2.5rem,5.15vw,6.9rem); font-weight:400; line-height:1.04; letter-spacing:-.06em; }
       .heritage p { max-width:660px; margin:25px auto 0; font-size:var(--text-body); line-height:1.6; }
       .heritage-mark { display:block; width:44px; height:1px; margin:42px auto 0; background:var(--ink); }
       .heritage .mask-line { display:block; overflow:hidden; padding:.04em .06em .12em; margin:-.04em -.06em -.12em; }
       .heritage .mask-reveal { display:block; }
+      .heritage-word { display:inline-block; white-space:nowrap; }
       .heritage-character { display:inline-block; }
       .js-motion .heritage .heritage-character { opacity:0; transform:translateY(9px); transition:opacity .28s ease,transform .52s cubic-bezier(.16,1,.3,1); transition-delay:var(--character-delay,0ms); will-change:opacity,transform; }
       .js-motion .heritage .mask-body { opacity:0; transform:translateY(10px); transition:opacity .32s ease .72s,transform .42s cubic-bezier(.16,1,.3,1) .72s; }
@@ -89,10 +90,11 @@
       .proof .mono { padding-top:3px; }
       .texture-story { height:260svh; color:var(--paper); background:#10191c; overflow:visible; }
       .texture-stage { position:sticky; top:0; height:100svh; isolation:isolate; overflow:hidden; }
+      .texture-composition { position:absolute; inset:0; width:min(1600px,100%); height:100%; margin:auto; }
       .texture-stage::before { content:""; position:absolute; inset:0; z-index:-3; background:radial-gradient(circle at 50% 52%,#315360 0,transparent 43%),#10191c; }
-      .texture-copy { position:absolute; z-index:2; inset:0; max-width:none; pointer-events:none; }.texture-copy p { position:absolute; top:7vh; left:5.5vw; margin:0; color:#8fc9d6; font-size:var(--text-body); }.texture-title-reveal { position:absolute; inset:0; }.js-motion .texture-title-reveal { opacity:var(--formula-reveal,0); transform:scale(var(--formula-title-scale,.9)); will-change:opacity,transform; }.texture-copy h2 { position:absolute; top:53%; left:50%; width:min(1120px,94vw); margin:0; color:#bfd4da; font-size:clamp(4.4rem,10.8vw,12rem); font-weight:400; line-height:.78; letter-spacing:-.06em; text-align:center; transform:translate(-50%,calc(-50% - var(--formula-shift,0px))) scale(var(--formula-scale,1)); transform-origin:center center; will-change:transform; }
+      .texture-copy { position:absolute; z-index:2; inset:0; max-width:none; pointer-events:none; }.texture-copy p { position:absolute; top:7vh; left:min(5.5vw,88px); margin:0; color:#8fc9d6; font-size:var(--text-body); }.texture-title-reveal { position:absolute; inset:0; }.js-motion .texture-title-reveal { opacity:var(--formula-reveal,0); transform:scale(var(--formula-title-scale,.9)); will-change:opacity,transform; }.texture-copy h2 { position:absolute; top:53%; left:50%; width:min(1120px,94vw); margin:0; color:#bfd4da; font-size:clamp(4.4rem,10.8vw,12rem); font-weight:400; line-height:.78; letter-spacing:-.06em; text-align:center; transform:translate(-50%,calc(-50% - var(--formula-shift,0px))) scale(var(--formula-scale,1)); transform-origin:center center; will-change:transform; }
       .texture-droplet { position:absolute; z-index:3; left:50%; top:55%; height:min(62vh,560px); width:auto; max-width:48vw; object-fit:contain; opacity:var(--droplet-opacity,0); transform:translate(-50%,calc(-50% + var(--droplet-offset,88vh))) scale(var(--droplet-scale,.9)); filter:drop-shadow(0 28px 26px rgba(0,0,0,.36)); will-change:transform,opacity; }
-      .texture-callout { position:absolute; z-index:5; width:min(310px,26vw); padding:11px 13px; opacity:0; background:rgba(16,25,28,.12); border:0; border-left:1px solid rgba(143,201,214,.42); box-shadow:none; backdrop-filter:blur(5px); -webkit-backdrop-filter:blur(5px); transform:translateY(14px); transition:opacity .38s ease,transform .48s ease; }.texture-callout.active { opacity:1; transform:translateY(0); }.texture-callout .mono { display:block; margin:0 0 8px; color:#8fc9d6; }.texture-callout h3 { margin:0 0 7px; color:#f0f6f7; font-size:var(--text-ui); font-weight:400; letter-spacing:.03em; }.texture-callout p { margin:0; color:rgba(225,237,240,.8); font-size:var(--text-body); font-weight:300; line-height:1.5; }.texture-callout.one { top:39%; left:8vw; }.texture-callout.two { top:51%; right:2vw; }.texture-callout.three { top:72%; left:5vw; }
+      .texture-callout { position:absolute; z-index:5; width:min(310px,26vw); padding:11px 13px; opacity:0; background:rgba(16,25,28,.12); border:0; border-left:1px solid rgba(143,201,214,.42); box-shadow:none; backdrop-filter:blur(5px); -webkit-backdrop-filter:blur(5px); transform:translateY(14px); transition:opacity .38s ease,transform .48s ease; }.texture-callout.active { opacity:1; transform:translateY(0); }.texture-callout .mono { display:block; margin:0 0 8px; color:#8fc9d6; }.texture-callout h3 { margin:0 0 7px; color:#f0f6f7; font-size:var(--text-ui); font-weight:400; letter-spacing:.03em; }.texture-callout p { margin:0; color:rgba(225,237,240,.8); font-size:var(--text-body); font-weight:300; line-height:1.5; }.texture-callout.one { top:39%; left:min(8vw,128px); }.texture-callout.two { top:51%; right:min(2vw,32px); }.texture-callout.three { top:72%; left:min(5vw,80px); }
       .texture-connectors { position:absolute; z-index:4; inset:0; width:100%; height:100%; overflow:visible; pointer-events:none; }.texture-connectors path { fill:none; stroke:#8fc9d6; stroke-width:1.4; stroke-linecap:round; stroke-dasharray:var(--path-length,150); stroke-dashoffset:var(--path-length,150); filter:drop-shadow(0 0 1.5px #091013); opacity:0; transition:stroke-dashoffset .76s cubic-bezier(.2,.7,.2,1),opacity .28s ease; }.texture-connectors circle { fill:#122327; stroke:#c3e1e7; stroke-width:1.8; filter:drop-shadow(0 0 1px #091013); opacity:0; transform-box:fill-box; transform-origin:center; transform:scale(.45); transition:opacity .2s ease,transform .3s ease .45s; }.texture-connectors .active path { stroke-dashoffset:0; opacity:1; }.texture-connectors .active circle { opacity:1; transform:scale(1); }
       .ingredients { padding:122px 5.5vw; color:var(--paper); background:#151d1f; }
       .ingredients-grid { display:grid; grid-template-columns:minmax(0,.8fr) minmax(410px,1.2fr); gap:9vw; max-width:1280px; margin:auto; align-items:end; }
@@ -233,7 +235,7 @@
       @media (min-width:1280px) { .flavor-stats { grid-template-columns:repeat(4,minmax(0,1fr)); gap:10px; } }
       @media (max-width:760px) { .range { padding:72px 0 0; }.range-top { padding:0 24px 32px; }.flavors { gap:0; }.flavor + .flavor { border-left:0; border-top:1px solid rgba(242,239,232,.09); }.flavor-visual { height:390px; }.flavor-product { height:335px; }.flavor-copy { padding:22px 24px 26px; }.flavor-stats { grid-template-columns:repeat(4,minmax(0,1fr)); gap:10px; } }
       @media (min-width:641px) and (max-width:1000px) { .texture-droplet { height:min(50vh,450px); max-width:42vw; }.texture-copy h2 { width:min(900px,90vw); font-size:clamp(3.8rem,8.6vw,7rem); }.texture-callout { width:min(245px,28vw); }.texture-callout.one { top:38%; left:5vw; }.texture-callout.two { top:51%; right:1.5vw; bottom:auto; left:auto; }.texture-callout.three { top:72%; left:3vw; right:auto; bottom:auto; } }
-      @media (max-width:640px) { .texture-story { height:auto; }.texture-stage { position:relative; height:auto; min-height:0; display:flex; flex-direction:column; align-items:stretch; padding:72px 24px 84px; overflow:hidden; }.texture-copy { position:relative; inset:auto; order:1; display:block; pointer-events:auto; }.texture-title-reveal { position:relative; inset:auto; opacity:1!important; transform:none!important; }.texture-copy h2 { position:relative; top:auto; left:auto; width:100%; margin:0; font-size:clamp(3.1rem,12vw,5rem); line-height:.88; text-align:left; transform:none!important; }.texture-droplet { position:relative; order:2; left:auto; top:auto; align-self:center; height:min(48vh,420px); max-width:80vw; margin:38px auto 34px; opacity:1!important; transform:none!important; }.texture-connectors { display:none; }.texture-callout,.texture-callout.one,.texture-callout.two,.texture-callout.three { position:relative; top:auto; right:auto; bottom:auto; left:auto; order:3; width:100%; margin:0; padding:20px 0; background:none; border-left:0; border-top:1px solid rgba(143,201,214,.3); opacity:1!important; transform:none!important; backdrop-filter:none; -webkit-backdrop-filter:none; }.texture-callout + .texture-callout { order:4; }.texture-callout h3 { font-size:15px; }.texture-callout p { max-width:390px; font-size:var(--text-note); } }
+      @media (max-width:640px) { .texture-story { height:auto; }.texture-stage { position:relative; height:auto; min-height:0; padding:72px 24px 84px; overflow:hidden; }.texture-composition { position:relative; inset:auto; width:100%; height:auto; display:flex; flex-direction:column; align-items:stretch; }.texture-copy { position:relative; inset:auto; order:1; display:block; pointer-events:auto; }.texture-title-reveal { position:relative; inset:auto; opacity:1!important; transform:none!important; }.texture-copy h2 { position:relative; top:auto; left:auto; width:100%; margin:0; font-size:clamp(3.1rem,12vw,5rem); line-height:.88; text-align:left; transform:none!important; }.texture-droplet { position:relative; order:2; left:auto; top:auto; align-self:center; height:min(48vh,420px); max-width:80vw; margin:38px auto 34px; opacity:1!important; transform:none!important; }.texture-connectors { display:none; }.texture-callout,.texture-callout.one,.texture-callout.two,.texture-callout.three { position:relative; top:auto; right:auto; bottom:auto; left:auto; order:3; width:100%; margin:0; padding:20px 0; background:none; border-left:0; border-top:1px solid rgba(143,201,214,.3); opacity:1!important; transform:none!important; backdrop-filter:none; -webkit-backdrop-filter:none; }.texture-callout + .texture-callout { order:4; }.texture-callout h3 { font-size:15px; }.texture-callout p { max-width:390px; font-size:var(--text-note); } }
       @media (prefers-reduced-motion:reduce) { .js-motion .range .flavor { opacity:1; transform:none; transition:none; } }
       @media (max-width:760px) { .flavor + .flavor { border-color:rgba(181,196,209,.15); } }
       .faq { padding:64px 5.5vw; background:var(--paper); color:var(--ink); }
@@ -346,12 +348,14 @@
       </section>
       <section class="texture-story" id="texture" aria-labelledby="texture-title">
         <div class="texture-stage">
-          <div class="texture-copy"><div class="texture-title-reveal"><h2 id="texture-title">Formulation<br />that matters</h2></div></div>
-          <svg class="texture-connectors" viewBox="0 0 1000 1000" preserveAspectRatio="none" aria-hidden="true"><g data-texture-link="0"><path d="" /><circle r="5" /></g><g data-texture-link="1"><path d="" /><circle r="5" /></g><g data-texture-link="2"><path d="" /><circle r="5" /></g></svg>
-          <img class="texture-droplet" src="oreha-water-droplet.png" alt="Clear water droplet" />
-          <article class="texture-callout one" data-texture-step="0"><span class="mono">01</span><h3>JELLY BY DESIGN</h3><p>A smooth, agar-based alternative to thick gels—no water needed to wash it down.</p></article>
-          <article class="texture-callout two" data-texture-step="1"><span class="mono">02</span><h3>PALATINOSE AT THE CORE</h3><p>Palatinose, fructose and dextrin form OREHA’s carbohydrate blend for endurance fueling.</p></article>
-          <article class="texture-callout three" data-texture-step="2"><span class="mono">03</span><h3>BEYOND CARBOHYDRATES</h3><p>Magnesium, MCT oil and sodium round out the formula with minerals and energy from fat.</p></article>
+          <div class="texture-composition">
+            <div class="texture-copy"><div class="texture-title-reveal"><h2 id="texture-title">Formulation<br />that matters</h2></div></div>
+            <svg class="texture-connectors" viewBox="0 0 1000 1000" preserveAspectRatio="none" aria-hidden="true"><g data-texture-link="0"><path d="" /><circle r="5" /></g><g data-texture-link="1"><path d="" /><circle r="5" /></g><g data-texture-link="2"><path d="" /><circle r="5" /></g></svg>
+            <img class="texture-droplet" src="oreha-water-droplet.png" alt="Clear water droplet" />
+            <article class="texture-callout one" data-texture-step="0"><span class="mono">01</span><h3>JELLY BY DESIGN</h3><p>A smooth, agar-based alternative to thick gels—no water needed to wash it down.</p></article>
+            <article class="texture-callout two" data-texture-step="1"><span class="mono">02</span><h3>PALATINOSE AT THE CORE</h3><p>Palatinose, fructose and dextrin form OREHA’s carbohydrate blend for endurance fueling.</p></article>
+            <article class="texture-callout three" data-texture-step="2"><span class="mono">03</span><h3>BEYOND CARBOHYDRATES</h3><p>Magnesium, MCT oil and sodium round out the formula with minerals and energy from fat.</p></article>
+          </div>
         </div>
       </section>
       <div class="formulation-bridge" aria-hidden="true"></div>
@@ -427,15 +431,27 @@
       document.querySelectorAll('.heritage .mask-reveal').forEach((line, lineIndex) => {
         const text = line.textContent;
         line.setAttribute('aria-label', text);
-        line.replaceChildren(...[...text].map((character, characterIndex) => {
-          const span = document.createElement('span');
-          span.className = 'heritage-character';
-          span.setAttribute('aria-hidden', 'true');
-          span.textContent = character === ' ' ? '\u00a0' : character;
-          const lineDelay = lineIndex * 280;
-          span.style.setProperty('--character-delay', `${lineDelay + characterIndex * 11}ms`);
-          return span;
-        }));
+        let characterIndex = 0;
+        const fragments = text.split(/(\s+)/).map((fragment) => {
+          if (/^\s+$/.test(fragment)) return document.createTextNode(fragment);
+
+          const word = document.createElement('span');
+          word.className = 'heritage-word';
+          word.setAttribute('aria-hidden', 'true');
+          word.replaceChildren(...[...fragment].map((character) => {
+            const span = document.createElement('span');
+            span.className = 'heritage-character';
+            span.setAttribute('aria-hidden', 'true');
+            span.textContent = character;
+            const lineDelay = lineIndex * 280;
+            span.style.setProperty('--character-delay', `${lineDelay + characterIndex * 11}ms`);
+            characterIndex += 1;
+            return span;
+          }));
+          characterIndex += 1;
+          return word;
+        });
+        line.replaceChildren(...fragments);
       });
       const reducedMotionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
       const revealTargets = [
@@ -637,7 +653,7 @@
       }
       const textureStory = document.querySelector('.texture-story');
       const reducedMotion = reducedMotionQuery;
-      const textureStage = textureStory?.querySelector('.texture-stage');
+      const textureStage = textureStory?.querySelector('.texture-composition');
       const textureTitleReveal = textureStory?.querySelector('.texture-title-reveal');
       const textureDroplet = textureStory?.querySelector('.texture-droplet');
       const textureCallouts = textureStory ? [...textureStory.querySelectorAll('[data-texture-step]')] : [];
