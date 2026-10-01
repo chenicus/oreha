@@ -166,7 +166,7 @@
       .social-marquee:focus-within .social-track { animation-play-state:paused; }
       @media (hover:hover) and (pointer:fine) { .social-marquee:hover .social-track { animation-play-state:paused; } }
       .social-card { width:clamp(210px,19vw,310px); flex:0 0 auto; margin:0; overflow:hidden; background:transparent; }
-      .social-card img { display:block; width:100%; aspect-ratio:4/5; object-fit:cover; filter:saturate(.78) contrast(1.03); transform-origin:center; transition:filter .25s ease,transform .4s ease; -webkit-user-drag:none; user-select:none; }
+      .social-card img { display:block; width:100%; height:auto; aspect-ratio:4/5; object-fit:cover; filter:saturate(.78) contrast(1.03); transform-origin:center; transition:filter .25s ease,transform .4s ease; -webkit-user-drag:none; user-select:none; }
       .social-card figcaption { position:relative; z-index:1; display:flex; align-items:center; gap:8px; padding:7px 0 8px; background:var(--surface-deep); color:rgba(242,240,234,.72); font:400 var(--text-ui)/1.2 Manrope,Arial,sans-serif; letter-spacing:.01em; text-transform:none; }
       .social-card figcaption::before { content:""; width:8px; height:12px; flex:0 0 auto; background:linear-gradient(currentColor,currentColor) center 8px/1px 4px no-repeat,radial-gradient(circle at 50% 4px,transparent 0 2px,currentColor 2.5px 3px,transparent 3.5px); }
       .location-pin { display:none; }
