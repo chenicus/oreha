@@ -342,6 +342,19 @@
         .texture-callout.one,.texture-callout.three { left:max(5.5vw,calc(50% - 640px)); }
         .texture-callout.two { right:max(5.5vw,calc(50% - 640px)); }
       }
+      /* Wide desktop uses a common frame; full-bleed colour and media remain deliberately full-width. */
+      :root { --layout-max:1440px; --wide-gutter:max(24px,calc((100vw - var(--layout-max)) / 2)); }
+      @media (min-width:1441px) {
+        .nav { width:min(var(--layout-max),calc(100vw - 48px)); }
+        .hero { padding-left:var(--wide-gutter); padding-right:var(--wide-gutter); }
+        .intro,.heritage,.ingredients,.faq { padding-left:var(--wide-gutter); padding-right:var(--wide-gutter); }
+        .range { padding-left:var(--wide-gutter); padding-right:var(--wide-gutter); }
+        .range-top { padding-left:0; padding-right:0; }
+        .flavors { max-width:var(--layout-max); margin-left:auto; margin-right:auto; }
+        .social-head { padding-left:var(--wide-gutter); padding-right:var(--wide-gutter); }
+        .social-marquee { padding-left:var(--wide-gutter); }
+        .footer-main { padding-left:var(--wide-gutter); padding-right:var(--wide-gutter); }
+      }
     </style>
   </head>
   <body>
