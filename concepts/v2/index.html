@@ -77,10 +77,10 @@
       .proof h3 { margin:0 0 6px; font-size:var(--text-ui); font-weight:400; }
       .proof p { margin:0; max-width:410px; color:#46545a; font-size:var(--text-body); line-height:1.6; }
       .proof .mono { padding-top:3px; }
-      .texture-story { height:260svh; color:var(--paper); background:#10191c; overflow:visible; }
+      .texture-story { height:230svh; color:var(--paper); background:#10191c; overflow:visible; }
       .texture-stage { position:sticky; top:0; height:100svh; isolation:isolate; overflow:hidden; }
       .texture-stage::before { content:""; position:absolute; inset:0; z-index:-3; background:radial-gradient(circle at 50% 52%,#315360 0,transparent 43%),#10191c; }
-      .texture-copy { position:absolute; z-index:2; inset:0; max-width:none; pointer-events:none; }.texture-copy p { position:absolute; top:7vh; left:5.5vw; margin:0; color:#8fc9d6; font-size:var(--text-body); }.texture-title-reveal { position:absolute; inset:0; }.js-motion .texture-title-reveal { opacity:var(--formula-reveal,0); transform:scale(var(--formula-title-scale,.9)); will-change:opacity,transform; }.texture-copy h2 { position:absolute; top:53%; left:50%; width:min(1120px,94vw); margin:0; color:#bfd4da; font-size:clamp(4.4rem,10.8vw,12rem); font-weight:400; line-height:.78; letter-spacing:-.06em; text-align:center; transform:translate(-50%,calc(-50% - var(--formula-shift,0px))) scale(var(--formula-scale,1)); transform-origin:center center; will-change:transform; }
+      .texture-copy { position:absolute; z-index:2; inset:0; max-width:none; pointer-events:none; }.texture-copy p { position:absolute; top:7vh; left:5.5vw; margin:0; color:#8fc9d6; font-size:var(--text-body); }.texture-title-reveal { position:absolute; inset:0; }.js-motion .texture-title-reveal { opacity:var(--formula-reveal,0); transform:scale(var(--formula-title-scale,.9)); will-change:opacity,transform; }.texture-copy h2 { position:absolute; top:38%; left:50%; width:min(1120px,94vw); margin:0; color:#bfd4da; font-size:clamp(4.4rem,10.8vw,12rem); font-weight:400; line-height:.78; letter-spacing:-.06em; text-align:center; transform:translate(-50%,calc(-50% - var(--formula-shift,0px))) scale(var(--formula-scale,1)); transform-origin:center center; will-change:transform; }.texture-title-line { display:block; overflow:hidden; padding:.05em .04em .11em; margin:-.05em -.04em -.11em; }.texture-title-line > span { display:block; opacity:var(--title-line-opacity,0); transform:translateY(var(--title-line-offset,34px)); will-change:opacity,transform; }
       .texture-droplet { position:absolute; z-index:3; left:50%; top:55%; height:min(62vh,560px); width:auto; max-width:48vw; object-fit:contain; opacity:var(--droplet-opacity,0); transform:translate(-50%,calc(-50% + var(--droplet-offset,88vh))) scale(var(--droplet-scale,.9)); filter:drop-shadow(0 28px 26px rgba(0,0,0,.36)); will-change:transform,opacity; }
       .texture-callout { position:absolute; z-index:5; width:min(310px,26vw); padding:11px 13px; opacity:0; background:rgba(16,25,28,.12); border:0; border-left:1px solid rgba(143,201,214,.42); box-shadow:none; backdrop-filter:blur(5px); -webkit-backdrop-filter:blur(5px); transform:translateY(14px); transition:opacity .38s ease,transform .48s ease; }.texture-callout.active { opacity:1; transform:translateY(0); }.texture-callout .mono { display:block; margin:0 0 8px; color:#8fc9d6; }.texture-callout h3 { margin:0 0 7px; color:#f0f6f7; font-size:var(--text-ui); font-weight:400; letter-spacing:.03em; }.texture-callout p { margin:0; color:rgba(225,237,240,.8); font-size:var(--text-body); font-weight:300; line-height:1.5; }.texture-callout.one { top:39%; left:8vw; }.texture-callout.two { top:51%; right:2vw; }.texture-callout.three { top:72%; left:5vw; }
       .texture-connectors { position:absolute; z-index:4; inset:0; width:100%; height:100%; overflow:visible; pointer-events:none; }.texture-connectors path { fill:none; stroke:#8fc9d6; stroke-width:1.4; stroke-linecap:round; stroke-dasharray:var(--path-length,150); stroke-dashoffset:var(--path-length,150); filter:drop-shadow(0 0 1.5px #091013); opacity:0; transition:stroke-dashoffset .76s cubic-bezier(.2,.7,.2,1),opacity .28s ease; }.texture-connectors circle { fill:#122327; stroke:#c3e1e7; stroke-width:1.8; filter:drop-shadow(0 0 1px #091013); opacity:0; transform-box:fill-box; transform-origin:center; transform:scale(.45); transition:opacity .2s ease,transform .3s ease .45s; }.texture-connectors .active path { stroke-dashoffset:0; opacity:1; }.texture-connectors .active circle { opacity:1; transform:scale(1); }
@@ -145,8 +145,9 @@
       .social-head { display:flex; align-items:end; justify-content:space-between; gap:28px; padding:0 5.5vw 32px; }
       .social-head p { margin:0; color:#b5c4d1; }
       .social-head h2 { max-width:790px; margin:0; font-size:clamp(2.4rem,5.4vw,5.8rem); font-weight:400; line-height:.94; letter-spacing:-.05em; }
-      .social-marquee { overflow:hidden; width:100%; }
-      .social-track { display:flex; width:max-content; gap:16px; padding-left:5.5vw; animation:social-scroll 34s linear infinite; }
+      .social-marquee { overflow:hidden; width:100%; padding-left:5.5vw; }
+      .social-track { display:flex; width:max-content; animation:social-scroll 34s linear infinite; }
+      .social-set { display:flex; flex:0 0 auto; gap:16px; padding-right:16px; }
       .social-marquee:hover .social-track,.social-marquee:focus-within .social-track { animation-play-state:paused; }
       .social-card { width:clamp(210px,19vw,310px); flex:0 0 auto; margin:0; overflow:hidden; background:transparent; }
       .social-card img { display:block; width:100%; aspect-ratio:4/5; object-fit:cover; filter:saturate(.78) contrast(1.03); transform-origin:center; transition:filter .25s ease,transform .4s ease; }
@@ -206,21 +207,23 @@
       @keyframes footer-letter-rise { from { opacity:0; transform:translateY(112%); } to { opacity:1; transform:translateY(0); } }
       @keyframes footer-letter-drop { from { opacity:0; transform:translateY(-112%); } to { opacity:1; transform:translateY(0); } }
       @keyframes product-glow { from { opacity:.55; transform:scale(.94); } to { opacity:1; transform:scale(1.06); } }
-      @keyframes social-scroll { to { transform:translateX(calc(-50% - 8px)); } }
+      @keyframes social-scroll { to { transform:translateX(-50%); } }
       @media (max-width:760px) {
         .nav { padding:18px 20px; }.nav-links { display:flex; gap:16px; font-size:11px; }.wordmark { font-size:16px; letter-spacing:.22em; }
         .hero { min-height:760px; padding:0 24px 52px; }.hero h1 { font-size:clamp(3rem,12vw,4.25rem); letter-spacing:-.06em; }
         .intro,.ingredients { padding:84px 24px; }.heritage { min-height:420px; padding:58px 24px; }.heritage-art { width:180px; margin-bottom:14px; }.heritage h2 { font-size:clamp(2.5rem,5.15vw,2.625rem); }.intro-grid,.ingredients-grid { display:block; }.intro-body { padding-top:40px; }.intro h2,.ingredients h2,.range h2 { font-size:3.1rem; }
         .ingredient-rows { margin-top:42px; }.ingredient-row { grid-template-columns:32px 1fr; gap:8px; }.ingredient-row p { grid-column:2; }.formulation-bridge { height:120px; }
-        .texture-story { height:260svh; }.texture-copy p { top:7vh; left:24px; }.texture-copy h2 { width:96vw; font-size:16vw; }.texture-droplet { height:min(48vh,440px); max-width:70vw; top:53%; }.texture-callout { width:190px; }.texture-callout.one { top:23%; left:24px; }.texture-callout.two { top:auto; right:16px; bottom:25%; }.texture-callout.three { top:auto; left:16px; bottom:9%; }
+        .texture-story { height:230svh; }.texture-copy p { top:7vh; left:24px; }.texture-copy h2 { width:96vw; font-size:16vw; }.texture-droplet { height:min(48vh,440px); max-width:70vw; top:53%; }.texture-callout { width:190px; }.texture-callout.one { top:23%; left:24px; }.texture-callout.two { top:auto; right:16px; bottom:25%; }.texture-callout.three { top:auto; left:16px; bottom:9%; }
         .range { padding:84px 20px 58px; }.range-top { margin-bottom:34px; }.range-top p { margin-top:18px; }.flavors { grid-template-columns:1fr; gap:13px; }.flavor-product { height:315px; }.social-feed { padding:64px 0 56px; }.social-head { display:block; padding:0 24px 25px; }.social-track { gap:10px; padding-left:24px; }.social-card { width:190px; }.footer-main { display:block; padding:42px 24px 0; }.footer-links { margin-top:32px; }.footer-wordmark { margin-top:22px; padding:0; font-size:33vw; }.signup-form { max-width:none; }
       }
+      @media (max-width:760px) { .social-marquee { padding-left:24px; }.social-track { padding-left:0; }.social-set { gap:10px; padding-right:10px; } }
       @media (prefers-reduced-motion:reduce) { .nav,.hero video,.hero h1,.hero p,.hero .button,.range.is-revealed .flavor-visual::before { animation:none; } .js-motion [data-reveal],.js-motion .texture-title-reveal { opacity:1; transform:none; transition:none; } .js-motion .footer-wordmark .footer-letter > span { opacity:1; transform:none; animation:none; } .texture-droplet { opacity:1; transform:translate(-50%,-50%); }.texture-callout { opacity:1; transform:none; }.texture-connectors path { stroke-dashoffset:0; opacity:1; }.texture-connectors circle { opacity:1; transform:scale(1); } .texture-copy h2 { transform:translate(-50%,calc(-50% - 34vh)) scale(.6); } .heritage-art { opacity:1; } .hero .hero-character,.heritage .heritage-character,.heritage .mask-body,.heritage-mark { opacity:1!important; filter:none!important; transform:none!important; transition:none!important; } .social-track { animation:none; } }
       .has-custom-cursor body,.has-custom-cursor .flavor,.has-custom-cursor a,.has-custom-cursor button { cursor:none; } .has-custom-cursor input,.has-custom-cursor textarea { cursor:text; } .has-custom-cursor select { cursor:default; }
       @media (min-width:1280px) { .flavor-stats { grid-template-columns:repeat(4,minmax(0,1fr)); gap:10px; } }
       @media (max-width:760px) { .range { padding:72px 0 0; }.range-top { padding:0 24px 32px; }.flavors { gap:0; }.flavor + .flavor { border-left:0; border-top:1px solid rgba(242,239,232,.09); }.flavor-visual { height:390px; }.flavor-product { height:335px; }.flavor-copy { padding:22px 24px 26px; }.flavor-stats { grid-template-columns:repeat(4,minmax(0,1fr)); gap:10px; } }
       @media (min-width:641px) and (max-width:1000px) { .texture-droplet { height:min(50vh,450px); max-width:42vw; }.texture-copy h2 { width:min(900px,90vw); font-size:clamp(3.8rem,8.6vw,7rem); }.texture-callout { width:min(245px,28vw); }.texture-callout.one { top:38%; left:5vw; }.texture-callout.two { top:51%; right:1.5vw; bottom:auto; left:auto; }.texture-callout.three { top:72%; left:3vw; right:auto; bottom:auto; } }
       @media (max-width:640px) { .texture-story { height:auto; }.texture-stage { position:relative; height:auto; min-height:0; display:flex; flex-direction:column; align-items:stretch; padding:72px 24px 84px; overflow:hidden; }.texture-copy { position:relative; inset:auto; order:1; display:block; pointer-events:auto; }.texture-title-reveal { position:relative; inset:auto; opacity:1!important; transform:none!important; }.texture-copy h2 { position:relative; top:auto; left:auto; width:100%; margin:0; font-size:clamp(3.1rem,12vw,5rem); line-height:.88; text-align:left; transform:none!important; }.texture-droplet { position:relative; order:2; left:auto; top:auto; align-self:center; height:min(48vh,420px); max-width:80vw; margin:38px auto 34px; opacity:1!important; transform:none!important; }.texture-connectors { display:none; }.texture-callout,.texture-callout.one,.texture-callout.two,.texture-callout.three { position:relative; top:auto; right:auto; bottom:auto; left:auto; order:3; width:100%; margin:0; padding:20px 0; background:none; border-left:0; border-top:1px solid rgba(143,201,214,.3); opacity:1!important; transform:none!important; backdrop-filter:none; -webkit-backdrop-filter:none; }.texture-callout + .texture-callout { order:4; }.texture-callout h3 { font-size:15px; }.texture-callout p { max-width:390px; font-size:var(--text-note); } }
+      @media (max-width:640px) { .texture-title-line > span { opacity:1!important; transform:none!important; } }
       @media (prefers-reduced-motion:reduce) { .js-motion .range .flavor { opacity:1; transform:none; transition:none; } }
       @media (max-width:760px) { .flavor + .flavor { border-color:rgba(181,196,209,.15); } }
       .faq { padding:64px 5.5vw; background:var(--paper); color:var(--ink); }
@@ -243,6 +246,8 @@
       .js-motion .faq-list.is-revealed details:nth-child(1) { --faq-delay:0ms; }.js-motion .faq-list.is-revealed details:nth-child(2) { --faq-delay:110ms; }.js-motion .faq-list.is-revealed details:nth-child(3) { --faq-delay:220ms; }.js-motion .faq-list.is-revealed details:nth-child(4) { --faq-delay:330ms; }.js-motion .faq-list.is-revealed details:nth-child(5) { --faq-delay:440ms; }.js-motion .faq-list.is-revealed details:nth-child(6) { --faq-delay:550ms; }
       .js-motion .faq-list.is-fast-reveal details { animation-duration:.32s; }.js-motion .faq-list.is-fast-reveal details:nth-child(1) { --faq-delay:0ms; }.js-motion .faq-list.is-fast-reveal details:nth-child(2) { --faq-delay:45ms; }.js-motion .faq-list.is-fast-reveal details:nth-child(3) { --faq-delay:90ms; }.js-motion .faq-list.is-fast-reveal details:nth-child(4) { --faq-delay:135ms; }.js-motion .faq-list.is-fast-reveal details:nth-child(5) { --faq-delay:180ms; }.js-motion .faq-list.is-fast-reveal details:nth-child(6) { --faq-delay:225ms; }
       .js-motion .range.is-fast-reveal .flavor { transition-duration:.28s,.42s,.42s,.32s,.32s,.35s; }.js-motion .range.is-fast-reveal .flavor:nth-child(2) { transition-delay:.07s; }.js-motion .range.is-fast-reveal .flavor:nth-child(3) { transition-delay:.14s; }
+      /* Product content cannot paint until the range heading transition has completed. */
+      .js-motion .range:not(.is-revealed) .flavors { visibility:hidden; }.js-motion .range.is-revealed .flavors { visibility:visible; }
       .js-motion .signup.is-revealed > * { opacity:0; transform:translateY(12px); animation:content-fade .5s cubic-bezier(.16,1,.3,1) var(--signup-delay,0ms) both; }
       .js-motion .signup.is-revealed > :nth-child(1) { --signup-delay:80ms; }.js-motion .signup.is-revealed > :nth-child(2) { --signup-delay:170ms; }.js-motion .signup.is-revealed > :nth-child(3) { --signup-delay:260ms; }.js-motion .signup.is-revealed > :nth-child(4) { --signup-delay:350ms; }.js-motion .signup.is-revealed > :nth-child(5) { --signup-delay:440ms; }
       /* Heading hierarchy: hero H1, shared feature headings, then shared closing headings. */
@@ -250,6 +255,7 @@
       .faq h2,.signup h2 { font-size:clamp(2.25rem,4vw,3.75rem); line-height:1; letter-spacing:-.05em; }
       @media(max-width:760px) { .faq { padding:48px 24px; }.faq-inner { grid-template-columns:1fr; gap:24px; }.range h2,.heritage h2,.social-head h2 { font-size:clamp(2.5rem,5.15vw,2.625rem); } }
       @media (prefers-reduced-motion:reduce) { .faq summary::before { transition:none; }.js-motion .faq-list.is-revealed details,.js-motion .signup.is-revealed > * { opacity:1; transform:none; animation:none; } }
+      @media (prefers-reduced-motion:reduce) { .js-motion .range:not(.is-revealed) .flavors { visibility:visible; } }
       /* Hero: one type family, one visual axis, and one restrained call to action. */
       .wordmark { font-size:21px; letter-spacing:.28em; }
       .nav-links { gap:38px; font-size:14px; }
@@ -344,7 +350,7 @@
       </section>
       <section class="texture-story" id="texture" aria-labelledby="texture-title">
         <div class="texture-stage">
-          <div class="texture-copy"><div class="texture-title-reveal"><h2 id="texture-title">Formulation<br />that matters</h2></div></div>
+          <div class="texture-copy"><div class="texture-title-reveal"><h2 id="texture-title"><span class="texture-title-line"><span>Formulation</span></span><span class="texture-title-line"><span>that matters</span></span></h2></div></div>
           <svg class="texture-connectors" viewBox="0 0 1000 1000" preserveAspectRatio="none" aria-hidden="true"><g data-texture-link="0"><path d="" /><circle r="5" /></g><g data-texture-link="1"><path d="" /><circle r="5" /></g><g data-texture-link="2"><path d="" /><circle r="5" /></g></svg>
           <img class="texture-droplet" src="assets/oreha-water-droplet.png" alt="Clear water droplet" />
           <article class="texture-callout one" data-texture-step="0"><span class="mono">01</span><h3>JELLY BY DESIGN</h3><p>A smooth, agar-based alternative to thick gels—no water needed to wash it down.</p></article>
@@ -369,21 +375,25 @@
     </main>
     <footer class="site-footer" id="cart">
       <section class="social-feed" aria-labelledby="social-title">
-        <div class="social-head"><h2 id="social-title">Same effort,<br />different cities</h2></div>
+        <div class="social-head"><h2 id="social-title">One fuel.<br />Every pursuit.</h2></div>
         <div class="social-marquee" aria-label="Placeholder Instagram posts">
           <div class="social-track">
+            <div class="social-set">
             <figure class="social-card"><img src="../social-with-gels/01-trail.png" alt="Runner on a trail carrying OREHA fuel" /><figcaption>Hong Kong</figcaption></figure>
             <figure class="social-card"><img src="../social-with-gels/02-track.png" alt="Runner training on a track with OREHA fuel" /><figcaption>Madrid</figcaption></figure>
             <figure class="social-card"><img src="../social-with-gels/03-club.png" alt="OREHA running club placeholder post" /><figcaption>Tokyo</figcaption></figure>
             <figure class="social-card"><img src="../varied-active/posts/06-seawall-run.png" alt="Runner by the seawall placeholder post" /><figcaption>Vancouver</figcaption></figure>
             <figure class="social-card"><img src="../varied-active/posts/04-tear-open.png" alt="OREHA pouch placeholder post" /><figcaption>Melbourne</figcaption></figure>
             <figure class="social-card"><img src="../varied-active/posts/05-five-colours.png" alt="OREHA assortment placeholder post" /><figcaption>London</figcaption></figure>
-            <figure class="social-card" aria-hidden="true"><img src="../social-with-gels/01-trail.png" alt="" /><figcaption>Hong Kong</figcaption></figure>
+            </div>
+            <div class="social-set" aria-hidden="true">
+            <figure class="social-card"><img src="../social-with-gels/01-trail.png" alt="" /><figcaption>Hong Kong</figcaption></figure>
             <figure class="social-card" aria-hidden="true"><img src="../social-with-gels/02-track.png" alt="" /><figcaption>Madrid</figcaption></figure>
             <figure class="social-card" aria-hidden="true"><img src="../social-with-gels/03-club.png" alt="" /><figcaption>Tokyo</figcaption></figure>
             <figure class="social-card" aria-hidden="true"><img src="../varied-active/posts/06-seawall-run.png" alt="" /><figcaption>Vancouver</figcaption></figure>
             <figure class="social-card" aria-hidden="true"><img src="../varied-active/posts/04-tear-open.png" alt="" /><figcaption>Melbourne</figcaption></figure>
-            <figure class="social-card" aria-hidden="true"><img src="../varied-active/posts/05-five-colours.png" alt="" /><figcaption>London</figcaption></figure>
+            <figure class="social-card"><img src="../varied-active/posts/05-five-colours.png" alt="" /><figcaption>London</figcaption></figure>
+            </div>
           </div>
         </div>
       </section>
@@ -485,43 +495,57 @@
           revealTarget(target);
         });
       }
+      function afterHeaderSettles(target, fast, callback) {
+        let complete = false;
+        const run = () => {
+          if (complete) return;
+          complete = true;
+          target.removeEventListener('transitionend', onTransitionEnd);
+          callback();
+        };
+        const onTransitionEnd = (event) => {
+          if (event.target === target && event.propertyName === 'transform') run();
+        };
+        target.addEventListener('transitionend', onTransitionEnd);
+        // A fallback protects the handoff if a browser suppresses transition events.
+        window.setTimeout(run, fast ? 460 : 860);
+      }
       function startFaqContent(fast = isFastArrival()) {
         if (faqContentStarted) return;
         faqContentStarted = true;
-        // Copy begins only after its header has landed; fast mode is quicker, never overlapping.
-        window.setTimeout(() => document.querySelector('.faq-list')?.classList.add('is-revealed', ...(fast ? ['is-fast-reveal'] : [])), fast ? 420 : 800);
-        // Header landing + six-row question cascade.
+        document.querySelector('.faq-list')?.classList.add('is-revealed', ...(fast ? ['is-fast-reveal'] : []));
+        // Six-row question cascade, after its header has fully settled.
         window.setTimeout(() => {
           revealState.faqFinished = true;
           tryPendingReveals();
-        }, fast ? 1080 : 2030);
+        }, fast ? 680 : 1250);
       }
       function startSocialContent(fast = isFastArrival()) {
         if (socialContentStarted) return;
         socialContentStarted = true;
-        window.setTimeout(() => document.querySelector('.social-marquee')?.classList.add('is-revealed', ...(fast ? ['is-fast-reveal'] : [])), fast ? 420 : 800);
+        document.querySelector('.social-marquee')?.classList.add('is-revealed', ...(fast ? ['is-fast-reveal'] : []));
         window.setTimeout(() => {
           revealState.socialFinished = true;
           tryPendingReveals();
-        }, fast ? 1120 : 1560);
+        }, fast ? 420 : 780);
       }
       function startSignupContent(fast = isFastArrival()) {
         if (signupContentStarted) return;
         signupContentStarted = true;
-        window.setTimeout(() => document.querySelector('.footer-wordmark')?.classList.add('is-revealed', ...(fast ? ['is-fast-reveal'] : [])), fast ? 420 : 800);
+        document.querySelector('.footer-wordmark')?.classList.add('is-revealed', ...(fast ? ['is-fast-reveal'] : []));
         window.setTimeout(() => {
           revealState.signupFinished = true;
           tryPendingReveals();
-        }, fast ? 1120 : 1560);
+        }, fast ? 420 : 780);
       }
       function revealTarget(target) {
         if (target.classList.contains('is-revealed')) return;
         const fast = isFastArrival();
         target.classList.add('is-revealed', ...(fast ? ['is-fast-reveal'] : []));
-        if (target.matches('.range-top')) window.setTimeout(() => revealRangeCards(fast), fast ? 420 : 800);
-        if (target.matches('.faq h2')) startFaqContent(fast);
-        if (target.matches('.social-head')) startSocialContent(fast);
-        if (target.matches('.signup')) startSignupContent(fast);
+        if (target.matches('.range-top')) afterHeaderSettles(target, fast, () => revealRangeCards(fast));
+        if (target.matches('.faq h2')) afterHeaderSettles(target, fast, () => startFaqContent(fast));
+        if (target.matches('.social-head')) afterHeaderSettles(target, fast, () => startSocialContent(fast));
+        if (target.matches('.signup')) afterHeaderSettles(target, fast, () => startSignupContent(fast));
         revealObserver.unobserve(target);
       }
       const revealObserver = new IntersectionObserver((entries, observer) => {
@@ -750,6 +774,7 @@
       const reducedMotion = reducedMotionQuery;
       const textureStage = textureStory?.querySelector('.texture-stage');
       const textureTitleReveal = textureStory?.querySelector('.texture-title-reveal');
+      const textureTitleLines = [...(textureStory?.querySelectorAll('.texture-title-line > span') || [])];
       const textureDroplet = textureStory?.querySelector('.texture-droplet');
       const textureCallouts = textureStory ? [...textureStory.querySelectorAll('[data-texture-step]')] : [];
       const textureLinks = textureStory ? [...textureStory.querySelectorAll('[data-texture-link]')] : [];
@@ -783,6 +808,10 @@
         if (reducedMotion.matches) {
           textureTitleReveal?.style.setProperty('--formula-reveal', '1');
           textureTitleReveal?.style.setProperty('--formula-title-scale', '1');
+          textureTitleLines.forEach((line) => {
+            line.style.setProperty('--title-line-opacity', '1');
+            line.style.setProperty('--title-line-offset', '0px');
+          });
           textureStory.style.setProperty('--droplet-opacity', '1');
           drawTextureConnectors();
           textureCallouts.forEach((callout) => callout.classList.add('active'));
@@ -792,18 +821,29 @@
         const rect = textureStory.getBoundingClientRect();
         const scrollableDistance = Math.max(1, rect.height - window.innerHeight);
         const progress = Math.max(0, Math.min(1, -rect.top / scrollableDistance));
-        const dropletProgress = Math.max(0, Math.min(1, (progress - .22) / .42));
+        // Start the title while this scene is still entering the viewport, not only
+        // after the sticky stage has reached the viewport top.
+        const titleEntryProgress = Math.max(0, Math.min(1, (window.innerHeight * .65 - rect.top) / (window.innerHeight * .3)));
+        const titleMotionProgress = Math.max(0, Math.min(1, (window.innerHeight * .65 - rect.top) / (scrollableDistance + window.innerHeight * .65)));
+        const dropletProgress = Math.max(0, Math.min(1, (progress - .1) / .3));
         textureStory.style.setProperty('--droplet-opacity', Math.min(1, dropletProgress * 3.5).toFixed(3));
         textureStory.style.setProperty('--droplet-offset', `${((1 - dropletProgress) * window.innerHeight * .88).toFixed(1)}px`);
         textureStory.style.setProperty('--droplet-scale', (.9 + dropletProgress * .1).toFixed(3));
-        const formulaReveal = Math.min(1, progress / .42);
+        // A masked, two-line arrival begins before the sticky scene locks in place.
+        const formulaReveal = titleEntryProgress;
         textureTitleReveal?.style.setProperty('--formula-reveal', formulaReveal.toFixed(3));
         textureTitleReveal?.style.setProperty('--formula-title-scale', (.9 + formulaReveal * .1).toFixed(3));
-        const formulaProgress = Math.max(0, Math.min(1, (progress - .42) / .3));
+        textureTitleLines.forEach((line, index) => {
+          const lineProgress = Math.max(0, Math.min(1, (titleEntryProgress - index * .18) / .82));
+          line.style.setProperty('--title-line-opacity', lineProgress.toFixed(3));
+          line.style.setProperty('--title-line-offset', `${((1 - lineProgress) * 34).toFixed(1)}px`);
+        });
+        // Its scale and position respond continuously from entry through the scene.
+        const formulaProgress = titleMotionProgress;
         textureStory.style.setProperty('--formula-shift', `${(formulaProgress * window.innerHeight * .34).toFixed(1)}px`);
         textureStory.style.setProperty('--formula-scale', (1 - formulaProgress * .4).toFixed(3));
         drawTextureConnectors();
-        const thresholds = [.68,.79,.9];
+        const thresholds = [.55,.7,.84];
         textureCallouts.forEach((callout) => callout.classList.toggle('active', progress >= thresholds[Number(callout.dataset.textureStep)]));
         textureLinks.forEach((link) => link.classList.toggle('active', progress >= thresholds[Number(link.dataset.textureLink)]));
       }
