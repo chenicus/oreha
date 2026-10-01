@@ -2,3 +2,8 @@
 .DS_Store
 .launch-build/
 output/
+
+# Archived local exports; only their source-of-truth notice is tracked.
+publish/*
+!publish/README.md
+publish-fixed/
