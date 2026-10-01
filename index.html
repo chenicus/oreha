@@ -528,6 +528,13 @@
         // A fallback protects the handoff if a browser suppresses transition events.
         window.setTimeout(run, fast ? 460 : 860);
       }
+      function startRangeCardsAfterHeading(target, fast = isFastArrival()) {
+        // A deep/fast scroll must use the same handoff as the normal product reveal:
+        // the title settles first, then the cards enter.
+        afterHeaderSettles(target, fast, () => {
+          window.setTimeout(() => revealRangeCards(fast), fast ? 80 : 140);
+        });
+      }
       function startFaqContent(fast = isFastArrival()) {
         if (faqContentStarted) return;
         faqContentStarted = true;
@@ -560,7 +567,7 @@
         if (target.classList.contains('is-revealed')) return;
         const fast = isFastArrival();
         target.classList.add('is-revealed', ...(fast ? ['is-fast-reveal'] : []));
-        if (target.matches('.range-top')) afterHeaderSettles(target, fast, () => revealRangeCards(fast));
+        if (target.matches('.range-top')) startRangeCardsAfterHeading(target, fast);
         if (target.matches('.faq h2')) afterHeaderSettles(target, fast, () => startFaqContent(fast));
         if (target.matches('.social-head')) afterHeaderSettles(target, fast, () => startSocialContent(fast));
         if (target.matches('.signup')) afterHeaderSettles(target, fast, () => startSignupContent(fast));
@@ -687,8 +694,14 @@
           // This also makes a direct #about link safe: finish the unseen range sequence
           // first, instead of leaving the heritage section blank indefinitely.
           if (!rangeCardsStarted) {
-            document.querySelector('.range-top')?.classList.add('is-revealed');
-            revealRangeCards();
+            const rangeHeading = document.querySelector('.range-top');
+            if (rangeHeading) {
+              const fast = isFastArrival();
+              rangeHeading.classList.add('is-revealed', ...(fast ? ['is-fast-reveal'] : []));
+              startRangeCardsAfterHeading(rangeHeading, fast);
+            } else {
+              revealRangeCards();
+            }
           }
           return;
         }
