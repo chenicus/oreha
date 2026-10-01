@@ -160,7 +160,9 @@
       .social-marquee { overflow:hidden; width:100%; padding-left:5.5vw; }
       .social-track { display:flex; width:max-content; animation:social-scroll 34s linear infinite; }
       .social-set { display:flex; flex:0 0 auto; gap:16px; padding-right:16px; }
-      .social-marquee:hover .social-track,.social-marquee:focus-within .social-track { animation-play-state:paused; }
+      /* Touch browsers can retain :hover after a tap. Only a real mouse should pause the reel. */
+      .social-marquee:focus-within .social-track { animation-play-state:paused; }
+      @media (hover:hover) and (pointer:fine) { .social-marquee:hover .social-track { animation-play-state:paused; } }
       .social-card { width:clamp(210px,19vw,310px); flex:0 0 auto; margin:0; overflow:hidden; background:transparent; }
       .social-card img { display:block; width:100%; aspect-ratio:4/5; object-fit:cover; filter:saturate(.78) contrast(1.03); transform-origin:center; transition:filter .25s ease,transform .4s ease; }
       .social-card figcaption { position:relative; z-index:1; display:flex; align-items:center; gap:8px; padding:7px 0 8px; background:var(--surface-deep); color:rgba(242,240,234,.72); font:400 var(--text-ui)/1.2 Manrope,Arial,sans-serif; letter-spacing:.01em; text-transform:none; }
@@ -266,7 +268,7 @@
       /* Heading hierarchy: hero H1, shared feature headings, then shared closing headings. */
       .range h2,.heritage h2,.social-head h2 { font-size:clamp(2.5rem,5.15vw,6.9rem); line-height:1.04; letter-spacing:-.06em; }
       .faq h2,.signup h2 { font-size:clamp(2.25rem,4vw,3.75rem); line-height:1; letter-spacing:-.05em; }
-      @media(max-width:760px) { .faq { padding:48px 24px; }.faq-inner { grid-template-columns:1fr; gap:24px; }.range h2,.heritage h2,.social-head h2 { font-size:clamp(2.5rem,5.15vw,2.625rem); } }
+      @media(max-width:760px) { .faq { padding:48px 24px; }.faq-inner { grid-template-columns:1fr; gap:24px; }.range h2,.social-head h2 { font-size:clamp(2.5rem,5.15vw,2.625rem); }.heritage h2 { font-size:clamp(1.6rem,9vw,2.5rem); }.heritage .mask-reveal { white-space:nowrap; } }
       @media (prefers-reduced-motion:reduce) { .faq summary::before { transition:none; }.js-motion .faq-list.is-revealed details,.js-motion .signup.is-revealed > * { opacity:1; transform:none; animation:none; } }
       @media (prefers-reduced-motion:reduce) { .js-motion .range:not(.is-revealed) .flavors { visibility:visible; } }
       /* Hero: one type family, one visual axis, and one restrained call to action. */
@@ -735,7 +737,10 @@
 
       const viewCursor = document.querySelector('.view-cursor');
       const cursorTrail = document.querySelector('.cursor-trail');
-      const supportsCustomCursor = !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      // Safari can emit compatibility mouse events after a touch. Keep the custom
+      // cursor exclusive to devices with a genuine fine, hover-capable pointer.
+      const supportsCustomCursor = window.matchMedia('(hover: hover) and (pointer: fine)').matches
+        && !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
       if (supportsCustomCursor && viewCursor && cursorTrail) {
         let pointerPosition = null;
         let trailPosition = null;
